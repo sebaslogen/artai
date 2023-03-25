@@ -2,11 +2,7 @@ package com.sebaslogen.artai.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -20,21 +16,21 @@ fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        darkColors(
+    val colorScheme = if (darkTheme) {
+        darkColorScheme(
             primary = Color(0xFFBB86FC),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            secondary = Color(0xFF3700B3),
+            tertiary = Color(0xFF03DAC5)
         )
     } else {
-        lightColors(
+        lightColorScheme(
             primary = Color(0xFF6200EE),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            secondary = Color(0xFF3700B3),
+            tertiary = Color(0xFF03DAC5)
         )
     }
     val typography = Typography(
-        body1 = TextStyle(
+        bodyLarge = TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
@@ -47,7 +43,7 @@ fun MyApplicationTheme(
     )
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colorScheme,
         typography = typography,
         shapes = shapes,
         content = content
