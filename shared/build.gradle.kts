@@ -7,7 +7,7 @@ plugins {
 kotlin {
     android {
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -22,6 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinInject.runtime)
+                api(libs.napier.logger)
             }
         }
         val commonTest by getting {

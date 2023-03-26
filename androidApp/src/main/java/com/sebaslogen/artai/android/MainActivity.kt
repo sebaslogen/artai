@@ -15,6 +15,7 @@ import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import io.github.aakira.napier.Napier
 import me.tatarka.inject.annotations.Component
 
 @Component
@@ -25,12 +26,13 @@ abstract class MainActivityComponent(@Component val parent: ApplicationComponent
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
         val platformGreeter: PlatformGreeter = MainActivityComponent::class.create(applicationComponent).platformGreeterCreator()
         setContent {
             MyApplicationTheme {
                 Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
                         GreetingView(Greeting().greet())
