@@ -22,6 +22,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinInject.runtime)
+                api(libs.kotlin.stdlib.common)
+                api(libs.coroutines.core)
                 api(libs.napier.logger)
             }
         }

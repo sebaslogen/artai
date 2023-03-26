@@ -18,6 +18,21 @@ class ArtaiApplication : Application(), ApplicationComponentProvider {
     }
 
     private fun setupAppLogger() {
-        Napier.base(DebugAntilog())
+        if (BuildConfig.DEBUG) {
+            // Debug build
+// TODO: Add and enable Crashlytics
+//            // disable firebase crashlytics
+//            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
+            // init napier
+            Napier.base(DebugAntilog())
+        } else {
+            // Others(Release build)
+
+// TODO: Add and enable Crashlytics
+//            // enable firebase crashlytics
+//            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+            // init napier
+            Napier.base(CrashlyticsAntilog(this))
+        }
     }
 }

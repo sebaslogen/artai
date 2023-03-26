@@ -9,12 +9,15 @@ minSdk = "28"
 targetSdk = "33"
 kotlinInject = '0.6.1'
 ksp = '1.8.10-1.0.9'
+coroutines = '1.6.4'
 napier = '2.6.1'
 
 [libraries]
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
 kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp', version.ref = 'kotlinInject' }
 kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlinInject' }
+kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
+coroutines-core = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-core', version.ref = 'coroutines' }
 compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
 compose-compiler = { module = 'androidx.compose.compiler:compiler', version.ref = 'compose-compiler' }
 compose-foundation = { module = 'androidx.compose.foundation:foundation' }
