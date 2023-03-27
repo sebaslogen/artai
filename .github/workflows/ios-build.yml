@@ -2,10 +2,10 @@ name: iOS Build CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore: [ '**.md', '**.MD' ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore: [ '**.md', '**.MD' ]
   workflow_dispatch:
 
