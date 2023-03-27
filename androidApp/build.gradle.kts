@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":shared"))
     implementation(libs.kotlinInject.runtime)
     ksp(libs.kotlinInject.compiler)
+    implementation(libs.napier.logger)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)

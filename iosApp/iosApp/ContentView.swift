@@ -8,6 +8,9 @@ struct ContentView: View {
 	var body: some View {
 		Text(greet)
 		Text(platformGreeter.greet())
+        Button("log me", action: {
+            Napier.d("Welcome to KT logging")
+        })
 	}
 }
 

@@ -12,7 +12,7 @@ tasks.register("clean", Delete::class) {
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 }

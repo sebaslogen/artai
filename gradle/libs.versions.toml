@@ -4,9 +4,9 @@ androidx-activity = '1.6.1'
 compose-bom = '2023.03.00' # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.4.4'
 kotlin = '1.8.10'
-compileSdk = "33"
-minSdk = "28"
-targetSdk = "33"
+compileSdk = '33'
+minSdk = '28'
+targetSdk = '33'
 kotlinInject = '0.6.1'
 ksp = '1.8.10-1.0.9'
 coroutines = '1.6.4'
@@ -33,4 +33,5 @@ android-application = { id = 'com.android.application', version.ref = 'agp' }
 android-library = { id = 'com.android.library', version.ref = 'agp' }
 kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = 'kotlin' }
 kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref = 'kotlin' }
+kotlin-native-cocoapods = { id = 'org.jetbrains.kotlin.native.cocoapods', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
