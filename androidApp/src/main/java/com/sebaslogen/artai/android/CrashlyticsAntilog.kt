@@ -20,15 +20,15 @@ class CrashlyticsAntilog(private val context: Context) : Antilog() {
         if (priority < LogLevel.ERROR) return
 
         throwable?.let {
-            when (it) {
 //                TODO: Add your own implementation of Crashlytics logs in "when" statement
-                // e.g. http exception, add a customized your exception message
+//            when (it) {
+            // e.g. http exception, add a customized your exception message
 //                is KtorException -> {
 //                    FirebaseCrashlytics.getInstance()
 //                        .log("${priority.ordinal}, HTTP Exception, ${it.response?.errorBody}")
 //                }
 //                else -> FirebaseCrashlytics.getInstance().recordException(it)
-            }
+//            }
         }
     }
 }
