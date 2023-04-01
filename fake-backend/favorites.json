@@ -1,0 +1,47 @@
+{
+  "screen": {
+    "id": 2,
+    "sections": [
+      {
+        "type": "list",
+        "id": "section-favorites",
+        "header": {
+          "type": "large",
+          "title": "Favorites"
+        },
+        "items": [
+          {
+            "type": "big-art",
+            "id": 1,
+            "title": "Art 1",
+            "image": "http://www.example.com/image1.jpg"
+          },
+          {
+            "type": "big-art",
+            "id": 2,
+            "title": "Art 2",
+            "image": "http://www.example.com/image2.jpg"
+          },
+          {
+            "type": "big-art",
+            "id": 3,
+            "title": "Art 3",
+            "image": "http://www.example.com/image3.jpg"
+          },
+          {
+            "type": "big-art",
+            "id": 4,
+            "title": "Art 4",
+            "image": "http://www.example.com/image4.jpg"
+          },
+          {
+            "type": "big-art",
+            "id": 5,
+            "title": "Art 5",
+            "image": "http://www.example.com/image5.jpg"
+          }
+        ]
+      }
+    ]
+  }
+}

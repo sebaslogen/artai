@@ -1,0 +1,152 @@
+{
+  "screen": {
+    "id": 1,
+    "sections": [
+      {
+        "type": "carousel",
+        "id": "section-new",
+        "style": "squared",
+        "header": {
+          "type": "normal",
+          "title": "Newest Art"
+        },
+        "items": [
+          {
+            "type": "small-art",
+            "id": 1,
+            "image": "http://www.example.com/image1.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 2,
+            "image": "http://www.example.com/image2.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 3,
+            "image": "http://www.example.com/image3.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 4,
+            "image": "http://www.example.com/image4.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 5,
+            "image": "http://www.example.com/image5.jpg"
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-favorites",
+        "style": "circle",
+        "header": {
+          "type": "normal",
+          "title": "Recent Favorites"
+        },
+        "items": [
+          {
+            "type": "small-art",
+            "id": 6,
+            "image": "http://www.example.com/image6.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 7,
+            "image": "http://www.example.com/image7.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 8,
+            "image": "http://www.example.com/image8.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 9,
+            "image": "http://www.example.com/image9.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 10,
+            "image": "http://www.example.com/image10.jpg"
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-recommended",
+        "style": "rounded-squares",
+        "header": {
+          "type": "normal",
+          "title": "For You"
+        },
+        "items": [
+          {
+            "type": "small-art",
+            "id": 11,
+            "image": "http://www.example.com/image11.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 12,
+            "image": "http://www.example.com/image12.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 13,
+            "image": "http://www.example.com/image13.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 14,
+            "image": "http://www.example.com/image14.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 15
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-similar-recommended",
+        "style": "squared",
+        "header": {
+          "type": "small-art",
+          "image": "http://www.example.com/image15.jpg",
+          "title": "More like",
+          "subtitle": "Art 15"
+        },
+        "items": [
+          {
+            "type": "small-art",
+            "id": 16,
+            "image": "http://www.example.com/image16.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 17,
+            "image": "http://www.example.com/image17.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 18,
+            "image": "http://www.example.com/image18.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 19,
+            "image": "http://www.example.com/image19.jpg"
+          },
+          {
+            "type": "small-art",
+            "id": 20,
+            "image": "http://www.example.com/image20.jpg"
+          }
+        ]
+      }
+    ]
+  }
+}
