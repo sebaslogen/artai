@@ -11,6 +11,7 @@ kotlinInject = '0.6.1'
 ksp = '1.8.10-1.0.9'
 coroutines = '1.6.4'
 napier = '2.6.1'
+ktor = '2.2.4'
 
 [libraries]
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
@@ -18,6 +19,7 @@ kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp
 kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlinInject' }
 kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
 coroutines-core = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-core', version.ref = 'coroutines' }
+coroutines-android = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-android', version.ref = 'coroutines' }
 compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
 compose-compiler = { module = 'androidx.compose.compiler:compiler', version.ref = 'compose-compiler' }
 compose-foundation = { module = 'androidx.compose.foundation:foundation' }
@@ -27,6 +29,11 @@ compose-ui = { module = 'androidx.compose.ui:ui' }
 compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
 compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
 napier-logger = { module = 'io.github.aakira:napier', version.ref = 'napier' }
+ktor-client-core = { module = 'io.ktor:ktor-client-core', version.ref = 'ktor' }
+ktor-client-android = { module = 'io.ktor:ktor-client-okhttp', version.ref = 'ktor' }
+ktor-client-ios = { module = 'io.ktor:ktor-client-darwin', version.ref = 'ktor' }
+ktor-client-serialization = { module = 'io.ktor:ktor-serialization-kotlinx-json', version.ref = 'ktor' }
+ktor-client-logging = { module = 'io.ktor:ktor-client-logging', version.ref = 'ktor' }
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'agp' }
@@ -35,3 +42,4 @@ kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = 'kotlin' }
 kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref = 'kotlin' }
 kotlin-native-cocoapods = { id = 'org.jetbrains.kotlin.native.cocoapods', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
+kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', version.ref = 'kotlin' }

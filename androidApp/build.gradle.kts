@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.kotlinInject.runtime)
     ksp(libs.kotlinInject.compiler)
     implementation(libs.napier.logger)
+    implementation(libs.coroutines.android)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
