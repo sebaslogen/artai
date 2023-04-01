@@ -9,7 +9,6 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import kotlin.time.Duration.Companion.minutes
@@ -39,7 +38,6 @@ fun httpClient(): Http {
                 ignoreUnknownKeys = true
             })
         }
-        install(WebSockets)
         install(Logging) {
 //            level = if (BuildKonfig.DEBUG) { // TODO: Use BuildKonfig
 //                LogLevel.HEADERS
