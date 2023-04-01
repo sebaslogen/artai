@@ -12,6 +12,7 @@ ksp = '1.8.10-1.0.9'
 coroutines = '1.6.4'
 napier = '2.6.1'
 ktor = '2.2.4'
+buildkonfig = "0.13.3"
 
 [libraries]
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
@@ -44,3 +45,4 @@ kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref 
 kotlin-native-cocoapods = { id = 'org.jetbrains.kotlin.native.cocoapods', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
 kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', version.ref = 'kotlin' }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }

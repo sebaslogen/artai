@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     kotlin("native.cocoapods")
     alias(libs.plugins.android.library)
+    alias(libs.plugins.buildkonfig)
     alias(libs.plugins.ksp)
 }
 
@@ -71,6 +72,13 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
+    }
+}
+
+buildkonfig {
+    packageName = "com.sebaslogen.artai.shared.build"
+    defaultConfigs {
+//        buildConfigField(BOOLEAN, "DEBUG", project.hasProperty("debugApp").toString(), const = true)
     }
 }
 
