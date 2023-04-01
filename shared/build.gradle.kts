@@ -33,7 +33,8 @@ kotlin {
                 api(libs.kotlin.stdlib.common)
                 api(libs.coroutines.core)
                 api(libs.napier.logger)
-                implementation(libs.ktor.client.core)
+                api(libs.ktor.client.core)
+                implementation(libs.ktor.content.negotiation)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.client.logging)
             }
