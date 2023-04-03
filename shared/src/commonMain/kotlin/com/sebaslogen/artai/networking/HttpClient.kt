@@ -1,5 +1,6 @@
 package com.sebaslogen.artai.networking
 
+import com.sebaslogen.artai.data.remote.models.ApiSection
 import com.sebaslogen.artai.shared.build.BuildKonfig
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -50,6 +51,8 @@ fun httpClient(): Http =
                 isLenient = false
                 prettyPrint = true // Useful for debugging
                 ignoreUnknownKeys = true
+                classDiscriminator = "type"
+                serializersModule = ApiSection.serializersModule
             })
         }
         install(Logging) {

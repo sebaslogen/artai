@@ -63,12 +63,9 @@ class MainActivity : ComponentActivity() {
             val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
             val bodyAsText = response.bodyAsText()
             Napier.d { bodyAsText }
-        }
-        // Ktorfit
-        lifecycle.coroutineScope.launch {
-            val http: DynamicUIApi = mainActivityComponent.apiServiceCreator()
-            val screen = http.home().screen
-            Napier.d { "Response was: $screen with id: ${screen?.id}" }
+            val dynamicUIApi: DynamicUIApi = mainActivityComponent.apiServiceCreator()
+            val screen = dynamicUIApi.home().screen
+            Napier.d { "Response was: $screen with id: ${screen.id}" }
         }
     }
 }

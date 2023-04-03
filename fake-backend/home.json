@@ -146,6 +146,11 @@
             "image": "http://www.example.com/image20.jpg"
           }
         ]
+      },
+      {
+        "type": "footer",
+        "id": "section-footer",
+        "text": "Thanks for using the app!"
       }
     ]
   }
