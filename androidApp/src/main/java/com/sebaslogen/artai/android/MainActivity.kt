@@ -9,13 +9,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.coroutineScope
 import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import com.sebaslogen.artai.networking.Http
 import io.github.aakira.napier.Napier
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Component
 
 @Component
@@ -27,7 +33,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
-        val platformGreeter: PlatformGreeter = MainActivityComponent::class.create(applicationComponent).platformGreeterCreator()
+        val mainActivityComponent = MainActivityComponent::class.create(applicationComponent)
+        httpCall(mainActivityComponent)
+
+        val platformGreeter: PlatformGreeter = mainActivityComponent.platformGreeterCreator()
         setContent {
             MyApplicationTheme {
                 Surface(
@@ -35,11 +44,22 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
-                        GreetingView(Greeting().greet())
-                        GreetingView(platformGreeter.greet())
+                        val platformGreet = remember { Greeting().greet() }
+                        GreetingView(platformGreet)
+                        val injectedGreet = remember { platformGreeter.greet() }
+                        GreetingView(injectedGreet)
                     }
                 }
             }
+        }
+    }
+
+    private fun httpCall(mainActivityComponent: MainActivityComponent) {
+        lifecycle.coroutineScope.launch {
+            val http: Http = mainActivityComponent.parent.httpFactory()
+            val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
+            val bodyAsText = response.bodyAsText()
+            Napier.d { bodyAsText }
         }
     }
 }
