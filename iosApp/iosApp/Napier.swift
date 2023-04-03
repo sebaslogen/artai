@@ -9,6 +9,7 @@ extension Napier {
         LoggerProxyKt.debugBuild()
 
         #else
+        // TODO: Implement Firebase logging for production
         // Others(Release build)
 
         //        // init firebase crashlytics

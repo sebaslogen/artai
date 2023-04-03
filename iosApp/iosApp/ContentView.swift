@@ -1,8 +1,11 @@
 import SwiftUI
 import shared
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
-	private let platformGreeter = InjectApplicationComponent().platformGreeterCreator()
+    private let platformGreeter = InjectApplicationComponent().platformGreeterCreator()
+    @StateViewModel var viewModel = InjectApplicationComponent().dynamicUIViewModel
 	let greet = Greeting().greet()
 
 	var body: some View {
@@ -10,9 +13,13 @@ struct ContentView: View {
 		Text(platformGreeter.greet())
         Button("log me", action: {
             Napier.d("Welcome to KT logging")
-            let result = await asyncResult(for: viewModel.getHome())
-            if case let .success(homeResponse) = result {
-                Napier.d("Got ViewModel result: \(homeResponse)")
+            Task {
+                do {
+                    let result = await asyncResult(for: viewModel.getHome())
+                    if case let .success(homeResponse) = result {
+                        Napier.d("Got ViewModel result: \(homeResponse)")
+                    }
+                }
             }
         })
 	}

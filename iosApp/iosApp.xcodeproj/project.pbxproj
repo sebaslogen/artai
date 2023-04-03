@@ -13,6 +13,7 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		AB0DD1B2AF3633700148FD3D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0462DAA9A38DC8FC0382FB0E /* Pods_iosApp.framework */; };
 		B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4729D1004700C7DE85 /* Napier.swift */; };
+		B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C56CFFFFCCA62F23F5FCD49 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		B7EA2B4729D1004700C7DE85 /* Napier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Napier.swift; sourceTree = "<group>"; };
+		B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 		F30A0EC773F852AC667FAAE4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				B7EA2B4729D1004700C7DE85 /* Napier.swift */,
+				B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */,
+				B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
