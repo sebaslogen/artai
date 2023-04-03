@@ -19,7 +19,7 @@ data class ApiScreen(
 sealed interface ApiSection {
 
     companion object {
-        val serializersModule = SerializersModule {
+        val serializers = SerializersModule {
             polymorphic(ApiSection::class) {
                 subclass(ApiCarousel::class)
                 subclass(ApiFooter::class)
@@ -33,6 +33,7 @@ sealed interface ApiSection {
         val id: String,
         val style: ApiCarouselStyle,
         val header: ApiSectionHeader,
+        val items: List<ApiCarouselItem>
     ) : ApiSection {
         enum class ApiCarouselStyle {
             Squared, Circle, RoundedSquares

@@ -13,27 +13,27 @@
         },
         "items": [
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 1,
             "image": "http://www.example.com/image1.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 2,
             "image": "http://www.example.com/image2.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 3,
             "image": "http://www.example.com/image3.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 4,
             "image": "http://www.example.com/image4.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 5,
             "image": "http://www.example.com/image5.jpg"
           }
@@ -50,27 +50,27 @@
         },
         "items": [
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 6,
             "image": "http://www.example.com/image6.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 7,
             "image": "http://www.example.com/image7.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 8,
             "image": "http://www.example.com/image8.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 9,
             "image": "http://www.example.com/image9.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 10,
             "image": "http://www.example.com/image10.jpg"
           }
@@ -87,27 +87,27 @@
         },
         "items": [
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 11,
             "image": "http://www.example.com/image11.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 12,
             "image": "http://www.example.com/image12.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 13,
             "image": "http://www.example.com/image13.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 14,
             "image": "http://www.example.com/image14.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 15
           }
         ]
@@ -125,27 +125,27 @@
         },
         "items": [
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 16,
             "image": "http://www.example.com/image16.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 17,
             "image": "http://www.example.com/image17.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 18,
             "image": "http://www.example.com/image18.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 19,
             "image": "http://www.example.com/image19.jpg"
           },
           {
-            "type": "small-art",
+            "type": "smallArt",
             "id": 20,
             "image": "http://www.example.com/image20.jpg"
           }
