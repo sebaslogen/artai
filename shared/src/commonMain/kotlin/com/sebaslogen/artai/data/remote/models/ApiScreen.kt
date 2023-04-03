@@ -59,7 +59,7 @@ sealed interface ApiSection {
     ) : ApiSection
 
     @Serializable
-    data class ApiUnknown(val id: String) : ApiSection
+    data class ApiUnknown(val type: String, val id: String? = null) : ApiSection
 }
 
 

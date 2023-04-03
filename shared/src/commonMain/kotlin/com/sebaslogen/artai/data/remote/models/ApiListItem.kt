@@ -28,5 +28,5 @@ sealed interface ApiListItem {
     ) : ApiListItem
 
     @Serializable
-    data class ApiUnknown(val id: String) : ApiListItem
+    data class ApiUnknown(val type: String, val id: String? = null) : ApiListItem
 }

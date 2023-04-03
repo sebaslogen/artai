@@ -27,5 +27,5 @@ sealed interface ApiCarouselItem {
     ) : ApiCarouselItem
 
     @Serializable
-    data class ApiUnknown(val id: String) : ApiCarouselItem
+    data class ApiUnknown(val type: String, val id: String? = null) : ApiCarouselItem
 }

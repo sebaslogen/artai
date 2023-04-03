@@ -45,5 +45,5 @@ sealed interface ApiSectionHeader {
     ) : ApiSectionHeader
 
     @Serializable
-    data class ApiUnknown(val id: String) : ApiSectionHeader
+    data class ApiUnknown(val type: String, val id: String? = null) : ApiSectionHeader
 }
