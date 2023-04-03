@@ -1,5 +1,6 @@
 package com.sebaslogen.artai.data.remote.models
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.modules.*
@@ -19,10 +20,12 @@ data class ApiScreen(
 sealed interface ApiSection {
 
     companion object {
+        @OptIn(ExperimentalSerializationApi::class)
         val serializers = SerializersModule {
             polymorphic(ApiSection::class) {
                 subclass(ApiCarousel::class)
                 subclass(ApiFooter::class)
+                defaultDeserializer { ApiUnknown.serializer() }
             }
         }
     }
@@ -54,6 +57,9 @@ sealed interface ApiSection {
         val header: ApiSectionHeader,
         val items: List<ApiListItem>
     ) : ApiSection
+
+    @Serializable
+    data class ApiUnknown(val id: String) : ApiSection
 }
 
 
