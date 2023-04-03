@@ -30,14 +30,26 @@ sealed interface ApiSection {
     @Serializable
     @SerialName("carousel")
     data class ApiCarousel(
-        val id: String
-    ) : ApiSection
+        val id: String,
+        val style: ApiCarouselStyle,
+        val header: ApiSectionHeader,
+    ) : ApiSection {
+        enum class ApiCarouselStyle {
+            Squared, Circle, RoundedSquares
+        }
+    }
 
     @Serializable
     @SerialName("footer")
     data class ApiFooter(
         val id: String,
         val text: String
+    ) : ApiSection
+
+    @Serializable
+    @SerialName("list")
+    data class ApiList(
+        val id: String,
     ) : ApiSection
 }
 

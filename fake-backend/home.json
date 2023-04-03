@@ -5,9 +5,10 @@
       {
         "type": "carousel",
         "id": "section-new",
-        "style": "squared",
+        "style": "Squared",
         "header": {
           "type": "normal",
+          "id": "section-header-new",
           "title": "Newest Art"
         },
         "items": [
@@ -41,9 +42,10 @@
       {
         "type": "carousel",
         "id": "section-favorites",
-        "style": "circle",
+        "style": "Circle",
         "header": {
           "type": "normal",
+          "id": "section-header-favorites",
           "title": "Recent Favorites"
         },
         "items": [
@@ -77,9 +79,10 @@
       {
         "type": "carousel",
         "id": "section-recommended",
-        "style": "rounded-squares",
+        "style": "RoundedSquares",
         "header": {
           "type": "normal",
+          "id": "section-header-recommended",
           "title": "For You"
         },
         "items": [
@@ -112,9 +115,10 @@
       {
         "type": "carousel",
         "id": "section-similar-recommended",
-        "style": "squared",
+        "style": "Squared",
         "header": {
-          "type": "small-art",
+          "type": "smallArt",
+          "id": "section-header-similar-recommended",
           "image": "http://www.example.com/image15.jpg",
           "title": "More like",
           "subtitle": "Art 15"

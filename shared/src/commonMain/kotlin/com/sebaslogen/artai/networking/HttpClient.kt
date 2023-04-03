@@ -1,6 +1,7 @@
 package com.sebaslogen.artai.networking
 
 import com.sebaslogen.artai.data.remote.models.ApiSection
+import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 import com.sebaslogen.artai.shared.build.BuildKonfig
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -25,6 +26,7 @@ import io.ktor.util.InternalAPI
 import io.ktor.util.date.GMTDate
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.plus
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
@@ -52,7 +54,7 @@ fun httpClient(): Http =
                 prettyPrint = true // Useful for debugging
                 ignoreUnknownKeys = true
                 classDiscriminator = "type"
-                serializersModule = ApiSection.serializersModule
+                serializersModule = ApiSection.serializersModule + ApiSectionHeader.serializersModule
             })
         }
         install(Logging) {
