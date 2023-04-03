@@ -17,7 +17,7 @@ import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
-import com.sebaslogen.artai.data.remote.api.DynamicUIApi
+import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.networking.Http
 import io.github.aakira.napier.Napier
 import io.ktor.client.request.get
@@ -28,7 +28,7 @@ import me.tatarka.inject.annotations.Component
 @Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
     abstract val platformGreeterCreator: () -> PlatformGreeter
-    abstract val apiServiceCreator: () -> DynamicUIApi
+    abstract val dynamicUIRepositoryCreator: () -> DynamicUIRepository
 }
 
 class MainActivity : ComponentActivity() {
@@ -63,8 +63,7 @@ class MainActivity : ComponentActivity() {
             val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
             val bodyAsText = response.bodyAsText()
             Napier.d { bodyAsText }
-            val dynamicUIApi: DynamicUIApi = mainActivityComponent.apiServiceCreator()
-            val screen = dynamicUIApi.home().screen
+            val screen = mainActivityComponent.dynamicUIRepositoryCreator().home().screen
             Napier.d { "Response was: $screen with id: ${screen.id}" }
         }
     }
