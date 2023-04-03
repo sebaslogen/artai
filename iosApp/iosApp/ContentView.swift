@@ -10,6 +10,10 @@ struct ContentView: View {
 		Text(platformGreeter.greet())
         Button("log me", action: {
             Napier.d("Welcome to KT logging")
+            let result = await asyncResult(for: viewModel.getHome())
+            if case let .success(homeResponse) = result {
+                Napier.d("Got ViewModel result: \(homeResponse)")
+            }
         })
 	}
 }

@@ -58,6 +58,7 @@ dependencies {
 
     // Compose dependencies and integration libs
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
@@ -65,4 +66,6 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.toolingPreview)
     debugRuntimeOnly(libs.compose.ui.tooling)
+
+    implementation(libs.kmm.viewmodel)
 }

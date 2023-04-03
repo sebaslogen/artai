@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.nativecoroutines)
 }
 
 kotlin {
@@ -30,6 +31,9 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinInject.runtime)
@@ -42,6 +46,7 @@ kotlin {
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
+                implementation(libs.kmm.viewmodel)
             }
         }
         val commonTest by getting {
@@ -52,6 +57,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.ktor.client.android)
+                api(libs.androidx.lifecycle.viewmodel.ktx)
             }
         }
         val androidUnitTest by getting
