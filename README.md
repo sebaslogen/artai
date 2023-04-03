@@ -14,3 +14,5 @@ Art gallery experimentation app for SDUI in Kotlin Mobile Multiplatform
 - Kotlin coroutines
 - Napier as multiplatform logger
 - Cocoapods for package management in iOS
+- Ktor
+- BuildKonfig
