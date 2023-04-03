@@ -16,3 +16,5 @@ Art gallery experimentation app for SDUI in Kotlin Mobile Multiplatform
 - Cocoapods for package management in iOS
 - Ktor
 - BuildKonfig
+- Kotlin serialization
+- Ktorfit
