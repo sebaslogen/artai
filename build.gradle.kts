@@ -1,12 +1,13 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform).apply(false)
-    alias(libs.plugins.kotlin.android).apply(false)
-    alias(libs.plugins.android.application).apply(false)
-    alias(libs.plugins.android.library).apply(false)
-    alias(libs.plugins.kotlin.serialization).apply(false)
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.buildkonfig) apply false
+    alias(libs.plugins.ktorfit) apply false
 }
 
 tasks.register("clean", Delete::class) {
@@ -29,6 +30,13 @@ subprojects {
                     buildConfigField(Type.BOOLEAN, "DEBUG", gradle.startParameter.taskRequests.toString().contains("Debug").toString(), const = true)
                 }
             }
+        }
+    }
+    // Configure KtorFit
+    plugins.withType<de.jensklingenberg.ktorfit.gradle.KtorfitGradleSubPlugin> {
+        configure<de.jensklingenberg.ktorfit.gradle.KtorfitGradleConfiguration> {
+            version = libs.versions.ktorfit.get()
+            logging = project.hasProperty("debugApp")
         }
     }
 }

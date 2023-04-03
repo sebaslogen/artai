@@ -1,6 +1,7 @@
 package com.sebaslogen.artai.android.di.components
 
 import android.content.Context
+import com.sebaslogen.artai.di.components.ApiServicesComponent
 import com.sebaslogen.artai.di.components.NetworkComponent
 import com.sebaslogen.artai.di.components.PlatformComponent
 import com.sebaslogen.artai.di.scopes.Singleton
@@ -11,7 +12,7 @@ import me.tatarka.inject.annotations.Provides
 @Singleton
 abstract class ApplicationComponent(
     @get:Provides val context: Context,
-) : PlatformComponent, NetworkComponent
+) : PlatformComponent, NetworkComponent, ApiServicesComponent
 
 interface ApplicationComponentProvider {
     val component: ApplicationComponent

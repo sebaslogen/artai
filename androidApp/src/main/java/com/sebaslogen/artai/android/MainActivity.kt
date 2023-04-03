@@ -17,6 +17,7 @@ import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import com.sebaslogen.artai.data.remote.api.DynamicUIApi
 import com.sebaslogen.artai.networking.Http
 import io.github.aakira.napier.Napier
 import io.ktor.client.request.get
@@ -27,6 +28,7 @@ import me.tatarka.inject.annotations.Component
 @Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
     abstract val platformGreeterCreator: () -> PlatformGreeter
+    abstract val apiServiceCreator: () -> DynamicUIApi
 }
 
 class MainActivity : ComponentActivity() {
@@ -55,11 +57,18 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun httpCall(mainActivityComponent: MainActivityComponent) {
+        // Vanilla Ktor
         lifecycle.coroutineScope.launch {
             val http: Http = mainActivityComponent.parent.httpFactory()
             val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
             val bodyAsText = response.bodyAsText()
             Napier.d { bodyAsText }
+        }
+        // Ktorfit
+        lifecycle.coroutineScope.launch {
+            val http: DynamicUIApi = mainActivityComponent.apiServiceCreator()
+            val screen = http.home().screen
+            Napier.d { "Response was: $screen with id: ${screen?.id}" }
         }
     }
 }
