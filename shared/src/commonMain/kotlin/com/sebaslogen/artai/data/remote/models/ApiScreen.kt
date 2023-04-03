@@ -51,6 +51,8 @@ sealed interface ApiSection {
     @SerialName("list")
     data class ApiList(
         val id: String,
+        val header: ApiSectionHeader,
+        val items: List<ApiListItem>
     ) : ApiSection
 }
 

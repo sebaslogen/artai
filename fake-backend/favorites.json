@@ -11,32 +11,32 @@
         },
         "items": [
           {
-            "type": "big-art",
-            "id": 1,
+            "type": "bigArt",
+            "id": "item-1",
             "title": "Art 1",
             "image": "http://www.example.com/image1.jpg"
           },
           {
-            "type": "big-art",
-            "id": 2,
+            "type": "bigArt",
+            "id": "item-2",
             "title": "Art 2",
             "image": "http://www.example.com/image2.jpg"
           },
           {
-            "type": "big-art",
-            "id": 3,
+            "type": "bigArt",
+            "id": "item-3",
             "title": "Art 3",
             "image": "http://www.example.com/image3.jpg"
           },
           {
-            "type": "big-art",
-            "id": 4,
+            "type": "bigArt",
+            "id": "item-4",
             "title": "Art 4",
             "image": "http://www.example.com/image4.jpg"
           },
           {
-            "type": "big-art",
-            "id": 5,
+            "type": "bigArt",
+            "id": "item-5",
             "title": "Art 5",
             "image": "http://www.example.com/image5.jpg"
           }

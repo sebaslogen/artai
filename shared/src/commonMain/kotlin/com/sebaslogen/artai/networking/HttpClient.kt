@@ -1,6 +1,7 @@
 package com.sebaslogen.artai.networking
 
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
+import com.sebaslogen.artai.data.remote.models.ApiListItem
 import com.sebaslogen.artai.data.remote.models.ApiSection
 import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 import com.sebaslogen.artai.shared.build.BuildKonfig
@@ -55,7 +56,7 @@ fun httpClient(): Http =
                 prettyPrint = true // Useful for debugging
                 ignoreUnknownKeys = true
                 classDiscriminator = "type"
-                serializersModule = ApiSection.serializers + ApiSectionHeader.serializers + ApiCarouselItem.serializers
+                serializersModule = ApiSection.serializers + ApiSectionHeader.serializers + ApiCarouselItem.serializers + ApiListItem.serializers
             })
         }
         install(Logging) {

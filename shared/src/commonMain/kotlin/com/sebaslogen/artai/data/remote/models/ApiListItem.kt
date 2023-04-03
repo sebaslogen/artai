@@ -6,20 +6,20 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 
-sealed interface ApiCarouselItem {
+sealed interface ApiListItem {
 
     companion object {
         val serializers = SerializersModule {
-            polymorphic(ApiCarouselItem::class) {
-                subclass(ApiSmallArt::class)
+            polymorphic(ApiListItem::class) {
+                subclass(ApiBigArt::class)
             }
         }
     }
 
     @Serializable
-    @SerialName("smallArt")
-    data class ApiSmallArt(
+    @SerialName("bigArt")
+    data class ApiBigArt(
         val id: String,
         val image: String,
-    ) : ApiCarouselItem
+    ) : ApiListItem
 }

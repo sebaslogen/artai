@@ -11,11 +11,19 @@ sealed interface ApiSectionHeader {
     companion object {
         val serializers = SerializersModule {
             polymorphic(ApiSectionHeader::class) {
+                subclass(ApiLarge::class)
                 subclass(ApiNormal::class)
                 subclass(ApiSmallArt::class)
             }
         }
     }
+
+    @Serializable
+    @SerialName("large")
+    data class ApiLarge(
+        val id: String,
+        val title: String,
+    ) : ApiSectionHeader
 
     @Serializable
     @SerialName("normal")
