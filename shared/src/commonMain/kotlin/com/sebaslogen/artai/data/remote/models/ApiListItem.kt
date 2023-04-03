@@ -23,6 +23,7 @@ sealed interface ApiListItem {
     @SerialName("bigArt")
     data class ApiBigArt(
         val id: String,
+        val title: String,
         val image: String,
     ) : ApiListItem
 

@@ -13,7 +13,7 @@ data class ApiScreenResponse(
 
 @Serializable
 data class ApiScreen(
-    val id: Int,
+    val id: String,
     val sections: List<ApiSection>
 )
 

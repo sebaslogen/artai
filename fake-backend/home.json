@@ -1,6 +1,6 @@
 {
   "screen": {
-    "id": 1,
+    "id": "home-screen",
     "sections": [
       {
         "type": "carousel",

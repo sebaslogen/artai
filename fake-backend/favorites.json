@@ -1,6 +1,6 @@
 {
   "screen": {
-    "id": 2,
+    "id": "favorites-screen",
     "sections": [
       {
         "type": "list",
