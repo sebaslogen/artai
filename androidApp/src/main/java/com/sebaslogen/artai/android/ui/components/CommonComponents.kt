@@ -1,11 +1,14 @@
 package com.sebaslogen.artai.android.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
 import com.sebaslogen.artai.data.remote.models.ApiScreen
 import com.sebaslogen.artai.data.remote.models.ApiSection
@@ -42,7 +45,7 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
             ) { item: ApiCarouselItem ->
                 // TODO: Apply style section.style
                 when (item) {
-                    is ApiCarouselItem.ApiSmallArt -> Text("Img ${item.image}")
+                    is ApiCarouselItem.ApiSmallArt -> Text("Img ${item.image}", modifier = Modifier.padding(8.dp))
                     is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)")
                 }
             }
