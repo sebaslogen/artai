@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -31,7 +32,7 @@ fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: Pl
         val screen = home.screen
         Napier.d { "ViewModel Response was: $screen with id: ${screen.id}" }
     }
-    val viewState = viewModel.viewState.collectAsStateWithLifecycle()
+    val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
         val platformGreet = remember { Greeting().greet() }
@@ -39,7 +40,7 @@ fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: Pl
         val injectedGreet = remember { platformGreeter.greet() }
         GreetingView(injectedGreet)
         Spacer(modifier = Modifier.height(20.dp))
-        when (val state = viewState.value) {
+        when (val state = viewState) {
             is DynamicUIViewState.Error -> Text("Error loading data :(")
             DynamicUIViewState.Loading -> Text("Loading...")
             is DynamicUIViewState.Success -> ScreenContent(state.data.screen)
