@@ -19,11 +19,22 @@ struct Carousel: View {
         
         ScrollView(.horizontal) {
             LazyHStack {
-                Text(section.id)
                 ForEach(section.items, id: \.id) { item in
                     switch item {
                     case is ApiCarouselItem.ApiSmallArt:
-                        Text("Img \((item as! ApiCarouselItem.ApiSmallArt).image)")
+                        if #available(iOS 15.0, *) {
+                            Text("Img \((item as! ApiCarouselItem.ApiSmallArt).image)")
+                                .padding()
+                                .background(Color(
+                                    red: .random(in: 0...1),
+                                    green: .random(in: 0...1),
+                                    blue: .random(in: 0...1),
+                                    opacity: 1
+                                ))
+                                .cornerRadius(10)
+                        } else {
+                            // Fallback on earlier versions
+                        }
                     case is ApiCarouselItem.ApiUnknown:
                         Text("TODO(ApiUnknown)")
                     default:
