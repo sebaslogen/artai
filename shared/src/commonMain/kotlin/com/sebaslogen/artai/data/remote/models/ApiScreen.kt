@@ -17,7 +17,10 @@ data class ApiScreen(
     val sections: List<ApiSection>
 )
 
-sealed interface ApiSection {
+@Serializable
+sealed class ApiSection {
+
+    abstract val id: String?
 
     companion object {
         @OptIn(ExperimentalSerializationApi::class)
@@ -33,11 +36,11 @@ sealed interface ApiSection {
     @Serializable
     @SerialName("carousel")
     data class ApiCarousel(
-        val id: String,
+        override val id: String,
         val header: ApiSectionHeader,
         val style: ApiCarouselStyle,
         val items: List<ApiCarouselItem>
-    ) : ApiSection {
+    ) : ApiSection() {
         enum class ApiCarouselStyle {
             Squared, Circle, RoundedSquares
         }
@@ -46,20 +49,20 @@ sealed interface ApiSection {
     @Serializable
     @SerialName("footer")
     data class ApiFooter(
-        val id: String,
+        override val id: String,
         val text: String
-    ) : ApiSection
+    ) : ApiSection()
 
     @Serializable
     @SerialName("list")
     data class ApiList(
-        val id: String,
+        override val id: String,
         val header: ApiSectionHeader,
         val items: List<ApiListItem>
-    ) : ApiSection
+    ) : ApiSection()
 
     @Serializable
-    data class ApiUnknown(val type: String, val id: String? = null) : ApiSection
+    data class ApiUnknown(val type: String, override val id: String? = null) : ApiSection()
 }
 
 

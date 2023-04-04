@@ -7,7 +7,10 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 
-sealed interface ApiSectionHeader {
+@Serializable
+sealed class ApiSectionHeader {
+
+    abstract val id: String?
 
     companion object {
         @OptIn(ExperimentalSerializationApi::class)
@@ -24,26 +27,26 @@ sealed interface ApiSectionHeader {
     @Serializable
     @SerialName("large")
     data class ApiLarge(
-        val id: String,
+        override val id: String,
         val title: String,
-    ) : ApiSectionHeader
+    ) : ApiSectionHeader()
 
     @Serializable
     @SerialName("normal")
     data class ApiNormal(
-        val id: String,
+        override val id: String,
         val title: String,
-    ) : ApiSectionHeader
+    ) : ApiSectionHeader()
 
     @Serializable
     @SerialName("smallArt")
     data class ApiSmallArt(
-        val id: String,
+        override val id: String,
         val image: String,
         val title: String,
         val subtitle: String,
-    ) : ApiSectionHeader
+    ) : ApiSectionHeader()
 
     @Serializable
-    data class ApiUnknown(val type: String, val id: String? = null) : ApiSectionHeader
+    data class ApiUnknown(val type: String, override val id: String? = null) : ApiSectionHeader()
 }

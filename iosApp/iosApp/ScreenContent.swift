@@ -17,6 +17,19 @@ struct ScreenContent: View {
         VStack {
             var screen = state.data.screen
             Text("Got ViewModel result: \(screen.id)")
+            
+            List(screen.sections, id: \.id) { section in
+                Text("Section")
+                switch section {
+                case is ApiSection.ApiCarousel:
+                    Text("Carousel Section")
+                default:
+                    Text("Unknown section type")
+                }
+//                Text("Section with id: \(section)")
+//                Text("Section with id: \(section.id)")
+//                CocktailItemRowView(drink: drink)
+            }
         }
     }
 }

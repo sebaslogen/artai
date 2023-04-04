@@ -7,7 +7,10 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 
-sealed interface ApiListItem {
+@Serializable
+sealed class ApiListItem {
+
+    abstract val id: String?
 
     companion object {
         @OptIn(ExperimentalSerializationApi::class)
@@ -22,11 +25,11 @@ sealed interface ApiListItem {
     @Serializable
     @SerialName("bigArt")
     data class ApiBigArt(
-        val id: String,
+        override val id: String,
         val title: String,
         val image: String,
-    ) : ApiListItem
+    ) : ApiListItem()
 
     @Serializable
-    data class ApiUnknown(val type: String, val id: String? = null) : ApiListItem
+    data class ApiUnknown(val type: String, override val id: String? = null) : ApiListItem()
 }

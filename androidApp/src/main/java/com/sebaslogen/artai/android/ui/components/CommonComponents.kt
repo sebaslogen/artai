@@ -16,12 +16,12 @@ import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 fun ScreenContent(screen: ApiScreen) {
     Text("Screen id is: ${screen.id}")
     LazyColumn {
-        screen.sections.forEach { section ->
+        screen.sections.forEach { section: ApiSection ->
             when (section) {
                 is ApiSection.ApiCarousel -> carousel(section)
-                is ApiSection.ApiFooter -> item() { Text("TODO(ApiFooter)") }
-                is ApiSection.ApiList -> item() { Text("TODO(ApiList)") }
-                is ApiSection.ApiUnknown -> item() { Text("TODO(ApiUnknown)") }
+                is ApiSection.ApiFooter -> item(key = section.id) { Text("TODO(ApiFooter)") }
+                is ApiSection.ApiList -> item(key = section.id) { Text("TODO(ApiList)") }
+                is ApiSection.ApiUnknown -> item(key = section.id) { Text("TODO(ApiUnknown)") }
             }
         }
     }
@@ -34,10 +34,10 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
         is ApiSectionHeader.ApiSmallArt -> sectionHeaderSmallArt(section.header as ApiSectionHeader.ApiSmallArt)
         is ApiSectionHeader.ApiUnknown -> sectionHeaderUnknown(section.header as ApiSectionHeader.ApiUnknown)
     }
-    item {
+    item(key = section.id) {
         LazyRow {
             items(items = section.items,
-//                key = { item -> item }, // TODO: Add key
+                key = { item -> item.id ?: item.hashCode() },
                 contentType = { item -> item::class }
             ) { item: ApiCarouselItem ->
                 // TODO: Apply style section.style
@@ -51,17 +51,17 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
 }
 
 fun LazyListScope.sectionHeaderLarge(header: ApiSectionHeader.ApiLarge) {
-    item() { Text(header.title) }
+    item(key = header.id) { Text(header.title) }
 }
 
 fun LazyListScope.sectionHeaderNormal(header: ApiSectionHeader.ApiNormal) {
-    item() { Text(header.title) }
+    item(key = header.id) { Text(header.title) }
 }
 
 fun LazyListScope.sectionHeaderSmallArt(header: ApiSectionHeader.ApiSmallArt) {
-    item() { Text(header.title) }
+    item(key = header.id) { Text(header.title) }
 }
 
 fun LazyListScope.sectionHeaderUnknown(header: ApiSectionHeader.ApiUnknown) {
-    item() { Text("Unknown header") }
+    item(key = header.id) { Text("Unknown header") }
 }
