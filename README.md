@@ -18,3 +18,5 @@ Art gallery experimentation app for SDUI in Kotlin Mobile Multiplatform
 - BuildKonfig
 - Kotlin serialization
 - Ktorfit
+- KMM-ViewModel
+- KMP-NativeCoroutines
