@@ -34,8 +34,8 @@ sealed interface ApiSection {
     @SerialName("carousel")
     data class ApiCarousel(
         val id: String,
-        val style: ApiCarouselStyle,
         val header: ApiSectionHeader,
+        val style: ApiCarouselStyle,
         val items: List<ApiCarouselItem>
     ) : ApiSection {
         enum class ApiCarouselStyle {

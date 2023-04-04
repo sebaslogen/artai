@@ -9,5 +9,6 @@ import me.tatarka.inject.annotations.Inject
 class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
     suspend fun home() = withContext(Dispatchers.Default) { // TODO: Add IO dispatcher
         dynamicUIApi.home() // TODO: Map to domain model
+        // TODO: Add error handling to return success or error
     }
 }

@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -13,14 +15,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUIViewModel
+import com.sebaslogen.artai.domain.DynamicUIViewState
 import com.sebaslogen.artai.networking.Http
 import io.github.aakira.napier.Napier
 import io.ktor.client.request.get
@@ -35,15 +41,22 @@ typealias Greeters = @Composable (PlatformGreeter) -> Unit
 @Composable
 fun Greeters(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: PlatformGreeter) {
     val viewModel = viewModel { dynamicUiViewModel() }
-    LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) {// Vanilla suspend call to fetch something from network
         val home = viewModel.getHome()
         val screen = home.screen
         Napier.d { "ViewModel Response was: $screen with id: ${screen.id}" }
     }
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle()
     val platformGreet = remember { Greeting().greet() }
     GreetingView(platformGreet)
     val injectedGreet = remember { platformGreeter.greet() }
     GreetingView(injectedGreet)
+    Spacer(modifier = Modifier.height(20.dp))
+    when (val state = viewState.value) {
+        is DynamicUIViewState.Error -> Text("Error loading data :(")
+        DynamicUIViewState.Loading -> Text("Loading...")
+        is DynamicUIViewState.Success -> ScreenContent(state.data.screen)
+    }
 }
 
 @Component
@@ -80,12 +93,13 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun httpCall(mainActivityComponent: MainActivityComponent) {
-        // Vanilla Ktor
         lifecycle.coroutineScope.launch {
+            // Vanilla Ktor
             val http: Http = mainActivityComponent.parent.httpFactory()
             val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
             val bodyAsText = response.bodyAsText()
             Napier.d { bodyAsText }
+            // Use repo and ktorfit
             val screen = mainActivityComponent.dynamicUIRepositoryCreator().home().screen
             Napier.d { "Response was: $screen with id: ${screen.id}" }
         }
