@@ -29,7 +29,7 @@ struct ContentView: View {
         case is DynamicUIViewState.Loading:
             Text("Loading...")
         case is DynamicUIViewState.Success:
-            ScreenContent(state: (state as! DynamicUIViewState.Success), onRefresh: {
+            ScreenContent(state: state as! DynamicUIViewState.Success, onRefresh: {
                 viewModel.onRefreshClicked()
             })
         default:

@@ -19,7 +19,6 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
     @NativeCoroutinesState
-//    val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow() // TODO: Choose which flow alternative to use
     val viewState: StateFlow<DynamicUIViewState> = _viewState.stateIn(
         viewModelScope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),

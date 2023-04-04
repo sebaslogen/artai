@@ -17,18 +17,23 @@ struct ScreenContent: View {
         VStack {
             var screen = state.data.screen
             Text("Got ViewModel result: \(screen.id)")
-            
+            Button(action: onRefresh) {
+                Text("Refresh")
+            }
             List(screen.sections, id: \.id) { section in
-                Text("Section")
                 switch section {
                 case is ApiSection.ApiCarousel:
-                    Text("Carousel Section")
+                    Carousel(section: section as! ApiSection.ApiCarousel)
+                case is ApiSection.ApiFooter:
+                    Text("TODO(ApiFooter)")
+                case is ApiSection.ApiList:
+                    Text("TODO(ApiList)")
+                case is ApiSection.ApiUnknown:
+                    Text("TODO(ApiUnknown)")
                 default:
                     Text("Unknown section type")
                 }
-//                Text("Section with id: \(section)")
-//                Text("Section with id: \(section.id)")
-//                CocktailItemRowView(drink: drink)
+
             }
         }
     }
