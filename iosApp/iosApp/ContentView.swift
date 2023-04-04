@@ -22,6 +22,19 @@ struct ContentView: View {
                 }
             }
         })
+        var state: DynamicUIViewState = viewModel.viewState
+        switch state {
+        case is DynamicUIViewState.Error:
+            Text("Error loading data :(")
+        case is DynamicUIViewState.Loading:
+            Text("Loading...")
+        case is DynamicUIViewState.Success:
+            ScreenContent(state: (state as! DynamicUIViewState.Success), onRefresh: {
+                viewModel.onRefreshClicked()
+            })
+        default:
+            Text("Unknown state")
+        }
 	}
 }
 
