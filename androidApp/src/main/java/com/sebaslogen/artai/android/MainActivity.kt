@@ -3,68 +3,32 @@ package com.sebaslogen.artai.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
-import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUIViewModel
-import com.sebaslogen.artai.domain.DynamicUIViewState
 import com.sebaslogen.artai.networking.Http
 import io.github.aakira.napier.Napier
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Component
-import me.tatarka.inject.annotations.Inject
-
-typealias Greeters = @Composable (PlatformGreeter) -> Unit
-
-@Inject
-@Composable
-fun Greeters(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: PlatformGreeter) {
-    val viewModel = viewModel { dynamicUiViewModel() }
-    LaunchedEffect(Unit) {// Vanilla suspend call to fetch something from network
-        val home = viewModel.getHome()
-        val screen = home.screen
-        Napier.d { "ViewModel Response was: $screen with id: ${screen.id}" }
-    }
-    val viewState = viewModel.viewState.collectAsStateWithLifecycle()
-    val platformGreet = remember { Greeting().greet() }
-    GreetingView(platformGreet)
-    val injectedGreet = remember { platformGreeter.greet() }
-    GreetingView(injectedGreet)
-    Spacer(modifier = Modifier.height(20.dp))
-    when (val state = viewState.value) {
-        is DynamicUIViewState.Error -> Text("Error loading data :(")
-        DynamicUIViewState.Loading -> Text("Loading...")
-        is DynamicUIViewState.Success -> ScreenContent(state.data.screen)
-    }
-}
 
 @Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
     abstract val platformGreeterCreator: () -> PlatformGreeter
     abstract val dynamicUIRepositoryCreator: () -> DynamicUIRepository
     abstract val dynamicUIViewModel: DynamicUIViewModel
-    abstract val greeters: Greeters
+    abstract val homeScreen: HomeScreen
 }
 
 class MainActivity : ComponentActivity() {
@@ -77,16 +41,14 @@ class MainActivity : ComponentActivity() {
         httpCall(mainActivityComponent)
 
         val platformGreeter: PlatformGreeter = mainActivityComponent.platformGreeterCreator()
-        val greeters = mainActivityComponent.greeters
+        val homeScreen = mainActivityComponent.homeScreen
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column {
-                        greeters(platformGreeter)
-                    }
+                    homeScreen(platformGreeter)
                 }
             }
         }
