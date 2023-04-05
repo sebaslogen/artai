@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    kotlin("native.cocoapods")
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.native.cocoapods)
     alias(libs.plugins.buildkonfig)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
@@ -18,14 +18,14 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "ArtAI application framework"
+        homepage = "Link to the Shared Module homepage is empty"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
             export(libs.napier.logger)
         }
     }
