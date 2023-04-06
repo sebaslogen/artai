@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.coroutineScope
@@ -17,6 +18,8 @@ import com.sebaslogen.artai.android.di.components.applicationComponent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUIViewModel
 import com.sebaslogen.artai.networking.Http
+import com.seiko.imageloader.ImageLoader
+import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
@@ -27,6 +30,7 @@ import me.tatarka.inject.annotations.Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
     abstract val platformGreeterCreator: () -> PlatformGreeter
     abstract val dynamicUIRepositoryCreator: () -> DynamicUIRepository
+    abstract val imageLoaderCreator: () -> ImageLoader
     abstract val dynamicUIViewModel: DynamicUIViewModel
     abstract val homeScreen: HomeScreen
 }
@@ -43,12 +47,16 @@ class MainActivity : ComponentActivity() {
         val platformGreeter: PlatformGreeter = mainActivityComponent.platformGreeterCreator()
         val homeScreen = mainActivityComponent.homeScreen
         setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    homeScreen(platformGreeter)
+            CompositionLocalProvider(
+                LocalImageLoader provides mainActivityComponent.imageLoaderCreator(),
+            ) {
+                MyApplicationTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        homeScreen(platformGreeter)
+                    }
                 }
             }
         }

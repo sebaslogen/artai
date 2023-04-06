@@ -12,7 +12,7 @@ import me.tatarka.inject.annotations.Provides
 @Singleton
 abstract class ApplicationComponent(
     @get:Provides val context: Context,
-) : PlatformComponent, NetworkComponent, ApiServicesComponent
+) : PlatformComponent, NetworkComponent, ApiServicesComponent, ImageLoaderComponent
 
 interface ApplicationComponentProvider {
     val component: ApplicationComponent
