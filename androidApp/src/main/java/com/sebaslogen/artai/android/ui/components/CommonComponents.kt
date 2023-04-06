@@ -4,6 +4,7 @@ package com.sebaslogen.artai.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
@@ -64,6 +65,7 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                             contentDescription = "Img ${item.image}",
                             filterQuality = FilterQuality.Medium,
                             modifier = Modifier
+                                .size(150.dp)
                                 .animateItemPlacement()
                                 .padding(12.dp)
                                 .clip(shape = shape)
