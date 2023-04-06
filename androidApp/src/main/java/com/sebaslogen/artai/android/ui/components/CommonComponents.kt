@@ -65,9 +65,8 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                             filterQuality = FilterQuality.Medium,
                             modifier = Modifier
                                 .animateItemPlacement()
-                                .padding(8.dp)
+                                .padding(12.dp)
                                 .clip(shape = shape)
-                                .padding(8.dp)
                         )
 
                     is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)", modifier = Modifier.animateItemPlacement())
