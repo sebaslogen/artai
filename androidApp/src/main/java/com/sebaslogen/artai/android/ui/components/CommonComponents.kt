@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
 import com.sebaslogen.artai.data.remote.models.ApiScreen
 import com.sebaslogen.artai.data.remote.models.ApiSection
+import com.sebaslogen.artai.data.remote.models.ApiSection.ApiCarousel.ApiCarouselStyle.*
 import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 
 
@@ -49,7 +51,11 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                 key = { item -> item.id ?: item.hashCode() },
                 contentType = { item -> item::class }
             ) { item: ApiCarouselItem ->
-                // TODO: Apply style section.style
+                val shape = when (section.style) {
+                    Squared -> RoundedCornerShape(0)
+                    Circle -> CircleShape
+                    RoundedSquares -> RoundedCornerShape(8.dp)
+                }
                 when (item) {
                     is ApiCarouselItem.ApiSmallArt ->
                         Text(
@@ -57,7 +63,7 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                             modifier = Modifier
                                 .animateItemPlacement()
                                 .padding(8.dp)
-                                .background(color = Color(4278255617 * 31 * item.hashCode()), shape = RoundedCornerShape(8.dp))
+                                .background(color = Color(4278255617 * 31 * item.hashCode()), shape = shape)
                                 .padding(8.dp)
                         )
 
