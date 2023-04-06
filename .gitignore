@@ -76,3 +76,4 @@ lint/tmp/
 
 .DS_Store
 xcuserdata
+*/.vscode/
