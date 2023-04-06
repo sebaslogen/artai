@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.sebaslogen.artai.android.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -41,7 +44,7 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
         is ApiSectionHeader.ApiUnknown -> sectionHeaderUnknown(section.header as ApiSectionHeader.ApiUnknown)
     }
     item(key = section.id) {
-        LazyRow {
+        LazyRow(modifier = Modifier.animateItemPlacement()) {
             items(items = section.items,
                 key = { item -> item.id ?: item.hashCode() },
                 contentType = { item -> item::class }
@@ -52,12 +55,13 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                         Text(
                             text = "Img ${item.image}",
                             modifier = Modifier
+                                .animateItemPlacement()
                                 .padding(8.dp)
                                 .background(color = Color(4278255617 * 31 * item.hashCode()), shape = RoundedCornerShape(8.dp))
                                 .padding(8.dp)
                         )
 
-                    is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)")
+                    is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)", modifier = Modifier.animateItemPlacement())
                 }
             }
         }
@@ -65,17 +69,17 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
 }
 
 fun LazyListScope.sectionHeaderLarge(header: ApiSectionHeader.ApiLarge) {
-    item(key = header.id) { Text(header.title) }
+    item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
 fun LazyListScope.sectionHeaderNormal(header: ApiSectionHeader.ApiNormal) {
-    item(key = header.id) { Text(header.title) }
+    item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
 fun LazyListScope.sectionHeaderSmallArt(header: ApiSectionHeader.ApiSmallArt) {
-    item(key = header.id) { Text(header.title) }
+    item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
 fun LazyListScope.sectionHeaderUnknown(header: ApiSectionHeader.ApiUnknown) {
-    item(key = header.id) { Text("Unknown header") }
+    item(key = header.id) { Text("Unknown header", modifier = Modifier.animateItemPlacement()) }
 }

@@ -94,35 +94,6 @@
         ]
       },
       {
-        "type": "carousel",
-        "id": "section-similar-recommended",
-        "style": "Squared",
-        "header": {
-          "type": "smallArt",
-          "id": "section-header-similar-recommended",
-          "image": "http://www.example.com/image15.jpg",
-          "title": "More like",
-          "subtitle": "Art 15"
-        },
-        "items": [
-          {
-            "type": "smallArt",
-            "id": "166",
-            "image": "http://www.example.com/image166.jpg"
-          },
-          {
-            "type": "smallArt",
-            "id": "16",
-            "image": "http://www.example.com/image16.jpg"
-          },
-          {
-            "type": "smallArt",
-            "id": "20",
-            "image": "http://www.example.com/image20.jpg"
-          }
-        ]
-      },
-      {
         "type": "footer",
         "id": "section-footer",
         "text": "Thanks for using the app!"
