@@ -3,6 +3,7 @@ package com.sebaslogen.artai.android
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -39,6 +40,9 @@ fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: Pl
         GreetingView(platformGreet)
         val injectedGreet = remember { platformGreeter.greet() }
         GreetingView(injectedGreet)
+        Button(onClick = viewModel::onRefreshClicked) {
+            Text("Refresh")
+        }
         Spacer(modifier = Modifier.height(20.dp))
         when (val state = viewState) {
             is DynamicUIViewState.Error -> Text("Error loading data :(")

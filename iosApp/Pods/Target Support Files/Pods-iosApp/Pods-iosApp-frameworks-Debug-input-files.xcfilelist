@@ -4,4 +4,3 @@ ${BUILT_PRODUCTS_DIR}/KMMViewModelCoreObjC/KMMViewModelCoreObjC.framework
 ${BUILT_PRODUCTS_DIR}/KMMViewModelSwiftUI/KMMViewModelSwiftUI.framework
 ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesAsync/KMPNativeCoroutinesAsync.framework
 ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.framework
-${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework

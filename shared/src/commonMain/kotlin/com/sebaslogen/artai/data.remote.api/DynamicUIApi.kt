@@ -7,4 +7,7 @@ interface DynamicUIApi {
 
     @GET("sebaslogen/artai/main/fake-backend/home.json")
     suspend fun home(): ApiScreenResponse
+
+    @GET("sebaslogen/artai/main/fake-backend/home-reloaded.json")
+    suspend fun homeReloaded(): ApiScreenResponse
 }

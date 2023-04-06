@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   KMMViewModelSwiftUI: af36e8ca89cb88c42581e953be9bd8a6c1b1a4b8
   KMPNativeCoroutinesAsync: 05e23198a8607af5abbb016beeed5586ab69d40e
   KMPNativeCoroutinesCore: ee5236cd93d3f96c594d3d7ea4245739cb06a367
-  shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
+  shared: b4054e5f8d4cb3b44093195409567da9d559ff3a
 
 PODFILE CHECKSUM: 5a75c755f309b469d42329f8bfb461161cbc2c36
 

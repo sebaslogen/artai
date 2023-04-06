@@ -11,4 +11,9 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
         dynamicUIApi.home() // TODO: Map to domain model
         // TODO: Add error handling to return success or error
     }
+
+    suspend fun homeReloaded() = withContext(Dispatchers.Default) { // TODO: Add IO dispatcher
+        dynamicUIApi.homeReloaded() // TODO: Map to domain model
+        // TODO: Add error handling to return success or error
+    }
 }

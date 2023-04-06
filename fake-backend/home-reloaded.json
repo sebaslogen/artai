@@ -1,0 +1,132 @@
+{
+  "screen": {
+    "id": "home-screen",
+    "sections": [
+      {
+        "type": "carousel",
+        "id": "section-new",
+        "style": "Squared",
+        "header": {
+          "type": "normal",
+          "id": "section-header-new",
+          "title": "Newest Art"
+        },
+        "items": [
+          {
+            "type": "smallArt",
+            "id": "2",
+            "image": "http://www.example.com/image2.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "4",
+            "image": "http://www.example.com/image4.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "5",
+            "image": "http://www.example.com/image5.jpg"
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-favorites",
+        "style": "Circle",
+        "header": {
+          "type": "normal",
+          "id": "section-header-favorites",
+          "title": "Recent Favorites"
+        },
+        "items": [
+          {
+            "type": "smallArt",
+            "id": "66",
+            "image": "http://www.example.com/image66.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "77",
+            "image": "http://www.example.com/image77.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "6",
+            "image": "http://www.example.com/image6.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "7",
+            "image": "http://www.example.com/image7.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "8",
+            "image": "http://www.example.com/image8.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "9",
+            "image": "http://www.example.com/image9.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "10",
+            "image": "http://www.example.com/image10.jpg"
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-recommended",
+        "style": "RoundedSquares",
+        "header": {
+          "type": "normal",
+          "id": "section-header-recommended",
+          "title": "For You"
+        },
+        "items": [
+          {
+            "type": "smallArt",
+            "id": "15",
+            "image": "http://www.example.com/image141.jpg"
+          }
+        ]
+      },
+      {
+        "type": "carousel",
+        "id": "section-similar-recommended",
+        "style": "Squared",
+        "header": {
+          "type": "smallArt",
+          "id": "section-header-similar-recommended",
+          "image": "http://www.example.com/image15.jpg",
+          "title": "More like",
+          "subtitle": "Art 15"
+        },
+        "items": [
+          {
+            "type": "smallArt",
+            "id": "166",
+            "image": "http://www.example.com/image166.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "16",
+            "image": "http://www.example.com/image16.jpg"
+          },
+          {
+            "type": "smallArt",
+            "id": "20",
+            "image": "http://www.example.com/image20.jpg"
+          }
+        ]
+      },
+      {
+        "type": "footer",
+        "id": "section-footer",
+        "text": "Thanks for using the app!"
+      }
+    ]
+  }
+}

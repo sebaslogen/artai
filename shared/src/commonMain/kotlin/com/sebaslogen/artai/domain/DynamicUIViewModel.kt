@@ -36,11 +36,18 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
         }
     }
 
+    private fun fetchFakeReloadData() {
+        viewModelScope.coroutineScope.launch {
+            val home = dynamicUIRepository.homeReloaded()
+            _viewState.value = DynamicUIViewState.Success(home)
+        }
+    }
+
     @NativeCoroutines
     suspend fun getHome() = dynamicUIRepository.home()
 
     fun onRefreshClicked() {
-        fetchData()
+        fetchFakeReloadData()
     }
 }
 
