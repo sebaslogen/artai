@@ -3,7 +3,6 @@
 package com.sebaslogen.artai.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -14,8 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.unit.dp
+import com.sebaslogen.artai.android.ui.utils.ImageLoaderImage
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
 import com.sebaslogen.artai.data.remote.models.ApiScreen
 import com.sebaslogen.artai.data.remote.models.ApiSection
@@ -58,12 +59,14 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                 }
                 when (item) {
                     is ApiCarouselItem.ApiSmallArt ->
-                        Text(
-                            text = "Img ${item.image}",
+                        ImageLoaderImage(
+                            data = item.image,
+                            contentDescription = "Img ${item.image}",
+                            filterQuality = FilterQuality.Medium,
                             modifier = Modifier
                                 .animateItemPlacement()
                                 .padding(8.dp)
-                                .background(color = Color(4278255617 * 31 * item.hashCode()), shape = shape)
+                                .clip(shape = shape)
                                 .padding(8.dp)
                         )
 
