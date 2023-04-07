@@ -22,7 +22,7 @@ struct ContentView: View {
                 }
             }
         })
-        var state: DynamicUIViewState = viewModel.viewState
+        let state: DynamicUIViewState = viewModel.viewState
         switch state {
         case is DynamicUIViewState.Error:
             Text("Error loading data :(")
