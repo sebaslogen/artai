@@ -19,6 +19,7 @@ import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.domain.DynamicUIViewModel
 import com.sebaslogen.artai.domain.DynamicUIViewState
 import io.github.aakira.napier.Napier
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 
@@ -26,7 +27,7 @@ typealias HomeScreen = @Composable (PlatformGreeter) -> Unit
 
 @Inject
 @Composable
-fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, platformGreeter: PlatformGreeter) {
+fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, @Assisted platformGreeter: PlatformGreeter) {
     val viewModel = viewModel { dynamicUiViewModel() }
     LaunchedEffect(Unit) {// Vanilla suspend call to fetch something from network
         val home = viewModel.getHome()
