@@ -8,9 +8,9 @@ struct iOSApp: App {
         Napier.setupLogger()
     }
 
-	var body: some Scene {
-		WindowGroup {
-			ContentView()
-		}
-	}
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
 }

@@ -6,11 +6,11 @@ import KMPNativeCoroutinesAsync
 struct ContentView: View {
     private let platformGreeter = InjectApplicationComponent().platformGreeterCreator()
     @StateViewModel var viewModel = InjectApplicationComponent().dynamicUIViewModel
-	let greet = Greeting().greet()
+    let greet = Greeting().greet()
 
-	var body: some View {
-		Text(greet)
-		Text(platformGreeter.greet())
+    var body: some View {
+        Text(greet)
+        Text(platformGreeter.greet())
         Button("log me", action: {
             Napier.d("Welcome to KT logging")
             Task {
@@ -35,11 +35,11 @@ struct ContentView: View {
         default:
             Text("Unknown state")
         }
-	}
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+    static var previews: some View {
+        ContentView()
+    }
 }
