@@ -8,7 +8,7 @@ kotlin-inject = '0.6.1'
 ksp = '1.8.20-1.0.10'
 coroutines = '1.6.4'
 napier = '2.6.1'
-ktor = '2.2.4'
+ktor = '2.3.0'
 buildkonfig = '0.13.3'
 ktorfit-lib = '1.1.0'
 ktorfit-compiler = '1.0.0'
@@ -21,28 +21,17 @@ compose-compiler = '1.4.6'
 compose-image-loader = '1.4.0'
 
 [libraries]
+kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
+coroutines-core = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-core', version.ref = 'coroutines' }
+coroutines-android = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-android', version.ref = 'coroutines' }
+napier-logger = { module = 'io.github.aakira:napier', version.ref = 'napier' }
+kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp', version.ref = 'kotlin-inject' }
+kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlin-inject' }
 # Android libraries
 androidx-lifecycle-viewmodel-ktx = { module = 'androidx.lifecycle:lifecycle-viewmodel-ktx', version.ref = 'androidx-lifecycle' }
 androidx-lifecycle-viewmodel-compose = { module = 'androidx.lifecycle:lifecycle-viewmodel-compose', version.ref = 'androidx-lifecycle' }
 androidx-lifecycle-runtime-compose = { module = 'androidx.lifecycle:lifecycle-runtime-compose', version.ref = 'androidx-lifecycle' }
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
-
-compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
-compose-compiler = { module = 'androidx.compose.compiler:compiler', version.ref = 'compose-compiler' }
-compose-foundation = { module = 'androidx.compose.foundation:foundation' }
-compose-material3 = { module = 'androidx.compose.material3:material3' }
-compose-runtime = { module = 'androidx.compose.runtime:runtime' }
-compose-ui = { module = 'androidx.compose.ui:ui' }
-compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
-compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
-compose-image-loader = { module = 'io.github.qdsfdhvh:image-loader', version.ref = 'compose-image-loader' }
-
-kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp', version.ref = 'kotlin-inject' }
-kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlin-inject' }
-kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
-coroutines-core = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-core', version.ref = 'coroutines' }
-coroutines-android = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-android', version.ref = 'coroutines' }
-napier-logger = { module = 'io.github.aakira:napier', version.ref = 'napier' }
 # Ktor Networking
 ktor-client-core = { module = 'io.ktor:ktor-client-core', version.ref = 'ktor' }
 ktor-client-android = { module = 'io.ktor:ktor-client-okhttp', version.ref = 'ktor' }
@@ -56,7 +45,16 @@ ktor-client-serialization = { module = 'io.ktor:ktor-client-serialization', vers
 ktor-serialization-json = { module = 'io.ktor:ktor-serialization-kotlinx-json', version.ref = 'ktor' }
 # KMM ViewModels
 kmm-viewmodel = { module = 'com.rickclephas.kmm:kmm-viewmodel-core', version.ref = 'kmm-viewmodel' }
-
+# Compose libs
+compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
+compose-compiler = { module = 'androidx.compose.compiler:compiler', version.ref = 'compose-compiler' }
+compose-foundation = { module = 'androidx.compose.foundation:foundation' }
+compose-material3 = { module = 'androidx.compose.material3:material3' }
+compose-runtime = { module = 'androidx.compose.runtime:runtime' }
+compose-ui = { module = 'androidx.compose.ui:ui' }
+compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
+compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
+compose-image-loader = { module = 'io.github.qdsfdhvh:image-loader', version.ref = 'compose-image-loader' }
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'agp' }
