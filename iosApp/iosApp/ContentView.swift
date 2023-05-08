@@ -4,9 +4,8 @@ import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
-    private let appComponent = InjectApplicationComponent()
-    private let platformGreeter = appComponent.platformGreeterCreator()
-    @StateViewModel var viewModel = appComponent.dynamicUIViewModel
+    private let platformGreeter = InjectApplicationComponent().platformGreeterCreator()
+    @StateViewModel var viewModel = InjectApplicationComponent().dynamicUIViewModel
     let greet = Greeting().greet()
 
     var body: some View {
