@@ -6,7 +6,6 @@ import com.sebaslogen.artai.networking.Http
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
-import com.seiko.imageloader.util.DebugLogger
 import me.tatarka.inject.annotations.Provides
 import okio.Path.Companion.toOkioPath
 
@@ -14,7 +13,6 @@ interface ImageLoaderComponent {
     @Singleton
     @Provides
     fun imageLoader(applicationContext: Context, httpClientProvider: () -> Http): ImageLoader = ImageLoader {
-        logger = DebugLogger()
         components {
             setupDefaultComponents(context = applicationContext, httpClient = httpClientProvider)
         }
