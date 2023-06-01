@@ -15,6 +15,7 @@ import androidx.lifecycle.coroutineScope
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUIViewModel
 import com.sebaslogen.artai.networking.Http
@@ -66,11 +67,14 @@ class MainActivity : ComponentActivity() {
         lifecycle.coroutineScope.launch {
             // Vanilla Ktor
             val http: Http = mainActivityComponent.parent.httpFactory()
-            val response = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
-            val bodyAsText = response.bodyAsText()
+            val rawResponse = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
+            val bodyAsText = rawResponse.bodyAsText()
             Napier.d { bodyAsText }
             // Use repo and ktorfit
-            val screen = mainActivityComponent.dynamicUIRepositoryCreator().home().screen
+            val screen = when(val response = mainActivityComponent.dynamicUIRepositoryCreator().home()) {
+                is DynamicUIDomainModel.Error -> TODO("Not planning on implementing this experimental function httpCall()")
+                is DynamicUIDomainModel.Success -> response.data.screen
+            }
             Napier.d { "Response was: $screen with id: ${screen.id}" }
         }
 

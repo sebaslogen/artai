@@ -6,6 +6,7 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
+import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,21 +26,31 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
     }
 
     private fun fetchData() {
-        viewModelScope.coroutineScope.launch {
-            val home = dynamicUIRepository.home()
-            _viewState.value = DynamicUIViewState.Success(home)
-        }
+        fetchData { dynamicUIRepository.home() }
     }
 
     private fun fetchFakeReloadData() {
+        fetchData { dynamicUIRepository.homeReloaded() }
+    }
+
+    private fun fetchData(request: suspend () -> DynamicUIDomainModel) {
         viewModelScope.coroutineScope.launch {
-            val home = dynamicUIRepository.homeReloaded()
-            _viewState.value = DynamicUIViewState.Success(home)
+            val dynamicUIDomainModel: DynamicUIDomainModel = request()
+            _viewState.value = mapDomainModelToUIState(dynamicUIDomainModel)
         }
     }
 
+    private fun mapDomainModelToUIState(dynamicUIDomainModel: DynamicUIDomainModel) = when (dynamicUIDomainModel) {
+        // TODO: Add nicer mappers from domain to UI state
+        is DynamicUIDomainModel.Error -> DynamicUIViewState.Error(dynamicUIDomainModel.error)
+        is DynamicUIDomainModel.Success -> DynamicUIViewState.Success(dynamicUIDomainModel.data)
+    }
+
     @NativeCoroutines
-    suspend fun getHome() = dynamicUIRepository.home()
+    suspend fun getHome(): ApiScreenResponse = when (val uiState = mapDomainModelToUIState(dynamicUIRepository.home())) {
+        is DynamicUIViewState.Error, DynamicUIViewState.Loading -> TODO("Not planning on implementing this experimental function getHome()")
+        is DynamicUIViewState.Success -> uiState.data
+    }
 
     fun onRefreshClicked() {
         fetchFakeReloadData()
