@@ -9,4 +9,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 7
+    groups:
+      compose-kotlin-dependencies:
+        # Define patterns to include dependencies in the group (based on
+        # dependency name)
+        patterns:
+          - "compose*compiler"
+          - "ksp"
+          - "kotlin-*"       # All kotlin dependencies
