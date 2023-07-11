@@ -117,3 +117,7 @@ dependencies {
         add(it, libs.ktorfit.ksp)
     }
 }
+
+task("testClasses").doLast {
+    println("This is a dummy testClasses task to avoid error: Cannot locate tasks that match ':shared:testClasses' as task 'testClasses'")
+}

@@ -29,9 +29,11 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope.Companion.DefaultFilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.seiko.imageloader.ImageRequestState
+import com.seiko.imageloader.model.ImageEvent
 import com.seiko.imageloader.model.ImageRequest
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.model.ImageResult
+import com.seiko.imageloader.rememberImageAction
+import com.seiko.imageloader.rememberImageActionPainter
 import io.github.aakira.napier.Napier
 
 
@@ -77,39 +79,38 @@ fun ImageLoaderImage(
     animationSpec: FiniteAnimationSpec<Float>? = tween(),
 ) {
     key(data) {
-        val request = remember { ImageRequest(data) }
-        val painter = rememberAsyncImagePainter(
-            request,
-            contentScale = contentScale,
-            filterQuality = filterQuality,
-        )
-
         val progress = remember { mutableStateOf(-1F) }
         val error = remember { mutableStateOf<Throwable?>(null) }
+
+        val request = remember { ImageRequest(data) }
+        val action by rememberImageAction(request)
+        val painter = rememberImageActionPainter(action = action, filterQuality = filterQuality)
+
         val state by remember {
             derivedStateOf {
-                when (val state = painter.requestState) {
-                    is ImageRequestState.Failure -> {
-                        progress.value = 0.0F
-                        error.value = state.error
-                        ImageLoadingState.Failure
-                    }
-
-                    is ImageRequestState.Loading -> {
+                when (action) {
+                    is ImageEvent.Start -> {
                         progress.value = 0.0F
                         ImageLoadingState.Loading
                     }
 
-                    ImageRequestState.Success -> {
+                    is ImageResult.Source, is ImageResult.Error -> {
+                        progress.value = 0.0F
+                        (action as? ImageResult.Error)?.let { error.value = it.error }
+                        ImageLoadingState.Failure
+                    }
+
+                    is ImageResult -> {
                         progress.value = 1.0F
                         ImageLoadingState.Success
                     }
+
+                    else -> Unit
                 }
             }
-
         }
         if (animationSpec != null) {
-            Crossfade(state, animationSpec = animationSpec, modifier = modifier) {
+            Crossfade(state, animationSpec = animationSpec, modifier = modifier, label = "") {
                 Box(Modifier.fillMaxSize(), contentAlignment) {
                     when (it) {
                         ImageLoadingState.Loading -> if (onLoading != null) {
