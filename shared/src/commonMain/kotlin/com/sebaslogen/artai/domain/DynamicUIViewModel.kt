@@ -5,6 +5,7 @@ import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.sebaslogen.artai.data.remote.models.ApiAction
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIRepository) : KMMViewModel() {
+open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIRepository) : KMMViewModel(), ActionHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
@@ -31,6 +32,10 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
 
     private fun fetchFakeReloadData() {
         fetchData { dynamicUIRepository.homeReloaded() }
+    }
+
+    private fun fetchScreenData(url: String) {
+        fetchData { dynamicUIRepository.screen(url) }
     }
 
     private fun fetchData(request: suspend () -> DynamicUIDomainModel) {
@@ -54,6 +59,13 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
 
     fun onRefreshClicked() {
         fetchFakeReloadData()
+    }
+
+    override fun onAction(action: ApiAction) {
+        when (action) {
+            is ApiAction.ApiOpenScreen -> fetchScreenData(action.url)
+            is ApiAction.ApiUnknown -> TODO("Not planning on implementing this error logging")
+        }
     }
 }
 

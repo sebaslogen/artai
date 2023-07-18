@@ -20,6 +20,11 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
         mapResponseToDomain(response)
     }
 
+    suspend fun screen(url: String) = withContext(Dispatchers.IO) {
+        val response = dynamicUIApi.screen(url)
+        mapResponseToDomain(response)
+    }
+
     private fun mapResponseToDomain(response: Response<ApiScreenResponse>): DynamicUIDomainModel {
         val apiHomeScreenResponseBody = response.body()
         return if (response.isSuccessful) {

@@ -7,27 +7,25 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 
 @Serializable
-sealed class ApiListItem {
-
+sealed class ApiAction {
     abstract val id: String?
 
     companion object {
         val serializers = SerializersModule {
-            polymorphic(ApiListItem::class) {
-                subclass(ApiBigArt::class)
+            polymorphic(ApiAction::class) {
+                subclass(ApiOpenScreen::class)
                 defaultDeserializer { ApiUnknown.serializer() }
             }
         }
     }
 
     @Serializable
-    @SerialName("bigArt")
-    data class ApiBigArt(
+    @SerialName("openScreen")
+    data class ApiOpenScreen(
         override val id: String,
-        val title: String,
-        val image: String,
-    ) : ApiListItem()
+        val url: String,
+    ) : ApiAction()
 
     @Serializable
-    data class ApiUnknown(val type: String, override val id: String? = null) : ApiListItem()
+    data class ApiUnknown(val type: String, override val id: String? = null) : ApiAction()
 }

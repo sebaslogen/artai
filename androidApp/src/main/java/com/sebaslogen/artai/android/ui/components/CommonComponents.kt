@@ -3,6 +3,7 @@
 package com.sebaslogen.artai.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,15 +24,16 @@ import com.sebaslogen.artai.data.remote.models.ApiScreen
 import com.sebaslogen.artai.data.remote.models.ApiSection
 import com.sebaslogen.artai.data.remote.models.ApiSection.ApiCarousel.ApiCarouselStyle.*
 import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
+import com.sebaslogen.artai.domain.ActionHandler
 
 
 @Composable
-fun ScreenContent(screen: ApiScreen) {
+fun ScreenContent(screen: ApiScreen, onAction: ActionHandler) {
     Text("Screen id is: ${screen.id}")
     LazyColumn {
         screen.sections.forEach { section: ApiSection ->
             when (section) {
-                is ApiSection.ApiCarousel -> carousel(section)
+                is ApiSection.ApiCarousel -> carousel(section, onAction)
                 is ApiSection.ApiFooter -> item(key = section.id) { Text("TODO(ApiFooter)") }
                 is ApiSection.ApiList -> item(key = section.id) { Text("TODO(ApiList)") }
                 is ApiSection.ApiUnknown -> item(key = section.id) { Text("TODO(ApiUnknown)") }
@@ -40,7 +42,7 @@ fun ScreenContent(screen: ApiScreen) {
     }
 }
 
-fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
+fun LazyListScope.carousel(section: ApiSection.ApiCarousel, onAction: ActionHandler) {
     when (section.header) {
         is ApiSectionHeader.ApiLarge -> sectionHeaderLarge(section.header as ApiSectionHeader.ApiLarge)
         is ApiSectionHeader.ApiNormal -> sectionHeaderNormal(section.header as ApiSectionHeader.ApiNormal)
@@ -69,6 +71,7 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel) {
                                 .animateItemPlacement()
                                 .padding(12.dp)
                                 .clip(shape = shape)
+                                .clickable { onAction.onAction(item.action) }
                         )
 
                     is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)", modifier = Modifier.animateItemPlacement())

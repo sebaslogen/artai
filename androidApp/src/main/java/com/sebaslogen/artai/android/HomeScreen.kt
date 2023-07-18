@@ -48,7 +48,7 @@ fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, @Assisted platformG
         when (val state = viewState) {
             is DynamicUIViewState.Error -> Text("Error loading data :(")
             DynamicUIViewState.Loading -> Text("Loading...")
-            is DynamicUIViewState.Success -> ScreenContent(state.data.screen)
+            is DynamicUIViewState.Success -> ScreenContent(state.data.screen, viewModel)
         }
     }
 }

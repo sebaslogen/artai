@@ -1,0 +1,17 @@
+{
+  "screen": {
+    "id": "art-1-screen",
+    "sections": [
+      {
+        "type": "list",
+        "id": "section-TBD",
+        "header": {
+          "type": "large",
+          "title": "Art 1 Details"
+        },
+        "items": [
+        ]
+      }
+    ]
+  }
+}

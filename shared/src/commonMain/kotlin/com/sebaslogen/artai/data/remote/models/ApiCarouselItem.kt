@@ -1,6 +1,5 @@
 package com.sebaslogen.artai.data.remote.models
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.modules.SerializersModule
@@ -13,7 +12,6 @@ sealed class ApiCarouselItem {
     abstract val id: String?
 
     companion object {
-        @OptIn(ExperimentalSerializationApi::class)
         val serializers = SerializersModule {
             polymorphic(ApiCarouselItem::class) {
                 subclass(ApiSmallArt::class)
@@ -27,6 +25,7 @@ sealed class ApiCarouselItem {
     data class ApiSmallArt(
         override val id: String,
         val image: String,
+        val action: ApiAction,
     ) : ApiCarouselItem()
 
     @Serializable
