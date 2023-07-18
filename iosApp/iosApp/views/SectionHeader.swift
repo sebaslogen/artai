@@ -10,18 +10,18 @@ import SwiftUI
 import shared
 
 struct SectionHeader: View {
-    var header: ApiSectionHeader
+    var header: SectionHeader
     
     var body: some View {
         switch header {
-        case is ApiSectionHeader.ApiLarge:
-            Text((header as! ApiSectionHeader.ApiLarge).title)
-        case is ApiSectionHeader.ApiNormal:
-            Text((header as! ApiSectionHeader.ApiNormal).title)
-        case is ApiSectionHeader.ApiSmallArt:
-            Text((header as! ApiSectionHeader.ApiSmallArt).title)
-        case is ApiSectionHeader.ApiUnknown:
-            Text("TODO(ApiUnknown)")
+        case is SectionHeader.Large:
+            Text((header as! SectionHeader.Large).title)
+        case is SectionHeader.Normal:
+            Text((header as! SectionHeader.Normal).title)
+        case is SectionHeader.SmallArt:
+            Text((header as! SectionHeader.SmallArt).title)
+        case is SectionHeader.Unknown:
+            Text("TODO(Unknown)")
         default:
             Text("Unknown carousel item type")
         }

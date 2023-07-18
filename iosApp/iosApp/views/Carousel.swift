@@ -11,21 +11,21 @@ import SwiftUI
 import shared
 
 struct Carousel: View {
-    var section: ApiSection.ApiCarousel
+    var section: Section.Carousel
     
     var body: some View {
         
         SectionHeader(header: section.header)
-        let s = ApiSection.ApiCarouselApiCarouselStyle.squared
+        let s = Section.CarouselCarouselStyle.squared
         if s == section.style {
             Text("Style parsed")
         }
 //        var itemShapeStyle: AnyShape = AnyShape(Rectangle())
-//            if section.style == ApiSection.ApiCarouselApiCarouselStyle.squared {
+//            if section.style == Section.CarouselCarouselStyle.squared {
 //                itemShapeStyle = AnyShape(RoundedRectangle(cornerRadius: 0))
-//            } else if section.style == ApiSection.ApiCarouselApiCarouselStyle.circle {
+//            } else if section.style == Section.CarouselCarouselStyle.circle {
 //                itemShapeStyle = AnyShape(Circle())
-//            } else if section.style == ApiSection.ApiCarouselApiCarouselStyle.roundedsquares {
+//            } else if section.style == Section.CarouselCarouselStyle.roundedsquares {
 //                itemShapeStyle = AnyShape(RoundedRectangle(cornerRadius: 8))
 //            } else {
 //                itemShapeStyle = AnyShape(Rectangle())
@@ -35,11 +35,11 @@ struct Carousel: View {
             LazyHStack {
                 ForEach(section.items, id: \.id) { item in
                     switch item {
-                    case is ApiCarouselItem.ApiSmallArt:
+                    case is CarouselItem.SmallArt:
                         if #available(iOS 15.0, *) {
-                            let url = URL(string: (item as! ApiCarouselItem.ApiSmallArt).image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+                            let url = URL(string: (item as! CarouselItem.SmallArt).image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                             
-                            if section.style == ApiSection.ApiCarouselApiCarouselStyle.squared {
+                            if section.style == Section.CarouselCarouselStyle.squared {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
@@ -47,7 +47,7 @@ struct Carousel: View {
                                 }
                                 .frame(width: 120, height: 120)
                                 .clipShape(Rectangle())
-                            } else if section.style == ApiSection.ApiCarouselApiCarouselStyle.circle {
+                            } else if section.style == Section.CarouselCarouselStyle.circle {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
@@ -55,7 +55,7 @@ struct Carousel: View {
                                 }
                                 .frame(width: 120, height: 120)
                                 .clipShape(Circle())
-                            } else if section.style == ApiSection.ApiCarouselApiCarouselStyle.roundedsquares {
+                            } else if section.style == Section.CarouselCarouselStyle.roundedsquares {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
@@ -84,7 +84,7 @@ struct Carousel: View {
 //                            .mask(RoundedRectangle(cornerRadius: 8))
 //                            .mask(RoundedRectangle(cornerRadius: cornerRadius))
                             
-//                            Text(((item as! ApiCarouselItem.ApiSmallArt).image))
+//                            Text(((item as! CarouselItem.SmallArt).image))
 //                                .padding()
 //                                .background(Color(
 //                                    red: .random(in: 0...1),
@@ -116,8 +116,8 @@ struct Carousel: View {
                         } else {
                             // Fallback on earlier versions
                         }
-                    case is ApiCarouselItem.ApiUnknown:
-                        Text("TODO(ApiUnknown)")
+                    case is CarouselItem.Unknown:
+                        Text("TODO(Unknown)")
                     default:
                         Text("Unknown carousel item type")
                     }
