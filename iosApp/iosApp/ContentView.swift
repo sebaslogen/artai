@@ -11,17 +11,6 @@ struct ContentView: View {
     var body: some View {
         Text(greet)
         Text(platformGreeter.greet())
-        Button("log me", action: {
-            Napier.d("Welcome to KT logging")
-            Task {
-                do {
-                    let result = await asyncResult(for: viewModel.getHome())
-                    if case let .success(homeResponse) = result {
-                        Napier.d("Got ViewModel result: \(homeResponse)")
-                    }
-                }
-            }
-        })
         let state: DynamicUIViewState = viewModel.viewState
         switch state {
         case is DynamicUIViewState.Error:
