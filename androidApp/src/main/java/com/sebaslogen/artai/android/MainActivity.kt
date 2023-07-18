@@ -17,8 +17,8 @@ import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
-import com.sebaslogen.artai.domain.DynamicUIViewModel
 import com.sebaslogen.artai.networking.Http
+import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
             val bodyAsText = rawResponse.bodyAsText()
             Napier.d { bodyAsText }
             // Use repo and ktorfit
-            val screen = when(val response = mainActivityComponent.dynamicUIRepositoryCreator().home()) {
+            val screen = when (val response = mainActivityComponent.dynamicUIRepositoryCreator().home()) {
                 is DynamicUIDomainModel.Error -> TODO("Not planning on implementing this experimental function httpCall()")
                 is DynamicUIDomainModel.Success -> response.data.screen
             }

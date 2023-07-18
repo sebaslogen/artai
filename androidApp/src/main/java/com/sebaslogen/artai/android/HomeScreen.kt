@@ -16,8 +16,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sebaslogen.artai.Greeting
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.ui.components.ScreenContent
-import com.sebaslogen.artai.domain.DynamicUIViewModel
-import com.sebaslogen.artai.domain.DynamicUIViewState
+import com.sebaslogen.artai.presentation.DynamicUIViewModel
+import com.sebaslogen.artai.presentation.DynamicUIViewState
 import io.github.aakira.napier.Napier
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject

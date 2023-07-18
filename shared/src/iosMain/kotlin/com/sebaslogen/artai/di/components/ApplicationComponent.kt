@@ -2,7 +2,7 @@ package com.sebaslogen.artai.di.components
 
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.di.scopes.Singleton
-import com.sebaslogen.artai.domain.DynamicUIViewModel
+import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import me.tatarka.inject.annotations.Component
 
 @Component

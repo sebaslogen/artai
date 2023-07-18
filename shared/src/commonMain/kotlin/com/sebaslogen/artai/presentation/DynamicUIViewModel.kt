@@ -1,4 +1,4 @@
-package com.sebaslogen.artai.domain
+package com.sebaslogen.artai.presentation
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
@@ -9,10 +9,15 @@ import com.sebaslogen.artai.data.remote.models.ApiAction
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
+import com.sebaslogen.artai.domain.ActionHandleImplementation
+import com.sebaslogen.artai.domain.ActionHandler
+import com.sebaslogen.artai.domain.DynamicUIUseCase
+import com.sebaslogen.artai.domain.ResponseHandler
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
+
 
 @Inject
 open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIRepository) : KMMViewModel(), ActionHandler {
@@ -21,6 +26,16 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
 
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow()
+
+    private val actionHandler: ActionHandler = ActionHandleImplementation(
+        coroutineScope = viewModelScope.coroutineScope,
+        dynamicUIUseCase = DynamicUIUseCase(dynamicUIRepository = dynamicUIRepository), // TODO: Inject this
+        responseHandler = object : ResponseHandler {
+            override fun handleSuccess(result: DynamicUIDomainModel) {
+                _viewState.value = mapDomainModelToUIState(result)
+            }
+        }
+    )
 
     init {
         fetchData()
@@ -32,10 +47,6 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
 
     private fun fetchFakeReloadData() {
         fetchData { dynamicUIRepository.homeReloaded() }
-    }
-
-    private fun fetchScreenData(url: String) {
-        fetchData { dynamicUIRepository.screen(url) }
     }
 
     private fun fetchData(request: suspend () -> DynamicUIDomainModel) {
@@ -62,10 +73,7 @@ open class DynamicUIViewModel(private val dynamicUIRepository: DynamicUIReposito
     }
 
     override fun onAction(action: ApiAction) {
-        when (action) {
-            is ApiAction.ApiOpenScreen -> fetchScreenData(action.url)
-            is ApiAction.ApiUnknown -> TODO("Not planning on implementing this error logging")
-        }
+        actionHandler.onAction(action)
     }
 }
 
