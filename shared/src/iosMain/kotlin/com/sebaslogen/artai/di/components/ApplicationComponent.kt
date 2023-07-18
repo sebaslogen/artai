@@ -7,7 +7,7 @@ import me.tatarka.inject.annotations.Component
 
 @Component
 @Singleton
-abstract class ApplicationComponent : PlatformComponent, NetworkComponent, ApiServicesComponent {
+abstract class ApplicationComponent : PlatformComponent, NetworkComponent, ApiServicesComponent, NavigationComponent {
     abstract val platformGreeterCreator: () -> PlatformGreeter
     abstract val dynamicUIViewModel: DynamicUIViewModel
 }

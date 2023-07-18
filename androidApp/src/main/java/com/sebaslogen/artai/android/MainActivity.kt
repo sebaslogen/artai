@@ -15,19 +15,22 @@ import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
+import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.MutableStateFlow
 import me.tatarka.inject.annotations.Component
 
 @Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
     abstract val platformGreeterCreator: () -> PlatformGreeter
+    abstract val navigationStateCreator: () -> MutableStateFlow<DynamicUINavigationState>
     abstract val dynamicUIRepositoryCreator: () -> DynamicUIRepository
     abstract val imageLoaderCreator: () -> ImageLoader
     abstract val dynamicUIViewModel: DynamicUIViewModel
-    abstract val homeScreen: HomeScreen
+    abstract val mainScreen: MainScreen
 }
 
 class MainActivity : ComponentActivity() {
@@ -39,7 +42,8 @@ class MainActivity : ComponentActivity() {
         val mainActivityComponent = MainActivityComponent::class.create(applicationComponent)
 
         val platformGreeter: PlatformGreeter = mainActivityComponent.platformGreeterCreator()
-        val homeScreen = mainActivityComponent.homeScreen
+        val navigationState: MutableStateFlow<DynamicUINavigationState> = mainActivityComponent.navigationStateCreator()
+        val mainScreen = mainActivityComponent.mainScreen
         setContent {
             CompositionLocalProvider(
                 LocalImageLoader provides mainActivityComponent.imageLoaderCreator(),
@@ -49,7 +53,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        homeScreen(platformGreeter)
+                        mainScreen(platformGreeter, navigationState)
                     }
                 }
             }

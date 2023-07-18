@@ -6,13 +6,14 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
+import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.domain.DynamicUIUseCase
-import com.sebaslogen.artai.domain.DynamicUIViewEvent
-import com.sebaslogen.artai.domain.EventHandler
+import com.sebaslogen.artai.domain.NavigationStateHandler
 import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.Screen
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -20,29 +21,29 @@ import me.tatarka.inject.annotations.Inject
 
 
 @Inject
-open class DynamicUIViewModel(private val dynamicUIUseCase: DynamicUIUseCase) : KMMViewModel(), ActionHandler, EventHandler {
+open class DynamicUIViewModel(
+    private val navigationState: MutableStateFlow<DynamicUINavigationState>,
+    private val dynamicUIUseCase: DynamicUIUseCase
+) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
-    private val _viewEvents = MutableStateFlow<DynamicUIViewEvent>(viewModelScope, DynamicUIViewEvent.OnAppStart)
 
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow()
 
-    @NativeCoroutinesState
-    val viewEvents: StateFlow<DynamicUIViewEvent> = _viewEvents.asStateFlow()
-
+    @Suppress("LeakingThis") // open modifier required for iOS/KMP
     private val actionHandler = ActionHandlerSync(
         dynamicUIUseCase = dynamicUIUseCase,
-        eventHandler = this
-//        responseHandler = object : ResponseHandler { // TODO: Delete?
-//            override fun handleSuccess(result: DynamicUIDomainModel) {
-//                _viewState.value = mapDomainModelToUIState(result)
-//            }
-//        }
+        navigationStateHandler = this
     )
 
     init {
-        fetchHomeData()
+        when (val initialNavigationState = navigationState.value) {
+            DynamicUINavigationState.HomeScreen -> fetchHomeData()
+            is DynamicUINavigationState.RemoteScreen -> fetchData { responseHandler ->
+                dynamicUIUseCase.fetchScreenData(url = initialNavigationState.url, responseHandler = responseHandler)
+            }
+        }
     }
 
     private fun fetchHomeData() {
@@ -79,8 +80,8 @@ open class DynamicUIViewModel(private val dynamicUIUseCase: DynamicUIUseCase) : 
         }
     }
 
-    override fun onEvent(event: DynamicUIViewEvent) {
-        _viewEvents.value = event
+    override fun onNavigationStateUpdate(event: DynamicUINavigationState) {
+        navigationState.value = event
     }
 }
 
