@@ -15,8 +15,8 @@ import androidx.lifecycle.coroutineScope
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
-import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
+import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.networking.Http
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.seiko.imageloader.ImageLoader
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
             // Use repo and ktorfit
             val screen = when (val response = mainActivityComponent.dynamicUIRepositoryCreator().home()) {
                 is DynamicUIDomainModel.Error -> TODO("Not planning on implementing this experimental function httpCall()")
-                is DynamicUIDomainModel.Success -> response.data.screen
+                is DynamicUIDomainModel.Success -> response.data
             }
             Napier.d { "Response was: $screen with id: ${screen.id}" }
         }

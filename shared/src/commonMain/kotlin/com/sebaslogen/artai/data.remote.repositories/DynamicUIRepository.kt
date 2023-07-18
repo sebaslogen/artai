@@ -1,7 +1,9 @@
 package com.sebaslogen.artai.data.remote.repositories
 
+import com.sebaslogen.artai.data.mappers.mapToSuccess
 import com.sebaslogen.artai.data.remote.api.DynamicUIApi
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
+import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import de.jensklingenberg.ktorfit.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -28,7 +30,7 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
     private fun mapResponseToDomain(response: Response<ApiScreenResponse>): DynamicUIDomainModel {
         val apiHomeScreenResponseBody = response.body()
         return if (response.isSuccessful) {
-            apiHomeScreenResponseBody?.let { DynamicUIDomainModel.Success(it) } // Success
+            apiHomeScreenResponseBody?.let { it.mapToSuccess() } // Success
                 ?: DynamicUIDomainModel.Error(Throwable("Error parsing response")) // Error parsing
         } else {
             val errorBody = response.errorBody()
@@ -37,7 +39,4 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
     }
 }
 
-sealed class DynamicUIDomainModel {
-    data class Error(val error: Throwable) : DynamicUIDomainModel() // TODO: Add domain error models
-    data class Success(val data: ApiScreenResponse) : DynamicUIDomainModel() // TODO: Map to domain model
-}
+

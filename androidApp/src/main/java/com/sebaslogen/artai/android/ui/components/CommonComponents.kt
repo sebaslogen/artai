@@ -19,49 +19,50 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.unit.dp
 import com.sebaslogen.artai.android.ui.utils.ImageLoaderImage
-import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
-import com.sebaslogen.artai.data.remote.models.ApiScreen
-import com.sebaslogen.artai.data.remote.models.ApiSection
-import com.sebaslogen.artai.data.remote.models.ApiSection.ApiCarousel.ApiCarouselStyle.*
-import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 import com.sebaslogen.artai.domain.ActionHandler
+import com.sebaslogen.artai.domain.models.CarouselItem
+import com.sebaslogen.artai.domain.models.Screen
+import com.sebaslogen.artai.domain.models.Section
+import com.sebaslogen.artai.domain.models.Section.*
+import com.sebaslogen.artai.domain.models.Section.Carousel.CarouselStyle.*
+import com.sebaslogen.artai.domain.models.SectionHeader
 
 
 @Composable
-fun ScreenContent(screen: ApiScreen, onAction: ActionHandler) {
+fun ScreenContent(screen: Screen, onAction: ActionHandler) {
     Text("Screen id is: ${screen.id}")
     LazyColumn {
-        screen.sections.forEach { section: ApiSection ->
+        screen.sections.forEach { section: Section ->
             when (section) {
-                is ApiSection.ApiCarousel -> carousel(section, onAction)
-                is ApiSection.ApiFooter -> item(key = section.id) { Text("TODO(ApiFooter)") }
-                is ApiSection.ApiList -> item(key = section.id) { Text("TODO(ApiList)") }
-                is ApiSection.ApiUnknown -> item(key = section.id) { Text("TODO(ApiUnknown)") }
+                is Carousel -> carousel(section, onAction)
+                is Footer -> item(key = section.id) { Text("TODO(Footer)") }
+                is ListSection -> item(key = section.id) { Text("TODO(List)") }
+                is Unknown -> item(key = section.id) { Text("TODO(Unknown)") }
             }
         }
     }
 }
 
-fun LazyListScope.carousel(section: ApiSection.ApiCarousel, onAction: ActionHandler) {
+fun LazyListScope.carousel(section: Carousel, onAction: ActionHandler) {
     when (section.header) {
-        is ApiSectionHeader.ApiLarge -> sectionHeaderLarge(section.header as ApiSectionHeader.ApiLarge)
-        is ApiSectionHeader.ApiNormal -> sectionHeaderNormal(section.header as ApiSectionHeader.ApiNormal)
-        is ApiSectionHeader.ApiSmallArt -> sectionHeaderSmallArt(section.header as ApiSectionHeader.ApiSmallArt)
-        is ApiSectionHeader.ApiUnknown -> sectionHeaderUnknown(section.header as ApiSectionHeader.ApiUnknown)
+        is SectionHeader.Large -> sectionHeaderLarge(section.header as SectionHeader.Large)
+        is SectionHeader.Normal -> sectionHeaderNormal(section.header as SectionHeader.Normal)
+        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt)
+        is SectionHeader.Unknown -> sectionHeaderUnknown(section.header as SectionHeader.Unknown)
     }
     item(key = section.id) {
         LazyRow(modifier = Modifier.animateItemPlacement()) {
             items(items = section.items,
                 key = { item -> item.id ?: item.hashCode() },
                 contentType = { item -> item::class }
-            ) { item: ApiCarouselItem ->
+            ) { item: CarouselItem ->
                 val shape = when (section.style) {
                     Squared -> RoundedCornerShape(0)
                     Circle -> CircleShape
                     RoundedSquares -> RoundedCornerShape(8.dp)
                 }
                 when (item) {
-                    is ApiCarouselItem.ApiSmallArt ->
+                    is CarouselItem.SmallArt ->
                         ImageLoaderImage(
                             data = item.image,
                             contentDescription = "Img ${item.image}",
@@ -74,25 +75,25 @@ fun LazyListScope.carousel(section: ApiSection.ApiCarousel, onAction: ActionHand
                                 .clickable { onAction.onAction(item.action) }
                         )
 
-                    is ApiCarouselItem.ApiUnknown -> Text("TODO(ApiUnknown)", modifier = Modifier.animateItemPlacement())
+                    is CarouselItem.Unknown -> Text("TODO(Unknown)", modifier = Modifier.animateItemPlacement())
                 }
             }
         }
     }
 }
 
-fun LazyListScope.sectionHeaderLarge(header: ApiSectionHeader.ApiLarge) {
+fun LazyListScope.sectionHeaderLarge(header: SectionHeader.Large) {
     item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
-fun LazyListScope.sectionHeaderNormal(header: ApiSectionHeader.ApiNormal) {
+fun LazyListScope.sectionHeaderNormal(header: SectionHeader.Normal) {
     item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
-fun LazyListScope.sectionHeaderSmallArt(header: ApiSectionHeader.ApiSmallArt) {
+fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt) {
     item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
-fun LazyListScope.sectionHeaderUnknown(header: ApiSectionHeader.ApiUnknown) {
+fun LazyListScope.sectionHeaderUnknown(header: SectionHeader.Unknown) {
     item(key = header.id) { Text("Unknown header", modifier = Modifier.animateItemPlacement()) }
 }

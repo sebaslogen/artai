@@ -1,22 +1,28 @@
 package com.sebaslogen.artai.domain
 
-import com.sebaslogen.artai.data.remote.repositories.DynamicUIDomainModel
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
+import me.tatarka.inject.annotations.Inject
 
+@Inject
 class DynamicUIUseCase(
     private val dynamicUIRepository: DynamicUIRepository
 ) {
 
-    fun fetchScreenData(coroutineScope: CoroutineScope, url: String, responseHandler: ResponseHandler) {
-        coroutineScope.fetchData(responseHandler) { dynamicUIRepository.screen(url) }
+    suspend fun fetchScreenData(url: String, responseHandler: ResponseHandler) {
+        fetchData(responseHandler) { dynamicUIRepository.screen(url) }
     }
 
-    private fun CoroutineScope.fetchData(responseHandler: ResponseHandler, request: suspend () -> DynamicUIDomainModel) {
-        launch {
-            val dynamicUIDomainModel: DynamicUIDomainModel = request()
-            responseHandler.handleSuccess(dynamicUIDomainModel)
-        }
+    private suspend fun fetchData(responseHandler: ResponseHandler, request: suspend () -> DynamicUIDomainModel) {
+        val dynamicUIDomainModel: DynamicUIDomainModel = request()
+        responseHandler.handleSuccess(dynamicUIDomainModel)
+    }
+
+    suspend fun fetchHomeData(responseHandler: ResponseHandler) {
+        fetchData(responseHandler) { dynamicUIRepository.home() }
+    }
+
+    suspend fun fetchHomeReloaded(responseHandler: ResponseHandler) {
+        fetchData(responseHandler) { dynamicUIRepository.homeReloaded() }
     }
 }

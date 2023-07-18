@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,7 +17,6 @@ import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.sebaslogen.artai.presentation.DynamicUIViewState
-import io.github.aakira.napier.Napier
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -29,11 +27,6 @@ typealias HomeScreen = @Composable (PlatformGreeter) -> Unit
 @Composable
 fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, @Assisted platformGreeter: PlatformGreeter) {
     val viewModel = viewModel { dynamicUiViewModel() }
-    LaunchedEffect(Unit) {// Vanilla suspend call to fetch something from network
-        val home = viewModel.getHome()
-        val screen = home.screen
-        Napier.d { "ViewModel Response was: $screen with id: ${screen.id}" }
-    }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
@@ -48,7 +41,7 @@ fun HomeScreen(dynamicUiViewModel: () -> DynamicUIViewModel, @Assisted platformG
         when (val state = viewState) {
             is DynamicUIViewState.Error -> Text("Error loading data :(")
             DynamicUIViewState.Loading -> Text("Loading...")
-            is DynamicUIViewState.Success -> ScreenContent(state.data.screen, viewModel)
+            is DynamicUIViewState.Success -> ScreenContent(state.data, viewModel)
         }
     }
 }
