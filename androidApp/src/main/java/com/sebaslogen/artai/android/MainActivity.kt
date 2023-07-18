@@ -11,20 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.coroutineScope
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
-import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
-import com.sebaslogen.artai.networking.Http
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Component
 
 @Component
@@ -43,7 +37,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
         val mainActivityComponent = MainActivityComponent::class.create(applicationComponent)
-        httpCall(mainActivityComponent)
 
         val platformGreeter: PlatformGreeter = mainActivityComponent.platformGreeterCreator()
         val homeScreen = mainActivityComponent.homeScreen
@@ -61,23 +54,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    private fun httpCall(mainActivityComponent: MainActivityComponent) {
-        lifecycle.coroutineScope.launch {
-            // Vanilla Ktor
-            val http: Http = mainActivityComponent.parent.httpFactory()
-            val rawResponse = http.get("https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/home.json")
-            val bodyAsText = rawResponse.bodyAsText()
-            Napier.d { bodyAsText }
-            // Use repo and ktorfit
-            val screen = when (val response = mainActivityComponent.dynamicUIRepositoryCreator().home()) {
-                is DynamicUIDomainModel.Error -> TODO("Not planning on implementing this experimental function httpCall()")
-                is DynamicUIDomainModel.Success -> response.data
-            }
-            Napier.d { "Response was: $screen with id: ${screen.id}" }
-        }
-
     }
 }
 

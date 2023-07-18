@@ -5,9 +5,11 @@ import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
+import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.DynamicUIUseCase
+import com.sebaslogen.artai.domain.DynamicUIViewEvent
+import com.sebaslogen.artai.domain.EventHandler
 import com.sebaslogen.artai.domain.ResponseHandler
-import com.sebaslogen.artai.domain.SyncActionHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.Screen
@@ -18,20 +20,25 @@ import me.tatarka.inject.annotations.Inject
 
 
 @Inject
-open class DynamicUIViewModel(private val dynamicUIUseCase: DynamicUIUseCase) : KMMViewModel(), ActionHandler {
+open class DynamicUIViewModel(private val dynamicUIUseCase: DynamicUIUseCase) : KMMViewModel(), ActionHandler, EventHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
+    private val _viewEvents = MutableStateFlow<DynamicUIViewEvent>(viewModelScope, DynamicUIViewEvent.OnAppStart)
 
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow()
 
-    private val actionHandler = SyncActionHandler(
+    @NativeCoroutinesState
+    val viewEvents: StateFlow<DynamicUIViewEvent> = _viewEvents.asStateFlow()
+
+    private val actionHandler = ActionHandlerSync(
         dynamicUIUseCase = dynamicUIUseCase,
-        responseHandler = object : ResponseHandler {
-            override fun handleSuccess(result: DynamicUIDomainModel) {
-                _viewState.value = mapDomainModelToUIState(result)
-            }
-        }
+        eventHandler = this
+//        responseHandler = object : ResponseHandler { // TODO: Delete?
+//            override fun handleSuccess(result: DynamicUIDomainModel) {
+//                _viewState.value = mapDomainModelToUIState(result)
+//            }
+//        }
     )
 
     init {
@@ -70,6 +77,10 @@ open class DynamicUIViewModel(private val dynamicUIUseCase: DynamicUIUseCase) : 
         viewModelScope.coroutineScope.launch {
             actionHandler.onAction(action)
         }
+    }
+
+    override fun onEvent(event: DynamicUIViewEvent) {
+        _viewEvents.value = event
     }
 }
 

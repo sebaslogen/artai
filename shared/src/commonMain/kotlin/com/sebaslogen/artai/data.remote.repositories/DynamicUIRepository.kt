@@ -17,12 +17,12 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
         mapResponseToDomain(response)
     }
 
-    suspend fun homeReloaded() = withContext(Dispatchers.IO) {
+    suspend fun homeReloaded(): DynamicUIDomainModel = withContext(Dispatchers.IO) {
         val response = dynamicUIApi.homeReloaded()
         mapResponseToDomain(response)
     }
 
-    suspend fun screen(url: String) = withContext(Dispatchers.IO) {
+    suspend fun screen(url: String): DynamicUIDomainModel = withContext(Dispatchers.IO) {
         val response = dynamicUIApi.screen(url)
         mapResponseToDomain(response)
     }

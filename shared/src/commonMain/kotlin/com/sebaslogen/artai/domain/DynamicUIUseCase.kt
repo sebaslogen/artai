@@ -13,16 +13,16 @@ class DynamicUIUseCase(
         fetchData(responseHandler) { dynamicUIRepository.screen(url) }
     }
 
-    private suspend fun fetchData(responseHandler: ResponseHandler, request: suspend () -> DynamicUIDomainModel) {
-        val dynamicUIDomainModel: DynamicUIDomainModel = request()
-        responseHandler.handleSuccess(dynamicUIDomainModel)
-    }
-
     suspend fun fetchHomeData(responseHandler: ResponseHandler) {
         fetchData(responseHandler) { dynamicUIRepository.home() }
     }
 
     suspend fun fetchHomeReloaded(responseHandler: ResponseHandler) {
         fetchData(responseHandler) { dynamicUIRepository.homeReloaded() }
+    }
+
+    private suspend fun fetchData(responseHandler: ResponseHandler, request: suspend () -> DynamicUIDomainModel) {
+        val dynamicUIDomainModel: DynamicUIDomainModel = request()
+        responseHandler.handleSuccess(dynamicUIDomainModel)
     }
 }
