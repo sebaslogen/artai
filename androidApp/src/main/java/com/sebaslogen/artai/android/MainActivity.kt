@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.sebaslogen.artai.PlatformGreeter
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
+import com.sebaslogen.artai.android.ui.MainScreen
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
