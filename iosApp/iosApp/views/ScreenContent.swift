@@ -22,13 +22,13 @@ struct ScreenContent: View {
             }
             List(screen.sections, id: \.id) { section in
                 switch section {
-                case is Section.Carousel:
-                    Carousel(section: section as! Section.Carousel)
-                case is Section.Footer:
+                case is KMPSection.Carousel:
+                    CarouselView(section: section as! KMPSection.Carousel)
+                case is KMPSection.Footer:
                     Text("TODO(Footer)")
-                case is Section.ListSection:
+                case is KMPSection.ListSection:
                     Text("TODO(ListSection)")
-                case is Section.Unknown:
+                case is KMPSection.Unknown:
                     Text("TODO(Unknown)")
                 default:
                     Text("Unknown section type")

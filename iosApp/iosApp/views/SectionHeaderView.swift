@@ -9,7 +9,7 @@
 import SwiftUI
 import shared
 
-struct SectionHeader: View {
+struct SectionHeaderView: View {
     var header: SectionHeader
     
     var body: some View {

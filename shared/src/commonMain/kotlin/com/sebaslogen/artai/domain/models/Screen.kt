@@ -1,10 +1,13 @@
 package com.sebaslogen.artai.domain.models
 
+import kotlin.native.ObjCName
+
 data class Screen(
     val id: String,
     val sections: List<Section>
 )
 
+@ObjCName(swiftName = "KMPSection") // Use this name to avoid iOS name collision with class Section
 sealed class Section {
     abstract val id: String?
 

@@ -10,22 +10,22 @@
 import SwiftUI
 import shared
 
-struct Carousel: View {
-    var section: Section.Carousel
+struct CarouselView: View {
+    var section: KMPSection.Carousel
     
     var body: some View {
         
-        SectionHeader(header: section.header)
-        let s = Section.CarouselCarouselStyle.squared
+        SectionHeaderView(header: section.header)
+        let s = KMPSection.CarouselCarouselStyle.squared
         if s == section.style {
             Text("Style parsed")
         }
 //        var itemShapeStyle: AnyShape = AnyShape(Rectangle())
-//            if section.style == Section.CarouselCarouselStyle.squared {
+//            if section.style == KMPSection.CarouselCarouselStyle.squared {
 //                itemShapeStyle = AnyShape(RoundedRectangle(cornerRadius: 0))
-//            } else if section.style == Section.CarouselCarouselStyle.circle {
+//            } else if section.style == KMPSection.CarouselCarouselStyle.circle {
 //                itemShapeStyle = AnyShape(Circle())
-//            } else if section.style == Section.CarouselCarouselStyle.roundedsquares {
+//            } else if section.style == KMPSection.CarouselCarouselStyle.roundedsquares {
 //                itemShapeStyle = AnyShape(RoundedRectangle(cornerRadius: 8))
 //            } else {
 //                itemShapeStyle = AnyShape(Rectangle())
@@ -39,7 +39,7 @@ struct Carousel: View {
                         if #available(iOS 15.0, *) {
                             let url = URL(string: (item as! CarouselItem.SmallArt).image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                             
-                            if section.style == Section.CarouselCarouselStyle.squared {
+                            if section.style == KMPSection.CarouselCarouselStyle.squared {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
@@ -47,7 +47,7 @@ struct Carousel: View {
                                 }
                                 .frame(width: 120, height: 120)
                                 .clipShape(Rectangle())
-                            } else if section.style == Section.CarouselCarouselStyle.circle {
+                            } else if section.style == KMPSection.CarouselCarouselStyle.circle {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
@@ -55,7 +55,7 @@ struct Carousel: View {
                                 }
                                 .frame(width: 120, height: 120)
                                 .clipShape(Circle())
-                            } else if section.style == Section.CarouselCarouselStyle.roundedsquares {
+                            } else if section.style == KMPSection.CarouselCarouselStyle.roundedsquares {
                                 AsyncImage(url: url) { image in
                                     image.resizable()
                                 } placeholder: {
