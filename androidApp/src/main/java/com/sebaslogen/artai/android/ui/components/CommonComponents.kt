@@ -4,7 +4,6 @@ package com.sebaslogen.artai.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -45,99 +44,3 @@ fun ScreenContent(screen: Screen, onAction: ActionHandler) {
     }
 }
 
-fun LazyListScope.listSection(section: ListSection) {
-    when (section.header) {
-        is SectionHeader.Large -> sectionHeaderLarge(section.header as SectionHeader.Large)
-        is SectionHeader.Normal -> sectionHeaderNormal(section.header as SectionHeader.Normal)
-        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt)
-        is SectionHeader.Unknown -> sectionHeaderUnknown(section.header as SectionHeader.Unknown)
-    }
-    section.items.forEach { item ->
-        item(key = item.id) {
-            when (item) {
-                is ListItem.BigArt -> {
-                    ImageLoaderImage(
-                        data = item.image,
-                        contentDescription = "Img ${item.image}",
-                        filterQuality = FilterQuality.Medium,
-                        modifier = Modifier
-                            .size(150.dp)
-                            .animateItemPlacement()
-                            .padding(12.dp)
-                    )
-                }
-                is ListItem.Unknown -> Text("TODO(ListItem.Unknown)", modifier = Modifier.animateItemPlacement())
-            }
-        }
-    }
-}
-
-fun LazyListScope.carousel(section: Carousel, onAction: ActionHandler) {
-    when (section.header) {
-        is SectionHeader.Large -> sectionHeaderLarge(section.header as SectionHeader.Large)
-        is SectionHeader.Normal -> sectionHeaderNormal(section.header as SectionHeader.Normal)
-        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt)
-        is SectionHeader.Unknown -> sectionHeaderUnknown(section.header as SectionHeader.Unknown)
-    }
-    item(key = section.id) {
-        LazyRow(modifier = Modifier.animateItemPlacement()) {
-            items(items = section.items,
-                key = { item -> item.id ?: item.hashCode() },
-                contentType = { item -> item::class }
-            ) { item: CarouselItem ->
-                val shape = when (section.style) {
-                    Squared -> RoundedCornerShape(0)
-                    Circle -> CircleShape
-                    RoundedSquares -> RoundedCornerShape(8.dp)
-                }
-                when (item) {
-                    is CarouselItem.SmallArt ->
-                        ImageLoaderImage(
-                            data = item.image,
-                            contentDescription = "Img ${item.image}",
-                            filterQuality = FilterQuality.Medium,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .animateItemPlacement()
-                                .padding(12.dp)
-                                .clip(shape = shape)
-                                .clickable { onAction.onAction(item.action) }
-                        )
-
-                    is CarouselItem.Unknown -> Text("TODO(CarouselItem.Unknown)", modifier = Modifier.animateItemPlacement())
-                }
-            }
-        }
-    }
-}
-
-fun LazyListScope.sectionHeaderLarge(header: SectionHeader.Large) {
-    item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
-}
-
-fun LazyListScope.sectionHeaderNormal(header: SectionHeader.Normal) {
-    item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
-}
-
-fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt) {
-    item(key = header.id) {
-        Column {
-
-            Text(header.title, modifier = Modifier.animateItemPlacement())
-            Text(header.subtitle, modifier = Modifier.animateItemPlacement())
-            ImageLoaderImage(
-                data = header.image,
-                contentDescription = "Img ${header.image}",
-                filterQuality = FilterQuality.Medium,
-                modifier = Modifier
-                    .size(400.dp)
-                    .animateItemPlacement()
-                    .padding(12.dp)
-            )
-        }
-    }
-}
-
-fun LazyListScope.sectionHeaderUnknown(header: SectionHeader.Unknown) {
-    item(key = header.id) { Text("Unknown header", modifier = Modifier.animateItemPlacement()) }
-}
