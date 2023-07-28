@@ -18,12 +18,16 @@ import com.sebaslogen.artai.presentation.DynamicUIViewState
 import kotlinx.coroutines.flow.StateFlow
 
 
+/**
+ * Home screen with manual refresh button hardcoded on screen and SDUI content below
+ */
 @Composable
 fun HomeScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel) {
     val viewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
+        Text("Home Screen content")
         Button(onClick = viewModel::onRefreshClicked) {
             Text("Refresh")
         }
@@ -37,15 +41,18 @@ fun HomeScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel) {
 }
 
 @Composable
-fun SDUIScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel, navigationState: StateFlow<DynamicUINavigationState>) {
-    val viewModel = viewModel { dynamicUiViewModelProvider() }
+fun SDUIScreenContent(
+    dynamicUiViewModelProvider: () -> DynamicUIViewModel,
+    navigationState: StateFlow<DynamicUINavigationState>
+) {
+    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
     val navState: DynamicUINavigationState by navigationState.collectAsStateWithLifecycle()
 
     Column {
         when (val e = navState) {
             DynamicUINavigationState.HomeScreen -> Text("Home")
-            is DynamicUINavigationState.RemoteScreen -> Text(e.url)
+            is DynamicUINavigationState.RemoteScreen -> Text("Remote url is ...${e.url.takeLast(20)}")
         }
         Spacer(modifier = Modifier.height(20.dp))
         when (val state = viewState) {
