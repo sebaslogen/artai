@@ -7,14 +7,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.sebaslogen.artai.Greeting
-import com.sebaslogen.artai.PlatformGreeter
-import com.sebaslogen.artai.android.GreetingView
 import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
@@ -23,15 +19,11 @@ import kotlinx.coroutines.flow.StateFlow
 
 
 @Composable
-fun HomeScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel, platformGreeter: PlatformGreeter) {
+fun HomeScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel) {
     val viewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
-        val platformGreet = remember { Greeting().greet() }
-        GreetingView(platformGreet)
-        val injectedGreet = remember { platformGreeter.greet() }
-        GreetingView(injectedGreet)
         Button(onClick = viewModel::onRefreshClicked) {
             Text("Refresh")
         }
