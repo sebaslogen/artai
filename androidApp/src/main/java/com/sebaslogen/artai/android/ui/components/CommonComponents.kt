@@ -133,7 +133,6 @@ fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt) {
                     .size(400.dp)
                     .animateItemPlacement()
                     .padding(12.dp)
-                    .clip(shape = RoundedCornerShape(15.dp))
             )
         }
     }
