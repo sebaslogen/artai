@@ -66,7 +66,7 @@ fun LazyListScope.listSection(section: ListSection) {
                             .padding(12.dp)
                     )
                 }
-                is ListItem.Unknown -> Text("TODO(Unknown)", modifier = Modifier.animateItemPlacement())
+                is ListItem.Unknown -> Text("TODO(ListItem.Unknown)", modifier = Modifier.animateItemPlacement())
             }
         }
     }
@@ -104,7 +104,7 @@ fun LazyListScope.carousel(section: Carousel, onAction: ActionHandler) {
                                 .clickable { onAction.onAction(item.action) }
                         )
 
-                    is CarouselItem.Unknown -> Text("TODO(Unknown)", modifier = Modifier.animateItemPlacement())
+                    is CarouselItem.Unknown -> Text("TODO(CarouselItem.Unknown)", modifier = Modifier.animateItemPlacement())
                 }
             }
         }
@@ -133,6 +133,7 @@ fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt) {
                     .size(400.dp)
                     .animateItemPlacement()
                     .padding(12.dp)
+                    .clip(shape = RoundedCornerShape(15.dp))
             )
         }
     }

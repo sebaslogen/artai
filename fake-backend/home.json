@@ -195,9 +195,9 @@
         "header": {
           "type": "smallArt",
           "id": "section-header-similar-recommended",
-          "image": "http://www.example.com/image15.jpg",
+          "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2981102505_whimsical and amusing scene, Michelangelo's David _xl-beta-v2-2-2.png",
           "title": "More like",
-          "subtitle": "Art 15"
+          "subtitle": "Art 15 subtitle"
         },
         "items": [
           {
