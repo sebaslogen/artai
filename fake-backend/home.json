@@ -259,7 +259,7 @@
       }
     ]
   },
-  "cache-data": {
+  "cache": {
     "favorites" : [ 1, 6, 12 ]
   }
 }
