@@ -4,26 +4,21 @@ import com.sebaslogen.artai.data.mappers.mapToCacheData
 import com.sebaslogen.artai.data.mappers.mapToSuccess
 import com.sebaslogen.artai.data.remote.api.DynamicUIApi
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
+import com.sebaslogen.artai.di.scopes.Singleton
 import com.sebaslogen.artai.domain.models.CacheData
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import de.jensklingenberg.ktorfit.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 import me.tatarka.inject.annotations.Inject
 
+@Singleton
 @Inject
-class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
-
-    /**
-     * Local cached list of favorites, the servers is always the ultimate source of truth
-     */
-    private val favoritesState: MutableStateFlow<List<String>> = MutableStateFlow(emptyList()) // TODO: Use here and in all other ids a value class: @JvmInline value class ArtId(val value: String)
-    val favorites: StateFlow<List<String>> = favoritesState.asStateFlow()
+class DynamicUIRepository(
+    private val dynamicUIApi: DynamicUIApi,
+    private val favoritesRepository: FavoritesRepository
+) {
 
     suspend fun home(): DynamicUIDomainModel = withContext(Dispatchers.IO) {
         val response = dynamicUIApi.home()
@@ -63,7 +58,7 @@ class DynamicUIRepository(private val dynamicUIApi: DynamicUIApi) {
 
     private fun updateCache(cacheData: CacheData?) {
         if (cacheData == null) return
-        cacheData.favorites?.let { favoritesState.value = it }
+        cacheData.favorites?.let { favoritesRepository.updateFavorites(it) }
     }
 }
 

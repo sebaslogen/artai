@@ -7,7 +7,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.DynamicUINavigationState
-import com.sebaslogen.artai.domain.DynamicUIUseCase
+import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import com.sebaslogen.artai.domain.NavigationStateHandler
 import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action

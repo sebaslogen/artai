@@ -1,6 +1,7 @@
-package com.sebaslogen.artai.domain
+package com.sebaslogen.artai.domain.usecases
 
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
+import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import me.tatarka.inject.annotations.Inject
 
