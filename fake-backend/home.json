@@ -258,5 +258,8 @@
         "text": "Thanks for using the app!"
       }
     ]
+  },
+  "cache-data": {
+    "favorites" : [ 1, 6, 12 ]
   }
 }
