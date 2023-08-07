@@ -7,6 +7,7 @@ import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.data.remote.models.ApiSection
 import com.sebaslogen.artai.data.remote.models.ApiSectionHeader
 import com.sebaslogen.artai.domain.models.Action
+import com.sebaslogen.artai.domain.models.CacheData
 import com.sebaslogen.artai.domain.models.CarouselItem
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.ListItem
@@ -14,6 +15,12 @@ import com.sebaslogen.artai.domain.models.Screen
 import com.sebaslogen.artai.domain.models.Section
 import com.sebaslogen.artai.domain.models.SectionHeader
 
+
+fun ApiScreenResponse.mapToCacheData() = cache?.let {
+    CacheData(
+        favorites = it.favorites
+    )
+}
 
 fun ApiScreenResponse.mapToSuccess() = DynamicUIDomainModel.Success(this.mapToScreen())
 
