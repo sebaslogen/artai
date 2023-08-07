@@ -16,6 +16,16 @@
             "type": "smallArt",
             "id": "1",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/1790338129_An abstract chromolithographic print with encausti_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=1",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=1",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -26,6 +36,16 @@
             "type": "smallArt",
             "id": "2",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/1977738175_A whimsical, dreamy image of a cute animal surroun_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=2",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=2",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -36,6 +56,16 @@
             "type": "smallArt",
             "id": "3",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/182144683_Massive airship floating above a sprawling metropo_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=3",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=3",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -46,6 +76,16 @@
             "type": "smallArt",
             "id": "4",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2352255852_A whimsical, dreamy image of a cute animal surroun_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=4",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=4",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -56,6 +96,16 @@
             "type": "smallArt",
             "id": "5",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2525542780_Massive airship floating above a sprawling metropo_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=5",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=5",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -78,6 +128,16 @@
             "type": "smallArt",
             "id": "6",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2612560547_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=6",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=6",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -88,6 +148,16 @@
             "type": "smallArt",
             "id": "7",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2829099306_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=7",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=7",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -98,6 +168,16 @@
             "type": "smallArt",
             "id": "8",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3001357078_whimsical and amusing scene, Michelangelo's David _xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=8",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=8",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -108,6 +188,16 @@
             "type": "smallArt",
             "id": "9",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3024571393_Wave of Kanagawa, Photorealistic, 4K ultra realist_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=9",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=9",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -118,6 +208,16 @@
             "type": "smallArt",
             "id": "10",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3649162183_An abstract chromolithographic print with encausti_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=10",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=10",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -140,6 +240,16 @@
             "type": "smallArt",
             "id": "11",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3950453110_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=11",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=11",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -150,6 +260,16 @@
             "type": "smallArt",
             "id": "12",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/4105266544_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=12",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=12",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -160,6 +280,16 @@
             "type": "smallArt",
             "id": "13",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/968477373_An abstract chromolithographic print with encausti_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=13",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=13",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -170,6 +300,16 @@
             "type": "smallArt",
             "id": "14",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/377780489_Massive airship floating above a sprawling metropo_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=14",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=14",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -180,6 +320,16 @@
             "type": "smallArt",
             "id": "15",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3699335042_Close up low viewing angle, a Pacific Rim mecha wi_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=15",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=15",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -204,16 +354,36 @@
             "type": "smallArt",
             "id": "16",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2981102505_whimsical and amusing scene, Michelangelo's David _xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=16",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=16",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
-              "id": "art-1",
-              "url": "https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/art-1.json"
+              "id": "art-16",
+              "url": "https://raw.githubusercontent.com/sebaslogen/artai/main/fake-backend/art-16.json"
             }
           },
           {
             "type": "smallArt",
             "id": "17",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/3398030174_Wave of Kanagawa, Photorealistic, 4K ultra realist_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=17",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=17",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -224,6 +394,16 @@
             "type": "smallArt",
             "id": "18",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2595581616_Close up low viewing angle, a Pacific Rim mecha wi_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=18",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=18",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -234,6 +414,16 @@
             "type": "smallArt",
             "id": "19",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2551194466_An abstract chromolithographic print with encausti_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=19",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=19",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",
@@ -244,6 +434,16 @@
             "type": "smallArt",
             "id": "20",
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/1693669018_Massive airship floating above a sprawling metropo_xl-beta-v2-2-2.png",
+            "favoriteAction": {
+              "type": "commandAddToFavorites",
+              "url": "/add-to-favorites?id=20",
+              "accessibilityDescription": "voeg toe aan favorieten"
+            },
+            "unFavoriteAction": {
+              "type": "commandRemoveFromFavorites",
+              "url": "/remove-from-favorites?id=20",
+              "accessibilityDescription": "verwijder uit favorieten"
+            },
             "action": {
               "type": "openScreen",
               "id": "art-1",

@@ -12,6 +12,7 @@ import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
+import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,7 +24,7 @@ import me.tatarka.inject.annotations.Inject
 open class DynamicUIViewModel(
     private val navigationState: MutableStateFlow<DynamicUINavigationState>,
     private val dynamicUIUseCase: DynamicUIUseCase,
-    private val favoritesViewModel: FavoritesViewModel
+    private val favoritesUseCase: FavoritesUseCase
 ) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
@@ -31,9 +32,10 @@ open class DynamicUIViewModel(
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow()
 
-    @Suppress("LeakingThis") // open modifier required for iOS/KMP
+    @Suppress("LeakingThis")
     private val actionHandler = ActionHandlerSync(
         dynamicUIUseCase = dynamicUIUseCase,
+        favoritesUseCase = favoritesUseCase,
         navigationStateHandler = this
     )
 

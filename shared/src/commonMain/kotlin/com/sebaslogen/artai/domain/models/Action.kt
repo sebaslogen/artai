@@ -8,5 +8,9 @@ sealed class Action {
         val url: String,
     ) : Action()
 
+    data class ToggleFavoriteState(
+        override val id: String
+    ) : Action()
+
     data class Unknown(val type: String, override val id: String? = null) : Action()
 }
