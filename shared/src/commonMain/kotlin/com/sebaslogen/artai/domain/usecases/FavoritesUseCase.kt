@@ -8,6 +8,7 @@ class FavoritesUseCase(
     private val favoritesRepository: FavoritesRepository
 ) {
     val favorites = favoritesRepository.favorites
+
     private fun setFavorite(id: String, favorited: Boolean) {
         val favorites = favoritesRepository.favorites.value
         val alreadyFavorited = favorites.contains(id)

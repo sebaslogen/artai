@@ -11,5 +11,5 @@ data class CacheData(
      * List of currently favorited items.
      * Important note: "null" value means there is no update on the list of favorites. Only a non-null empty list means the list is empty.
      */
-    val favorites: List<String>? // TODO: Use here and in all other ids a value class: @JvmInline value class ArtId(val value: String)
+    val favorites: List<String>? = null // TODO: Use here and in all other ids a value class: @JvmInline value class ArtId(val value: String)
 )

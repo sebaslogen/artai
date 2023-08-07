@@ -7,12 +7,11 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.DynamicUINavigationState
-import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import com.sebaslogen.artai.domain.NavigationStateHandler
 import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
-import com.sebaslogen.artai.domain.models.Screen
+import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,7 +22,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 open class DynamicUIViewModel(
     private val navigationState: MutableStateFlow<DynamicUINavigationState>,
-    private val dynamicUIUseCase: DynamicUIUseCase
+    private val dynamicUIUseCase: DynamicUIUseCase,
+    private val favoritesViewModel: FavoritesViewModel
 ) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
@@ -85,8 +85,3 @@ open class DynamicUIViewModel(
     }
 }
 
-sealed class DynamicUIViewState {
-    object Loading : DynamicUIViewState()
-    data class Error(val error: Throwable) : DynamicUIViewState()
-    data class Success(val data: Screen) : DynamicUIViewState()
-}

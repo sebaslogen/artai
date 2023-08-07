@@ -58,7 +58,7 @@ class DynamicUIRepository(
 
     private fun updateCache(cacheData: CacheData?) {
         if (cacheData == null) return
-        cacheData.favorites?.let { favoritesRepository.updateFavorites(it) }
+        cacheData.favorites?.let { favoritesRepository.updateCachedFavorites(it) }
     }
 }
 
