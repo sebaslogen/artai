@@ -19,7 +19,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-1",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -41,7 +41,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-2",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -63,7 +63,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-3",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -85,7 +85,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-4",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -107,7 +107,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-5",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -141,7 +141,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-6",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -163,7 +163,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-7",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -185,7 +185,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-8",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
@@ -207,7 +207,7 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-9",
-              "url": "sebaslogen/artai/main/fake-backend/add-to-favorite.json",
+              "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
