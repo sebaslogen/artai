@@ -43,16 +43,19 @@ class DynamicUIRepository(
 
     private fun mapResponseToDomain(response: Response<ApiScreenResponse>): Pair<DynamicUIDomainModel, CacheData?> {
         val apiHomeScreenResponseBody: ApiScreenResponse? = response.body()
+        val cacheData: CacheData? = // Only parse and update cached when the response was successful
+            if (response.isSuccessful) apiHomeScreenResponseBody?.mapToCacheData() else null
+
         val domainModel: DynamicUIDomainModel = if (response.isSuccessful) {
-            apiHomeScreenResponseBody?.mapToSuccess(favoritesRepository.favorites.value) // Success
+            val favorites = cacheData?.favorites ?: favoritesRepository.favorites.value // Use the latest data from the JSON response or the cached data
+            apiHomeScreenResponseBody?.mapToSuccess(favorites) // Success
                 ?: DynamicUIDomainModel.Error(Throwable("Error parsing response")) // Error parsing
         } else {
             val errorBody = response.errorBody()
             DynamicUIDomainModel.Error(Throwable("Error with status code: ${response.code} and error body:${errorBody}")) // Error retrieving
 
         }
-        val cacheData: CacheData? = // Only parse and update cached when the response was successful
-            if (response.isSuccessful) apiHomeScreenResponseBody?.mapToCacheData() else null
+
         return domainModel to cacheData
     }
 

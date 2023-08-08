@@ -58,7 +58,7 @@ private fun LazyItemScope.CarouselSmallArt(
     shape: RoundedCornerShape,
     onAction: ActionHandler
 ) {
-    FavoriteContainer(onAction) {
+    FavoriteContainer(item.favorite, onAction) {
         ImageLoaderImage(
             data = item.image,
             contentDescription = "Img ${item.image}",
