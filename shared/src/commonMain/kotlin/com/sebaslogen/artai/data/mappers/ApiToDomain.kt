@@ -2,6 +2,8 @@ package com.sebaslogen.artai.data.mappers
 
 import com.sebaslogen.artai.data.remote.models.ApiAction
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
+import com.sebaslogen.artai.data.remote.models.ApiFavorite
+import com.sebaslogen.artai.data.remote.models.ApiFavoriteAction
 import com.sebaslogen.artai.data.remote.models.ApiListItem
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.data.remote.models.ApiSection
@@ -10,6 +12,7 @@ import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.CacheData
 import com.sebaslogen.artai.domain.models.CarouselItem
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
+import com.sebaslogen.artai.domain.models.Favorite
 import com.sebaslogen.artai.domain.models.ListItem
 import com.sebaslogen.artai.domain.models.Screen
 import com.sebaslogen.artai.domain.models.Section
@@ -22,20 +25,20 @@ fun ApiScreenResponse.mapToCacheData() = cache?.let {
     )
 }
 
-fun ApiScreenResponse.mapToSuccess() = DynamicUIDomainModel.Success(this.mapToScreen())
+fun ApiScreenResponse.mapToSuccess(favorites: List<String>) = DynamicUIDomainModel.Success(this.mapToScreen(favorites))
 
-private fun ApiScreenResponse.mapToScreen(): Screen = Screen(
+private fun ApiScreenResponse.mapToScreen(favorites: List<String>): Screen = Screen(
     id = screen.id,
-    sections = screen.sections.mapToSections()
+    sections = screen.sections.mapToSections(favorites)
 )
 
-private fun List<ApiSection>.mapToSections(): List<Section> = this.map { section ->
+private fun List<ApiSection>.mapToSections(favorites: List<String>): List<Section> = this.map { section ->
     when (section) {
         is ApiSection.ApiCarousel -> Section.Carousel(
             id = section.id,
             header = section.header.mapToSectionHeader(),
             style = section.style.mapToCarouselStyle(),
-            items = section.items.mapToCarouselItems()
+            items = section.items.mapToCarouselItems(favorites)
         )
 
         is ApiSection.ApiFooter -> Section.Footer(id = section.id, text = section.text)
@@ -58,11 +61,28 @@ private fun ApiSection.ApiCarousel.ApiCarouselStyle.mapToCarouselStyle(): Sectio
         ApiSection.ApiCarousel.ApiCarouselStyle.RoundedSquares -> Section.Carousel.CarouselStyle.RoundedSquares
     }
 
-private fun List<ApiCarouselItem>.mapToCarouselItems(): List<CarouselItem> = this.map { item ->
+private fun List<ApiCarouselItem>.mapToCarouselItems(favorites: List<String>): List<CarouselItem> = this.map { item ->
     when (item) {
-        is ApiCarouselItem.ApiSmallArt -> CarouselItem.SmallArt(id = item.id, image = item.image, action = item.action.mapToAction())
+        is ApiCarouselItem.ApiSmallArt -> CarouselItem.SmallArt(
+            id = item.id,
+            image = item.image,
+            favorite = item.toFavorite(favorites),
+            action = item.action.mapToAction()
+        )
+
         is ApiCarouselItem.ApiUnknown -> CarouselItem.Unknown(type = item.type, id = item.id)
     }
+}
+
+private fun ApiFavorite.toFavorite(favorites: List<String>) = Favorite(
+    id = this.id,
+    favorited = favorites.contains(this.id),
+    toggleFavoriteState = this.toToggleFavoriteState(favorites)
+)
+
+private fun ApiFavorite.toToggleFavoriteState(favorites: List<String>): Action.ToggleFavoriteState {
+    val favorited = favorites.contains(id)
+    return Action.ToggleFavoriteState(id = id, url = if (favorited) unFavoriteAction.url else favoriteAction.url)
 }
 
 private fun List<ApiListItem>.mapToListItems(): List<ListItem> = this.map { item ->
@@ -75,4 +95,6 @@ private fun List<ApiListItem>.mapToListItems(): List<ListItem> = this.map { item
 private fun ApiAction.mapToAction(): Action = when (this) {
     is ApiAction.ApiOpenScreen -> Action.OpenScreen(id = id, url = url)
     is ApiAction.ApiUnknown -> Action.Unknown(type = type, id = id)
+    is ApiAction.ApiCommandAddToFavorites -> Action.ToggleFavoriteState(id = id, url = url)
+    is ApiAction.ApiCommandRemoveFromFavorites -> Action.ToggleFavoriteState(id = id, url = url)
 }

@@ -27,5 +27,27 @@ sealed class ApiAction {
     ) : ApiAction()
 
     @Serializable
+    @SerialName("commandAddToFavorites")
+    data class ApiCommandAddToFavorites(
+        override val id: String,
+        override val url: String,
+        override val accessibilityDescription: String,
+    ) : ApiFavoriteAction, ApiAction()
+
+    @Serializable
+    @SerialName("commandRemoveFromFavorites")
+    data class ApiCommandRemoveFromFavorites(
+        override val id: String,
+        override val url: String,
+        override val accessibilityDescription: String,
+    ) : ApiFavoriteAction, ApiAction()
+
+    @Serializable
     data class ApiUnknown(val type: String, override val id: String? = null) : ApiAction()
+}
+
+interface ApiFavoriteAction {
+    val id: String
+    val url: String
+    val accessibilityDescription: String
 }

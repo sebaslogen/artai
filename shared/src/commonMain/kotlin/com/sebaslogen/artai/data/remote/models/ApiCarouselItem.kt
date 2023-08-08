@@ -25,8 +25,10 @@ sealed class ApiCarouselItem {
     data class ApiSmallArt(
         override val id: String,
         val image: String,
+        override val favoriteAction: ApiAction.ApiCommandAddToFavorites,
+        override val unFavoriteAction: ApiAction.ApiCommandRemoveFromFavorites,
         val action: ApiAction,
-    ) : ApiCarouselItem()
+    ) : ApiFavorite, ApiCarouselItem()
 
     @Serializable
     data class ApiUnknown(val type: String, override val id: String? = null) : ApiCarouselItem()

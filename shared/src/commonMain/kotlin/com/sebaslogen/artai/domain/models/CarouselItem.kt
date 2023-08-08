@@ -7,6 +7,7 @@ sealed class CarouselItem {
     data class SmallArt(
         override val id: String,
         val image: String,
+        val favorite: Favorite,
         val action: Action,
     ) : CarouselItem()
 

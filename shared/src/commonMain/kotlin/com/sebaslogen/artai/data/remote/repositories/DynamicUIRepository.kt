@@ -44,7 +44,7 @@ class DynamicUIRepository(
     private fun mapResponseToDomain(response: Response<ApiScreenResponse>): Pair<DynamicUIDomainModel, CacheData?> {
         val apiHomeScreenResponseBody: ApiScreenResponse? = response.body()
         val domainModel: DynamicUIDomainModel = if (response.isSuccessful) {
-            apiHomeScreenResponseBody?.mapToSuccess() // Success
+            apiHomeScreenResponseBody?.mapToSuccess(favoritesRepository.favorites.value) // Success
                 ?: DynamicUIDomainModel.Error(Throwable("Error parsing response")) // Error parsing
         } else {
             val errorBody = response.errorBody()
