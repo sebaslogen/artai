@@ -19,13 +19,13 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-2",
-              "url": "/add-to-favorites?id=2",
+              "url": "/add-to-favorites",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
               "type": "commandRemoveFromFavorites",
               "id": "command-remove-from-favorites-2",
-              "url": "/remove-from-favorites?id=2",
+              "url": "/remove-from-favorites",
               "accessibilityDescription": "verwijder uit favorieten"
             },
             "action": {
@@ -41,13 +41,13 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-4",
-              "url": "/add-to-favorites?id=4",
+              "url": "/add-to-favorites",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
               "type": "commandRemoveFromFavorites",
               "id": "command-remove-from-favorites-4",
-              "url": "/remove-from-favorites?id=4",
+              "url": "/remove-from-favorites",
               "accessibilityDescription": "verwijder uit favorieten"
             },
             "action": {
@@ -63,13 +63,13 @@
             "favoriteAction": {
               "type": "commandAddToFavorites",
               "id": "command-add-to-favorites-5",
-              "url": "/add-to-favorites?id=5",
+              "url": "/add-to-favorites",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
               "type": "commandRemoveFromFavorites",
               "id": "command-remove-from-favorites-5",
-              "url": "/remove-from-favorites?id=5",
+              "url": "/remove-from-favorites",
               "accessibilityDescription": "verwijder uit favorieten"
             },
             "action": {
