@@ -22,8 +22,9 @@ class FavoritesViewModel(
 //        return favoritesUseCase.favoriteSetter(id)
 //    }
 
-    /**
-     * Flip the favorited state of the given favorite [id].
-     */
-    fun toggleFavoriteState(id: String) = favoritesUseCase.toggleFavoriteState(id)
+    // TODO: Remove or use this nice idea
+//    /**
+//     * Flip the favorited state of the given favorite [id].
+//     */
+//    suspend fun toggleFavoriteState(id: String) = favoritesUseCase.toggleFavoriteState(id, action.url)
 }

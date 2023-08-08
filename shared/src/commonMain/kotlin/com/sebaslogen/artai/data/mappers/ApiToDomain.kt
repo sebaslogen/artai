@@ -1,6 +1,8 @@
 package com.sebaslogen.artai.data.mappers
 
 import com.sebaslogen.artai.data.remote.models.ApiAction
+import com.sebaslogen.artai.data.remote.models.ApiCacheData
+import com.sebaslogen.artai.data.remote.models.ApiCacheResponse
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
 import com.sebaslogen.artai.data.remote.models.ApiFavorite
 import com.sebaslogen.artai.data.remote.models.ApiFavoriteAction
@@ -19,11 +21,12 @@ import com.sebaslogen.artai.domain.models.Section
 import com.sebaslogen.artai.domain.models.SectionHeader
 
 
-fun ApiScreenResponse.mapToCacheData() = cache?.let {
+fun ApiScreenResponse.mapToCacheData() = cache?.mapToCacheData()
+fun ApiCacheResponse.mapToCacheData() = cache?.mapToCacheData()
+fun ApiCacheData.mapToCacheData() =
     CacheData(
-        favorites = it.favorites
+        favorites = this.favorites
     )
-}
 
 fun ApiScreenResponse.mapToSuccess(favorites: List<String>) = DynamicUIDomainModel.Success(this.mapToScreen(favorites))
 

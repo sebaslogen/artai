@@ -10,11 +10,11 @@ class ActionHandlerSync(
     private val favoritesUseCase: FavoritesUseCase,
     private val navigationStateHandler: NavigationStateHandler
 ) {
-    fun onAction(action: Action) {
+    suspend fun onAction(action: Action) {
         when (action) {
             is Action.OpenScreen -> navigationStateHandler.onNavigationStateUpdate(DynamicUINavigationState.RemoteScreen(action.url))
             // TODO This is on Present Screen ViewEvent dynamicUIUseCase.fetchScreenData(action.url, responseHandler)
-            is Action.ToggleFavoriteState -> favoritesUseCase.toggleFavoriteState(action.id)
+            is Action.ToggleFavoriteState -> favoritesUseCase.toggleFavoriteState(action.id, action.url)
             is Action.Unknown -> TODO("Not planning on implementing this error logging")
         }
     }
