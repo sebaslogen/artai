@@ -356,11 +356,13 @@
             "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2981102505_whimsical and amusing scene, Michelangelo's David _xl-beta-v2-2-2.png",
             "favoriteAction": {
               "type": "commandAddToFavorites",
+              "id": "command-add-to-favorites-16",
               "url": "/add-to-favorites?id=16",
               "accessibilityDescription": "voeg toe aan favorieten"
             },
             "unFavoriteAction": {
               "type": "commandRemoveFromFavorites",
+              "id": "command-remove-from-favorites-16",
               "url": "/remove-from-favorites?id=16",
               "accessibilityDescription": "verwijder uit favorieten"
             },
