@@ -4,6 +4,7 @@ import com.sebaslogen.artai.domain.models.CarouselItem
 import com.sebaslogen.artai.domain.models.Favorite
 import com.sebaslogen.artai.domain.models.ListItem
 import com.sebaslogen.artai.domain.models.Section
+import com.sebaslogen.artai.domain.models.SectionHeader
 
 object DynamicUIViewStateReducer {
     // TODO: We miss a favorites reducer here when the favorites are updated on the local cache before network response
@@ -31,8 +32,9 @@ private fun Section.reduce(favorites: List<String>): Section = when (this) {
 }
 
 private fun Section.Carousel.reduce(favorites: List<String>): Section.Carousel {
+    val newSectionHeader = header.reduce(favorites)
     val newSectionItems = items.reduceListCarouselItem(favorites)
-    return if (newSectionItems == items) this else this.copy(items = newSectionItems)
+    return if (newSectionItems == items && newSectionHeader == header) this else this.copy(items = newSectionItems)
 }
 
 private fun List<CarouselItem>.reduceListCarouselItem(favorites: List<String>): List<CarouselItem> =
@@ -51,8 +53,9 @@ private fun CarouselItem.SmallArt.reduce(favorites: List<String>): CarouselItem.
 }
 
 private fun Section.ListSection.reduce(favorites: List<String>): Section.ListSection {
+    val newSectionHeader = header.reduce(favorites)
     val newSectionItems = items.reduceListItems(favorites)
-    return if (newSectionItems == items) this else this.copy(items = newSectionItems)
+    return if (newSectionItems == items && newSectionHeader == header) this else this.copy(items = newSectionItems)
 }
 
 private fun List<ListItem>.reduceListItems(favorites: List<String>): List<ListItem> =
@@ -76,3 +79,12 @@ private fun Favorite.reduce(favorites: List<String>): Favorite {
     return if (newFavState == favorited) this else this.copy(favorited = favorites.contains(id))
 }
 
+private fun SectionHeader.reduce(favorites: List<String>): SectionHeader = when (this) {
+    is SectionHeader.SmallArt -> this.reduce(favorites)
+    is SectionHeader.Large, is SectionHeader.Normal, is SectionHeader.Unknown -> this
+}
+
+private fun SectionHeader.SmallArt.reduce(favorites: List<String>): SectionHeader {
+    val newFavorite: Favorite = favorite.reduce(favorites)
+    return if (newFavorite == favorite) this else this.copy(favorite = newFavorite)
+}

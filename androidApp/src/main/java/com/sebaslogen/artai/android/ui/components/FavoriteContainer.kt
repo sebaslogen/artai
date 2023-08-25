@@ -19,6 +19,7 @@ import com.sebaslogen.artai.domain.models.Favorite
 fun FavoriteContainer(
     favorite: Favorite,
     onAction: ActionHandler,
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     Box {
@@ -29,7 +30,7 @@ fun FavoriteContainer(
             imageVector = imageVector,
             contentDescription = contentDescription,
             tint = Color.Red,
-            modifier = Modifier
+            modifier = modifier
                 .align(Alignment.TopEnd)
                 .padding(12.dp)
                 .clickable { onAction.onAction(favorite.toggleFavoriteState) }
