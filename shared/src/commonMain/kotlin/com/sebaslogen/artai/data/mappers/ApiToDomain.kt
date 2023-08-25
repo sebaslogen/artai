@@ -5,7 +5,6 @@ import com.sebaslogen.artai.data.remote.models.ApiCacheData
 import com.sebaslogen.artai.data.remote.models.ApiCacheResponse
 import com.sebaslogen.artai.data.remote.models.ApiCarouselItem
 import com.sebaslogen.artai.data.remote.models.ApiFavorite
-import com.sebaslogen.artai.data.remote.models.ApiFavoriteAction
 import com.sebaslogen.artai.data.remote.models.ApiListItem
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.data.remote.models.ApiSection
@@ -39,21 +38,26 @@ private fun List<ApiSection>.mapToSections(favorites: List<String>): List<Sectio
     when (section) {
         is ApiSection.ApiCarousel -> Section.Carousel(
             id = section.id,
-            header = section.header.mapToSectionHeader(),
+            header = section.header.mapToSectionHeader(favorites),
             style = section.style.mapToCarouselStyle(),
             items = section.items.mapToCarouselItems(favorites)
         )
 
         is ApiSection.ApiFooter -> Section.Footer(id = section.id, text = section.text)
-        is ApiSection.ApiList -> Section.ListSection(id = section.id, header = section.header.mapToSectionHeader(), items = section.items.mapToListItems())
+        is ApiSection.ApiList -> Section.ListSection(
+            id = section.id,
+            header = section.header.mapToSectionHeader(favorites),
+            items = section.items.mapToListItems()
+        )
+
         is ApiSection.ApiUnknown -> Section.Unknown(type = section.type, id = section.id)
     }
 }
 
-private fun ApiSectionHeader.mapToSectionHeader(): SectionHeader = when (this) {
+private fun ApiSectionHeader.mapToSectionHeader(favorites: List<String>): SectionHeader = when (this) {
     is ApiSectionHeader.ApiLarge -> SectionHeader.Large(id = id, title = title)
     is ApiSectionHeader.ApiNormal -> SectionHeader.Normal(id = id, title = title)
-    is ApiSectionHeader.ApiSmallArt -> SectionHeader.SmallArt(id = id, image = image, title = title, subtitle = subtitle)
+    is ApiSectionHeader.ApiSmallArt -> SectionHeader.SmallArt(id = id, image = image, title = title, subtitle = subtitle, favorite = this.toFavorite(favorites))
     is ApiSectionHeader.ApiUnknown -> SectionHeader.Unknown(type = type, id = id)
 }
 

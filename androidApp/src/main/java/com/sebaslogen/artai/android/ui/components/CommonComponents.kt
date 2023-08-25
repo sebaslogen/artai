@@ -37,7 +37,7 @@ fun ScreenContent(screen: Screen, onAction: ActionHandler) {
             when (section) {
                 is Carousel -> carousel(section, onAction)
                 is Footer -> item(key = section.id) { Text("TODO(Footer)") }
-                is ListSection -> listSection(section)
+                is ListSection -> listSection(section, onAction)
                 is Unknown -> item(key = section.id) { Text("TODO(Unknown)") }
             }
         }

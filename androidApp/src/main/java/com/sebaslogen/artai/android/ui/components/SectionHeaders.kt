@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.unit.dp
 import com.sebaslogen.artai.android.ui.utils.ImageLoaderImage
+import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.models.SectionHeader
 
 fun LazyListScope.sectionHeaderLarge(header: SectionHeader.Large) {
@@ -22,21 +23,23 @@ fun LazyListScope.sectionHeaderNormal(header: SectionHeader.Normal) {
     item(key = header.id) { Text(header.title, modifier = Modifier.animateItemPlacement()) }
 }
 
-fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt) {
+fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt, onAction: ActionHandler) {
     item(key = header.id) {
         Column {
 
             Text(header.title, modifier = Modifier.animateItemPlacement())
             Text(header.subtitle, modifier = Modifier.animateItemPlacement())
-            ImageLoaderImage(
-                data = header.image,
-                contentDescription = "Img ${header.image}",
-                filterQuality = FilterQuality.Medium,
-                modifier = Modifier
-                    .size(400.dp)
-                    .animateItemPlacement()
-                    .padding(12.dp)
-            )
+            FavoriteContainer(header.favorite, onAction) {
+                ImageLoaderImage(
+                    data = header.image,
+                    contentDescription = "Img ${header.image}",
+                    filterQuality = FilterQuality.Medium,
+                    modifier = Modifier
+                        .size(400.dp)
+                        .animateItemPlacement()
+                        .padding(12.dp)
+                )
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ fun LazyListScope.carousel(section: Section.Carousel, onAction: ActionHandler) {
     when (section.header) {
         is SectionHeader.Large -> sectionHeaderLarge(section.header as SectionHeader.Large)
         is SectionHeader.Normal -> sectionHeaderNormal(section.header as SectionHeader.Normal)
-        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt)
+        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt, onAction)
         is SectionHeader.Unknown -> sectionHeaderUnknown(section.header as SectionHeader.Unknown)
     }
     item(key = section.id) {

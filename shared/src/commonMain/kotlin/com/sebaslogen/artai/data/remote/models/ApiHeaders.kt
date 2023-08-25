@@ -43,7 +43,9 @@ sealed class ApiSectionHeader {
         val image: String,
         val title: String,
         val subtitle: String,
-    ) : ApiSectionHeader()
+        override val favoriteAction: ApiAction.ApiCommandAddToFavorites,
+        override val unFavoriteAction: ApiAction.ApiCommandRemoveFromFavorites,
+    ) : ApiFavorite, ApiSectionHeader()
 
     @Serializable
     data class ApiUnknown(val type: String, override val id: String? = null) : ApiSectionHeader()

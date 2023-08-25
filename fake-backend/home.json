@@ -377,7 +377,19 @@
           "id": "section-header-similar-recommended",
           "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2981102505_whimsical and amusing scene, Michelangelo's David _xl-beta-v2-2-2.png",
           "title": "More like",
-          "subtitle": "Art 15 subtitle"
+          "subtitle": "Art 15 subtitle",
+          "favoriteAction": {
+            "type": "commandAddToFavorites",
+            "id": "command-add-to-favorites-header-1",
+            "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
+            "accessibilityDescription": "voeg toe aan favorieten"
+          },
+          "unFavoriteAction": {
+            "type": "commandRemoveFromFavorites",
+            "id": "command-remove-from-favorites-header-1",
+            "url": "sebaslogen/artai/main/fake-backend/remove-from-favorites.json",
+            "accessibilityDescription": "verwijder uit favorieten"
+          }
         },
         "items": [
           {

@@ -21,6 +21,7 @@ sealed class SectionHeader {
         val image: String,
         val title: String,
         val subtitle: String,
+        val favorite: Favorite,
     ) : SectionHeader()
 
 
