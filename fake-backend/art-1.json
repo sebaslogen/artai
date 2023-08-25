@@ -10,7 +10,19 @@
           "id": "section-header-small-art",
           "title": "Art 1 Details",
           "subtitle": "art 1 details subtitle",
-          "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2829099306_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png"
+          "image": "https://raw.githubusercontent.com/sebaslogen/artai/main/art-resources/2829099306_Multi - dimensional paper kirigami craft, paper il_xl-beta-v2-2-2.png",
+          "favoriteAction": {
+            "type": "commandAddToFavorites",
+            "id": "command-add-to-favorites-header-1",
+            "url": "sebaslogen/artai/main/fake-backend/add-to-favorites.json",
+            "accessibilityDescription": "voeg toe aan favorieten"
+          },
+          "unFavoriteAction": {
+            "type": "commandRemoveFromFavorites",
+            "id": "command-remove-from-favorites-header-1",
+            "url": "sebaslogen/artai/main/fake-backend/remove-from-favorites.json",
+            "accessibilityDescription": "verwijder uit favorieten"
+          }
         },
         "items": [
         ]
