@@ -4,7 +4,7 @@ kotlin = '1.9.0'
 compileSdk = '34'
 minSdk = '28'
 targetSdk = '34'
-kotlin-inject = '0.6.1'
+kotlin-inject = '0.6.2'
 ksp = '1.9.0-1.0.12'
 coroutines = "1.7.3"
 napier = '2.6.1'
@@ -16,9 +16,9 @@ kmm-viewmodel = "1.0.0-ALPHA-13"
 nativecoroutines = '1.0.0-ALPHA-17'
 androidx-activity = '1.7.2'
 androidx-lifecycle = '2.6.1'
-androidx-navigation = "2.7.0"
+androidx-navigation = "2.7.1"
 compose-bom = "2023.08.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
-compose-compiler = '1.5.1'
+compose-compiler = '1.5.2'
 compose-image-loader = "1.6.4"
 
 [libraries]
