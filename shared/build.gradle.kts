@@ -11,7 +11,7 @@ plugins {
 }
 
 kotlin {
-    android {
+    androidTarget {
     }
 
     iosX64()
@@ -95,7 +95,6 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
