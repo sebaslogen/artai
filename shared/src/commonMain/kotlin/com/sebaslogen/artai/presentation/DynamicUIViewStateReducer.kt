@@ -5,7 +5,7 @@ import com.sebaslogen.artai.domain.models.Favorite
 import com.sebaslogen.artai.domain.models.ListItem
 import com.sebaslogen.artai.domain.models.Section
 import com.sebaslogen.artai.domain.models.SectionHeader
-
+// TODO: Delete
 object DynamicUIViewStateReducer {
     // TODO: We miss a favorites reducer here when the favorites are updated on the local cache before network response
     fun reduce(state: DynamicUIViewState, favorites: List<String>): DynamicUIViewState = when (state) {

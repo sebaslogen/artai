@@ -58,7 +58,9 @@ private fun LazyItemScope.CarouselSmallArt(
     shape: RoundedCornerShape,
     onAction: ActionHandler
 ) {
-    FavoriteContainer(item.favorite, onAction) {
+//    FavoriteContainer(item.favorite, onAction) {
+    @Suppress("LocalVariableName") val FavoriteContainer = LocalFavoriteContainer.current
+    FavoriteContainer(favorite = item.favorite, modifier = Modifier) {
         ImageLoaderImage(
             data = item.image,
             contentDescription = "Img ${item.image}",

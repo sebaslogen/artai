@@ -3,6 +3,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 }
 
@@ -11,6 +12,7 @@ dependencyResolutionManagement {
         google()
         maven { setUrl("https://androidx.dev/storage/compose-compiler/repository/") }
         mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 }
 

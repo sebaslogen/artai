@@ -17,6 +17,7 @@ import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
@@ -26,22 +27,14 @@ import me.tatarka.inject.annotations.Inject
 open class DynamicUIViewModel(
     private val navigationState: MutableStateFlow<DynamicUINavigationState>,
     private val dynamicUIUseCase: DynamicUIUseCase,
-    private val favoritesUseCase: FavoritesUseCase,
+    private val favoritesUseCase: FavoritesUseCase, // TODO: Delete?
     private val actionHandler: ActionHandlerSync
 ) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
     @NativeCoroutinesState
-    val viewState: StateFlow<DynamicUIViewState> = _viewState
-        .combine(favoritesUseCase.favorites) { state, favorites ->
-            DynamicUIViewStateReducer.reduce(state, favorites)
-        }
-        .stateIn(
-            viewModelScope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = DynamicUIViewState.Loading
-        )
+    val viewState: StateFlow<DynamicUIViewState> = _viewState.asStateFlow()
 
     init {
         when (val initialNavigationState = navigationState.value) {
@@ -71,7 +64,6 @@ open class DynamicUIViewModel(
     }
 
     private fun mapDomainModelToUIState(dynamicUIDomainModel: DynamicUIDomainModel) = when (dynamicUIDomainModel) {
-        // TODO: Add nicer mappers from domain to UI state
         is DynamicUIDomainModel.Error -> DynamicUIViewState.Error(dynamicUIDomainModel.error)
         is DynamicUIDomainModel.Success -> DynamicUIViewState.Success(dynamicUIDomainModel.data)
     }

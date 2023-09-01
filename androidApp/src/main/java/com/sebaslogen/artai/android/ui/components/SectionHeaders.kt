@@ -29,7 +29,9 @@ fun LazyListScope.sectionHeaderSmallArt(header: SectionHeader.SmallArt, onAction
 
             Text(header.title, modifier = Modifier.animateItemPlacement())
             Text(header.subtitle, modifier = Modifier.animateItemPlacement())
-            FavoriteContainer(favorite = header.favorite, onAction = onAction, modifier = Modifier.padding(12.dp)) {
+            @Suppress("LocalVariableName") val FavoriteContainer = LocalFavoriteContainer.current
+            FavoriteContainer(header.favorite, Modifier.padding(12.dp)) {
+//            FavoriteContainer(favorite = header.favorite, onAction = onAction, modifier = Modifier.padding(12.dp)) {
                 ImageLoaderImage(
                     data = header.image,
                     contentDescription = "Img ${header.image}",
