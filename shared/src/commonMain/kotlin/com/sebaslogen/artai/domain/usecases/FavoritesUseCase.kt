@@ -9,7 +9,7 @@ import me.tatarka.inject.annotations.Inject
 class FavoritesUseCase(
     private val favoritesRepository: FavoritesRepository
 ) {
-    val favorites = favoritesRepository.favorites
+    private val favorites = favoritesRepository.favorites
 
     /**
      * Return a flow of favorited states (in the from of a boolean) for the given favorite id
