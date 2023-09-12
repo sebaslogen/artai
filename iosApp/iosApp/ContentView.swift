@@ -8,17 +8,15 @@ struct ContentView: View {
 
     var body: some View {
         let state: DynamicUIViewState = viewModel.viewState
-        switch state {
-        case is DynamicUIViewState.Error:
+        switch onEnum(of: state) {
+        case .error(_):
             Text("Error loading data :(")
-        case is DynamicUIViewState.Loading:
+        case .loading(_):
             Text("Loading...")
-        case is DynamicUIViewState.Success:
-            ScreenContent(state: state as! DynamicUIViewState.Success, onRefresh: {
+        case .success(let sucessState):
+            ScreenContent(state: sucessState, onRefresh: {
                 viewModel.onRefreshClicked()
             })
-        default:
-            Text("Unknown state")
         }
     }
 }

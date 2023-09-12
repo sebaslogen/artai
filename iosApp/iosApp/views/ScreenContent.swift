@@ -21,19 +21,16 @@ struct ScreenContent: View {
                 Text("Refresh")
             }
             List(screen.sections, id: \.id) { section in
-                switch section {
-                case is KMPSection.Carousel:
-                    CarouselView(section: section as! KMPSection.Carousel)
-                case is KMPSection.Footer:
+                switch onEnum(of: section) {
+                case .carousel(let carousel):
+                    CarouselView(section: carousel)
+                case .footer(let footer):
                     Text("TODO(Footer)")
-                case is KMPSection.ListSection:
+                case .listSection(let listSection):
                     Text("TODO(ListSection)")
-                case is KMPSection.Unknown:
+                case .unknown(_):
                     Text("TODO(Unknown)")
-                default:
-                    Text("Unknown section type")
                 }
-
             }
         }
     }

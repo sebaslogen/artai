@@ -13,17 +13,15 @@ struct SectionHeaderView: View {
     var header: SectionHeader
     
     var body: some View {
-        switch header {
-        case is SectionHeader.Large:
-            Text((header as! SectionHeader.Large).title)
-        case is SectionHeader.Normal:
-            Text((header as! SectionHeader.Normal).title)
-        case is SectionHeader.SmallArt:
-            Text((header as! SectionHeader.SmallArt).title)
-        case is SectionHeader.Unknown:
+        switch onEnum(of: header) {
+        case .large(let largeHeader):
+            Text(largeHeader.title)
+        case .normal(let normalHeader):
+            Text(normalHeader.title)
+        case .smallArt(let smallArtHeader):
+            Text(smallArtHeader.title)
+        case .unknown(_):
             Text("TODO(Unknown)")
-        default:
-            Text("Unknown carousel item type")
         }
     }
 }

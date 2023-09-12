@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.skie)
     alias(libs.plugins.nativecoroutines)
 }
 
@@ -48,6 +49,7 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
                 implementation(libs.kmm.viewmodel)
+                implementation("co.touchlab.skie:configuration-annotations:0.4.20")
             }
         }
         val commonTest by getting {
@@ -99,6 +101,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+skie {
+    features {
+        group {
+            co.touchlab.skie.configuration.FlowInterop.Enabled(false)
+//            SuspendInterop.Enabled(false)
+        }
     }
 }
 

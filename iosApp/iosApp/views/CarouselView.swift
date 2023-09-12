@@ -16,8 +16,7 @@ struct CarouselView: View {
     var body: some View {
         
         SectionHeaderView(header: section.header)
-        let s = KMPSection.CarouselCarouselStyle.squared
-        if s == section.style {
+        if section.style == KMPSection.CarouselCarouselStyle.squared {
             Text("Style parsed")
         }
 //        var itemShapeStyle: AnyShape = AnyShape(Rectangle())
@@ -34,10 +33,10 @@ struct CarouselView: View {
         ScrollView(.horizontal) {
             LazyHStack {
                 ForEach(section.items, id: \.id) { item in
-                    switch item {
-                    case is CarouselItem.SmallArt:
+                    switch onEnum(of: item) {
+                    case .smallArt(let smallArt):
                         if #available(iOS 15.0, *) {
-                            let url = URL(string: (item as! CarouselItem.SmallArt).image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+                            let url = URL(string: smallArt.image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                             
                             if section.style == KMPSection.CarouselCarouselStyle.squared {
                                 AsyncImage(url: url) { image in
@@ -74,52 +73,50 @@ struct CarouselView: View {
                             }
                             
                             
-//                            AsyncImage(url: url) { image in
-//                                image.resizable()
-//                            } placeholder: {
-//                                ProgressView()
-//                            }
-//                            .frame(width: 120, height: 120)
-//                            .clipShape(AnyShape(Circle())) // iOS16
-//                            .mask(RoundedRectangle(cornerRadius: 8))
-//                            .mask(RoundedRectangle(cornerRadius: cornerRadius))
+                            //                            AsyncImage(url: url) { image in
+                            //                                image.resizable()
+                            //                            } placeholder: {
+                            //                                ProgressView()
+                            //                            }
+                            //                            .frame(width: 120, height: 120)
+                            //                            .clipShape(AnyShape(Circle())) // iOS16
+                            //                            .mask(RoundedRectangle(cornerRadius: 8))
+                            //                            .mask(RoundedRectangle(cornerRadius: cornerRadius))
                             
-//                            Text(((item as! CarouselItem.SmallArt).image))
-//                                .padding()
-//                                .background(Color(
-//                                    red: .random(in: 0...1),
-//                                    green: .random(in: 0...1),
-//                                    blue: .random(in: 0...1),
-//                                    opacity: 1
-//                                ))
-//                                .cornerRadius(10)
-
-//                            AsyncImage(url: url, transaction: .init(animation: .spring())) { phase in
-//                                switch phase {
-//                                case .empty:
-//                                    randomPlaceholderColor()
-//                                    .opacity(0.2)
-//                                    .transition(.opacity.combined(with: .scale))
-//                                case .success(let image):
-//                                    image
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fill)
-//                                    .transition(.opacity.combined(with: .scale))
-//                                case .failure(let error):
-//                                    ErrorView(error)
-//                                @unknown default:
-//                                    ErrorView()
-//                                }
-//                            }
-//                            .frame(width: 120, height: 120)
-//                            .mask(RoundedRectangle(cornerRadius: 16))
+                            //                            Text(((item as! CarouselItem.SmallArt).image))
+                            //                                .padding()
+                            //                                .background(Color(
+                            //                                    red: .random(in: 0...1),
+                            //                                    green: .random(in: 0...1),
+                            //                                    blue: .random(in: 0...1),
+                            //                                    opacity: 1
+                            //                                ))
+                            //                                .cornerRadius(10)
+                            
+                            //                            AsyncImage(url: url, transaction: .init(animation: .spring())) { phase in
+                            //                                switch phase {
+                            //                                case .empty:
+                            //                                    randomPlaceholderColor()
+                            //                                    .opacity(0.2)
+                            //                                    .transition(.opacity.combined(with: .scale))
+                            //                                case .success(let image):
+                            //                                    image
+                            //                                    .resizable()
+                            //                                    .aspectRatio(contentMode: .fill)
+                            //                                    .transition(.opacity.combined(with: .scale))
+                            //                                case .failure(let error):
+                            //                                    ErrorView(error)
+                            //                                @unknown default:
+                            //                                    ErrorView()
+                            //                                }
+                            //                            }
+                            //                            .frame(width: 120, height: 120)
+                            //                            .mask(RoundedRectangle(cornerRadius: 16))
                         } else {
-                            // Fallback on earlier versions
+                            // Fallback on earlier iOS versions
                         }
-                    case is CarouselItem.Unknown:
+                    case .unknown(_):
                         Text("TODO(Unknown)")
-                    default:
-                        Text("Unknown carousel item type")
                     }
                 }
             }
