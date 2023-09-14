@@ -15,7 +15,7 @@ struct ScreenContent: View {
 
     var body: some View {
         VStack {
-            var screen = state.data
+            let screen = state.data
             Text("Got ViewModel result: \(screen.id)")
             Button(action: onRefresh) {
                 Text("Refresh")
