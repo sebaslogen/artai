@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		AB0DD1B2AF3633700148FD3D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0462DAA9A38DC8FC0382FB0E /* Pods_iosApp.framework */; };
+		B77D4B932AB2FB1000B7BF30 /* CarouselSmallArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */; };
 		B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6429DC401E00E7B64A /* CarouselView.swift */; };
 		B7829F6729DC431600E7B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6629DC431600E7B64A /* SectionHeaderView.swift */; };
 		B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4729D1004700C7DE85 /* Napier.swift */; };
@@ -28,6 +29,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C56CFFFFCCA62F23F5FCD49 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSmallArtView.swift; sourceTree = "<group>"; };
 		B7829F6429DC401E00E7B64A /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		B7829F6629DC431600E7B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		B7EA2B4729D1004700C7DE85 /* Napier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Napier.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				B7EA2B4D29DC34DB00C7DE85 /* ScreenContent.swift */,
 				B7829F6429DC401E00E7B64A /* CarouselView.swift */,
 				B7829F6629DC431600E7B64A /* SectionHeaderView.swift */,
+				B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */,
 				B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */,
 				B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */,
+				B77D4B932AB2FB1000B7BF30 /* CarouselSmallArtView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
