@@ -2,6 +2,7 @@ package com.sebaslogen.artai.presentation
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.coroutineScope
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.NotANavigationStateHandler
@@ -21,6 +22,7 @@ open class FavoritesViewModel(
     /**
      * Return a flow of favorited states (in the from of a boolean) for the given favorite id
      */
+    @NativeCoroutines
     fun favoriteState(favorite: Favorite): Flow<Favorite> =
         favoritesUseCase.favoriteState(favorite.id).map { favorited ->
             favorite.copy(favorited = favorited)

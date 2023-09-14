@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.models.Favorite
 import com.sebaslogen.artai.presentation.FavoritesViewModel
@@ -54,7 +55,7 @@ fun FavoriteContainer(
     @Assisted content: @Composable () -> Unit
 ) {
     val favoritesViewModel = viewModelScoped { favoritesViewModelProvider() }
-    val updatedFavorite by favoritesViewModel.favoriteState(favorite).collectAsState(initial = favorite)
+    val updatedFavorite by favoritesViewModel.favoriteState(favorite).collectAsStateWithLifecycle(initialValue = favorite)
     FavoriteContainer(favorite = updatedFavorite, onAction = favoritesViewModel, modifier = modifier, content = content)
 }
 
