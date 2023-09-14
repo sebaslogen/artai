@@ -55,13 +55,8 @@ struct CarouselSmallArtView: View {
             } else {
                 // Fallback on earlier iOS versions
             }
-            let icon = (true ? "heart.fill" : "heart")
-            var onAction: () -> Void = {
-                print("Favorite button was tapped")
-            }
-            Button(action: onAction) {
-                Image(systemName: icon)
-            }.foregroundColor(.red).padding()
+            
+            FavoriteView(favorite: smallArt.favorite)
         }
     }
 }
