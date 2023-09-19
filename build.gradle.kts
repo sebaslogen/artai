@@ -34,11 +34,4 @@ subprojects {
             }
         }
     }
-    // Configure KtorFit
-    plugins.withType<de.jensklingenberg.ktorfit.gradle.KtorfitGradleSubPlugin> {
-        configure<de.jensklingenberg.ktorfit.gradle.KtorfitGradleConfiguration> {
-            version = libs.versions.ktorfit.lib.get()
-            logging = project.hasProperty("debugApp")
-        }
-    }
 }

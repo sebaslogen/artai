@@ -49,7 +49,7 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
                 implementation(libs.kmm.viewmodel)
-                implementation("co.touchlab.skie:configuration-annotations:0.4.20")
+                implementation(libs.configuration.annotations)
             }
         }
         val commonTest by getting {
