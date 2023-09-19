@@ -6,6 +6,6 @@ import me.tatarka.inject.annotations.Component
 
 @Component
 @Singleton
-abstract class ApplicationComponent : NetworkComponent, ApiServicesComponent, NavigationComponent {
+abstract class ApplicationComponent : NetworkComponent, ApiServicesComponent {
     abstract val dynamicUIViewModel: DynamicUIViewModel
 }

@@ -18,6 +18,7 @@ import com.sebaslogen.artai.domain.models.ListItem
 import com.sebaslogen.artai.domain.models.Screen
 import com.sebaslogen.artai.domain.models.Section
 import com.sebaslogen.artai.domain.models.SectionHeader
+import com.sebaslogen.artai.domain.models.Url
 
 
 fun ApiScreenResponse.mapToCacheData() = cache?.mapToCacheData()
@@ -89,7 +90,7 @@ private fun ApiFavorite.toFavorite(favorites: List<String>) = Favorite(
 
 private fun ApiFavorite.toToggleFavoriteState(favorites: List<String>): Action.ToggleFavoriteState {
     val favorited = favorites.contains(id)
-    return Action.ToggleFavoriteState(id = id, url = if (favorited) unFavoriteAction.url else favoriteAction.url)
+    return Action.ToggleFavoriteState(id = id, url = Url(if (favorited) unFavoriteAction.url else favoriteAction.url))
 }
 
 private fun List<ApiListItem>.mapToListItems(): List<ListItem> = this.map { item ->
@@ -100,8 +101,8 @@ private fun List<ApiListItem>.mapToListItems(): List<ListItem> = this.map { item
 }
 
 private fun ApiAction.mapToAction(): Action = when (this) {
-    is ApiAction.ApiOpenScreen -> Action.OpenScreen(id = id, url = url)
+    is ApiAction.ApiOpenScreen -> Action.OpenScreen(id = id, url = Url(url))
     is ApiAction.ApiUnknown -> Action.Unknown(type = type, id = id)
-    is ApiAction.ApiCommandAddToFavorites -> Action.ToggleFavoriteState(id = id, url = url)
-    is ApiAction.ApiCommandRemoveFromFavorites -> Action.ToggleFavoriteState(id = id, url = url)
+    is ApiAction.ApiCommandAddToFavorites -> Action.ToggleFavoriteState(id = id, url = Url(url))
+    is ApiAction.ApiCommandRemoveFromFavorites -> Action.ToggleFavoriteState(id = id, url = Url(url))
 }

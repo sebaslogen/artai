@@ -8,6 +8,7 @@ import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
 import com.sebaslogen.artai.di.scopes.Singleton
 import com.sebaslogen.artai.domain.models.CacheData
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
+import com.sebaslogen.artai.domain.models.Url
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,8 +37,8 @@ class FavoritesRepository(private val dynamicUIApi: DynamicUIApi) {
      * Method to update the favorites on the backend,
      * the response of that update should trigger the update of the local (in memory) state of the favorites
      */
-    suspend fun updateFavorites(actionUrl: String) {
-        val response = dynamicUIApi.action(actionUrl)
+    suspend fun updateFavorites(actionUrl: Url) {
+        val response = dynamicUIApi.action(actionUrl.value)
         val apiCacheResponse: ApiCacheResponse? = response.body()
         if (response.isSuccessful && apiCacheResponse != null) {
             val cacheData: CacheData? = apiCacheResponse.mapToCacheData()

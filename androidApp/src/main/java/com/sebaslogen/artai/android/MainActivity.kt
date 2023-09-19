@@ -8,35 +8,41 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
-import com.sebaslogen.artai.android.ui.HomeScreen
-import com.sebaslogen.artai.android.ui.MainScreen
+import com.sebaslogen.artai.android.ui.RootScreen
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
-import com.sebaslogen.artai.domain.DynamicUINavigationState
+import com.sebaslogen.artai.di.scopes.MainActivityScope
+import com.sebaslogen.artai.di.scopes.Singleton
+import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.DefaultRootComponent
 import com.sebaslogen.artai.domain.components.RootComponent
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.flow.MutableStateFlow
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
 
 @Component
-abstract class MainActivityComponent(@Component val parent: ApplicationComponent, private val defaultComponentContext: DefaultComponentContext) {
-    abstract val navigationStateCreator: () -> MutableStateFlow<DynamicUINavigationState>
+@MainActivityScope
+abstract class MainActivityComponent(
+    @Component val parent: ApplicationComponent,
+    @get:Provides protected val componentContext: ComponentContext
+) {
     abstract val dynamicUIRepositoryCreator: () -> DynamicUIRepository
     abstract val imageLoaderCreator: () -> ImageLoader
     abstract val dynamicUIViewModel: DynamicUIViewModel
-    abstract val mainScreen: MainScreen
+    abstract val defaultRootComponent: DefaultRootComponent
 
     @Provides
-    fun rootComponent(): RootComponent =
-        DefaultRootComponent(componentContext = defaultComponentContext)
+    fun rootComponent(): RootComponent = defaultRootComponent
+
+    @Provides
+    fun navigator(): Navigator = defaultRootComponent
 }
 
 class MainActivity : ComponentActivity() {
@@ -46,8 +52,6 @@ class MainActivity : ComponentActivity() {
         Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
         val mainActivityComponent = MainActivityComponent::class.create(applicationComponent, defaultComponentContext())
 
-        val navigationState: MutableStateFlow<DynamicUINavigationState> = mainActivityComponent.navigationStateCreator()
-        val mainScreen = mainActivityComponent.mainScreen
         val rootComponent = mainActivityComponent.rootComponent()
         setContent {
             CompositionLocalProvider(
@@ -58,8 +62,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-//                        mainScreen(navigationState)
-                        HomeScreen(rootComponent, { mainActivityComponent.dynamicUIViewModel }, navigationState)
+                        RootScreen(rootComponent, { mainActivityComponent.dynamicUIViewModel })
                     }
                 }
             }

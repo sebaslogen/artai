@@ -1,6 +1,7 @@
 package com.sebaslogen.artai.domain.usecases
 
 import com.sebaslogen.artai.data.remote.repositories.FavoritesRepository
+import com.sebaslogen.artai.domain.models.Url
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import me.tatarka.inject.annotations.Inject
@@ -16,7 +17,7 @@ class FavoritesUseCase(
      */
     fun favoriteState(id: String): Flow<Boolean> = favorites.map { it.contains(id) }
 
-    private suspend fun setFavorite(id: String, favorited: Boolean, actionUrl: String) {
+    private suspend fun setFavorite(id: String, favorited: Boolean, actionUrl: Url) {
         val favorites = favoritesRepository.favorites.value
         val alreadyFavorited = favorites.contains(id)
         val addFavorite = favorited && !alreadyFavorited
@@ -43,7 +44,7 @@ class FavoritesUseCase(
     /**
      * Flip the favorited state of the given favorite [id].
      */
-    suspend fun toggleFavoriteState(id: String, actionUrl: String) {
+    suspend fun toggleFavoriteState(id: String, actionUrl: Url) {
         val favorites = favoritesRepository.favorites.value
         val favorited = favorites.contains(id)
         val toggledFavoriteState = !favorited

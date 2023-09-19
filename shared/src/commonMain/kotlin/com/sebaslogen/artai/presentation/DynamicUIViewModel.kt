@@ -7,14 +7,11 @@ import com.rickclephas.kmm.viewmodel.stateIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
-import com.sebaslogen.artai.domain.DynamicUINavigationState
-import com.sebaslogen.artai.domain.NavigationStateHandler
 import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -24,11 +21,10 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 open class DynamicUIViewModel(
-    private val navigationState: MutableStateFlow<DynamicUINavigationState>,
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync
-) : KMMViewModel(), ActionHandler, NavigationStateHandler {
+) : KMMViewModel(), ActionHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
@@ -44,13 +40,16 @@ open class DynamicUIViewModel(
         )
 
     init {
-        when (val initialNavigationState = navigationState.value) {
-            DynamicUINavigationState.HomeScreen -> fetchHomeData()
-            is DynamicUINavigationState.RemoteScreen -> fetchData { responseHandler ->
-                dynamicUIUseCase.fetchScreenData(url = initialNavigationState.url, responseHandler = responseHandler)
-            }
-        }
+        fetchHomeData()
     }
+    // TODO
+//        when (val initialNavigationState = navigationState.value) {
+//            DynamicUINavigationState.HomeScreen -> fetchHomeData()
+//            is DynamicUINavigationState.RemoteScreen -> fetchData { responseHandler ->
+//                dynamicUIUseCase.fetchScreenData(url = initialNavigationState.url, responseHandler = responseHandler)
+//            }
+//        }
+//    }
 
     private fun fetchHomeData() {
         fetchData(dynamicUIUseCase::fetchHomeData)
@@ -82,12 +81,8 @@ open class DynamicUIViewModel(
 
     override fun onAction(action: Action) {
         viewModelScope.coroutineScope.launch {
-            actionHandler.onAction(action = action, navigationStateHandler = this@DynamicUIViewModel)
+            actionHandler.onAction(action = action)
         }
-    }
-
-    override fun onNavigationStateUpdate(event: DynamicUINavigationState) {
-        navigationState.value = event
     }
 }
 
