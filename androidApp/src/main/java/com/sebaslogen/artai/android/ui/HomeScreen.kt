@@ -52,10 +52,12 @@ fun SDUIScreenContent(
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
-//        when (val e = navState) { // TODO
-//            DynamicUINavigationState.HomeScreen -> Text("Home")
-//            is DynamicUINavigationState.RemoteScreen -> Text("Remote url is ...${e.url.takeLast(20)}")
-//        }
+        val url = component.url.value
+        if (url.isBlank()) {
+            Text("Home")
+        } else {
+            Text("Remote url is ...${url.takeLast(20)}")
+        }
         Spacer(modifier = Modifier.height(20.dp))
         when (val state = viewState) {
             is DynamicUIViewState.Error -> Text("Error loading data :(")

@@ -26,6 +26,8 @@ open class DynamicUIViewModel(
     private val actionHandler: ActionHandlerSync
 ) : KMMViewModel(), ActionHandler {
 
+    // TODO: Move all this to SDUIScreenComponent
+
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
     @NativeCoroutinesState
