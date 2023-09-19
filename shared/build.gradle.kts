@@ -51,6 +51,7 @@ kotlin {
                 api(libs.ktorfit.lib)
                 implementation(libs.kmm.viewmodel)
                 implementation(libs.configuration.annotations)
+                api(libs.decompose)
             }
         }
         val commonTest by getting {

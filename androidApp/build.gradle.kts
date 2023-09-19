@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -69,6 +70,8 @@ dependencies {
     implementation(libs.compose.ui.toolingPreview)
     debugRuntimeOnly(libs.compose.ui.tooling)
     implementation(libs.compose.image.loader)
+
+    implementation(libs.decompose.extensions.compose.jetpack)
 
     implementation(libs.kmm.viewmodel)
 }
