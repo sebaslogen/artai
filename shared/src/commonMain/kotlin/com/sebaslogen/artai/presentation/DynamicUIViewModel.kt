@@ -26,7 +26,8 @@ import me.tatarka.inject.annotations.Inject
 open class DynamicUIViewModel(
     private val navigationState: MutableStateFlow<DynamicUINavigationState>,
     private val dynamicUIUseCase: DynamicUIUseCase,
-    private val favoritesUseCase: FavoritesUseCase
+    private val favoritesUseCase: FavoritesUseCase,
+    private val actionHandler: ActionHandlerSync
 ) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
@@ -41,15 +42,6 @@ open class DynamicUIViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = DynamicUIViewState.Loading
         )
-
-
-
-    @Suppress("LeakingThis")
-    private val actionHandler = ActionHandlerSync(
-        dynamicUIUseCase = dynamicUIUseCase,
-        favoritesUseCase = favoritesUseCase,
-        navigationStateHandler = this
-    )
 
     init {
         when (val initialNavigationState = navigationState.value) {
@@ -90,7 +82,7 @@ open class DynamicUIViewModel(
 
     override fun onAction(action: Action) {
         viewModelScope.coroutineScope.launch {
-            actionHandler.onAction(action)
+            actionHandler.onAction(action = action, navigationStateHandler = this@DynamicUIViewModel)
         }
     }
 
