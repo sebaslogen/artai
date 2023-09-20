@@ -9,12 +9,12 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.sebaslogen.artai.di.scopes.MainActivityScope
-import com.sebaslogen.artai.di.scopes.Singleton
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.Url
 import me.tatarka.inject.annotations.Inject
+import kotlin.coroutines.CoroutineContext
 
 
 /**
@@ -24,7 +24,8 @@ import me.tatarka.inject.annotations.Inject
 @MainActivityScope
 @Inject
 class DefaultRootComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val mainCoroutineContext: CoroutineContext
 ) : RootComponent, ComponentContext by componentContext, Navigator {
 
     private val navigation = StackNavigation<Config>()
@@ -48,8 +49,8 @@ class DefaultRootComponent(
 
     private fun createChild(config: Config, componentContext: ComponentContext): Child =
         when (config) {
-            is Config.HomeScreen -> Child.HomeScreen(HomeScreenComponent(componentContext))
-            is Config.RemoteScreen -> Child.RemoteScreen(SDUIScreenComponent(componentContext, url = config.url))
+            is Config.HomeScreen -> Child.HomeScreen(HomeScreenComponent(componentContext, coroutineContext = mainCoroutineContext))
+            is Config.RemoteScreen -> Child.RemoteScreen(SDUIScreenComponent(componentContext, coroutineContext = mainCoroutineContext, url = config.url))
         }
 //    init {
 //        lifecycle... // Access the Lifecycle
