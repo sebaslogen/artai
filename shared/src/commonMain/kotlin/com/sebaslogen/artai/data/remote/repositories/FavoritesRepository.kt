@@ -1,20 +1,17 @@
 package com.sebaslogen.artai.data.remote.repositories
 
 import com.sebaslogen.artai.data.mappers.mapToCacheData
-import com.sebaslogen.artai.data.mappers.mapToSuccess
 import com.sebaslogen.artai.data.remote.api.DynamicUIApi
 import com.sebaslogen.artai.data.remote.models.ApiCacheResponse
-import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
-import com.sebaslogen.artai.di.scopes.Singleton
+import com.sebaslogen.artai.di.scopes.ApplicationSingleton
 import com.sebaslogen.artai.domain.models.CacheData
-import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.Url
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import me.tatarka.inject.annotations.Inject
 
-@Singleton
+@ApplicationSingleton
 @Inject
 class FavoritesRepository(private val dynamicUIApi: DynamicUIApi) {
     /**

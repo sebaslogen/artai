@@ -3,13 +3,14 @@ package com.sebaslogen.artai.domain
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class ActionHandlerSync(
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
-    private val navigator: Navigator
+    @Assisted private val navigator: Navigator
 ) {
     suspend fun onAction(action: Action) {
         when (action) {

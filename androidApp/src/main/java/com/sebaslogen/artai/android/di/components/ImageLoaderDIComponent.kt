@@ -1,7 +1,8 @@
 package com.sebaslogen.artai.android.di.components
 
 import android.content.Context
-import com.sebaslogen.artai.di.scopes.Singleton
+import com.sebaslogen.artai.android.di.scopes.AndroidSingleton
+import com.sebaslogen.artai.di.scopes.ApplicationSingleton
 import com.sebaslogen.artai.networking.Http
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
@@ -9,8 +10,8 @@ import com.seiko.imageloader.component.setupDefaultComponents
 import me.tatarka.inject.annotations.Provides
 import okio.Path.Companion.toOkioPath
 
-interface ImageLoaderComponent {
-    @Singleton
+interface ImageLoaderDIComponent {
+    @AndroidSingleton
     @Provides
     fun imageLoader(applicationContext: Context, httpClientProvider: () -> Http): ImageLoader = ImageLoader {
         components {

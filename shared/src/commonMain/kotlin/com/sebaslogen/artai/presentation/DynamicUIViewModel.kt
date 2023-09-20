@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 
-@Inject
+//@Inject
 open class DynamicUIViewModel(
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,

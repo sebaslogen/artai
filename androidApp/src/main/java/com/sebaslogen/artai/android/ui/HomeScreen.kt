@@ -16,6 +16,7 @@ import com.sebaslogen.artai.domain.components.HomeScreenComponent
 import com.sebaslogen.artai.domain.components.SDUIScreenComponent
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.sebaslogen.artai.presentation.DynamicUIViewState
+import com.sebaslogen.artai.presentation.SDUIScreenComponentViewModel
 
 
 /**
@@ -24,9 +25,10 @@ import com.sebaslogen.artai.presentation.DynamicUIViewState
 @Composable
 fun HomeScreenContent(
     component: HomeScreenComponent,
-    dynamicUiViewModelProvider: () -> DynamicUIViewModel
 ) {
-    val viewModel = viewModel { dynamicUiViewModelProvider() }
+    val viewModel: SDUIScreenComponentViewModel = component.viewModel
+    // TODO: Get VM from SDUIScreenComponent
+//    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
@@ -45,10 +47,11 @@ fun HomeScreenContent(
 
 @Composable
 fun SDUIScreenContent(
-    component: SDUIScreenComponent,
-    dynamicUiViewModelProvider: () -> DynamicUIViewModel
+    component: SDUIScreenComponent
 ) {
-    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
+    val viewModel: SDUIScreenComponentViewModel = component.viewModel
+    // TODO: Get VM from SDUIScreenComponent
+//    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {

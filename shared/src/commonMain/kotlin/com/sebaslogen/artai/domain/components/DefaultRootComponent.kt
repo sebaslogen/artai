@@ -8,6 +8,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import com.sebaslogen.artai.di.components.AppComponentsDIComponent
 import com.sebaslogen.artai.di.scopes.MainActivityScope
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
@@ -25,7 +26,8 @@ import kotlin.coroutines.CoroutineContext
 @Inject
 class DefaultRootComponent(
     componentContext: ComponentContext,
-    private val mainCoroutineContext: CoroutineContext
+    private val mainCoroutineContext: CoroutineContext,
+    private val appComponentsDIComponent: AppComponentsDIComponent
 ) : RootComponent, ComponentContext by componentContext, Navigator {
 
     private val navigation = StackNavigation<Config>()
@@ -47,11 +49,20 @@ class DefaultRootComponent(
         data class RemoteScreen(val url: Url) : Config
     }
 
-    private fun createChild(config: Config, componentContext: ComponentContext): Child =
-        when (config) {
-            is Config.HomeScreen -> Child.HomeScreen(HomeScreenComponent(componentContext, coroutineContext = mainCoroutineContext))
-            is Config.RemoteScreen -> Child.RemoteScreen(SDUIScreenComponent(componentContext, coroutineContext = mainCoroutineContext, url = config.url))
+    private fun createChild(config: Config, componentContext: ComponentContext): Child {
+        val actionHandler = appComponentsDIComponent.actionHandlerSyncCreator(this)
+        return when (config) {
+            // TODO: Assisted injection
+            is Config.HomeScreen ->
+                Child.HomeScreen(
+                    appComponentsDIComponent.homeScreenComponentCreator(componentContext, mainCoroutineContext, actionHandler, Url(""))
+                )
+            is Config.RemoteScreen ->
+                Child.RemoteScreen(
+                    appComponentsDIComponent.theSDUIScreenComponentCreator(componentContext, mainCoroutineContext, actionHandler, config.url)
+                )
         }
+    }
 //    init {
 //        lifecycle... // Access the Lifecycle
 //        stateKeeper... // Access the StateKeeper
