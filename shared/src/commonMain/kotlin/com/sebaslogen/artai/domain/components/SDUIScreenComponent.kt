@@ -2,6 +2,7 @@ package com.sebaslogen.artai.domain.components
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
+import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.Navigator
@@ -49,6 +50,9 @@ class SDUIScreenComponent(
             fetchData { responseHandler ->
                 dynamicUIUseCase.fetchScreenData(url = url.value, responseHandler = responseHandler)
             }
+        }
+        lifecycle.doOnDestroy {
+            // TODO: Move ViewModel to this class and cancel coroutine here
         }
     }
 
