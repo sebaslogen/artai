@@ -10,7 +10,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackA
 import com.sebaslogen.artai.domain.components.RootComponent
 
 @Composable
-fun RootScreen(
+fun NavRootScreen(
     component: RootComponent,
     modifier: Modifier = Modifier
 ) {

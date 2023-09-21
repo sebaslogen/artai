@@ -24,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
  */
 @MainActivityScope
 @Inject
-class DefaultRootComponent(
+class NavRootComponent(
     componentContext: ComponentContext,
     private val mainCoroutineContext: CoroutineContext,
     private val viewModelsDIComponent: ViewModelsDIComponent

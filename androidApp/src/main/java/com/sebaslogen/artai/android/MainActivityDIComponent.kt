@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.sebaslogen.artai.android.di.components.AndroidApplicationDIComponent
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.di.scopes.MainActivityScope
-import com.sebaslogen.artai.domain.components.DefaultRootComponent
+import com.sebaslogen.artai.domain.components.NavRootComponent
 import com.sebaslogen.artai.domain.components.RootComponent
 import com.seiko.imageloader.ImageLoader
 import me.tatarka.inject.annotations.Component
@@ -24,5 +24,5 @@ abstract class MainActivityDIComponent(
      * Bind an specific implementation to the interface
      */
     @Provides
-    fun rootComponent(defaultRootComponent: DefaultRootComponent): RootComponent = defaultRootComponent
+    fun rootComponent(navRootComponent: NavRootComponent): RootComponent = navRootComponent
 }

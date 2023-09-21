@@ -10,7 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
 import com.sebaslogen.artai.android.di.components.androidApplicationDIComponent
-import com.sebaslogen.artai.android.ui.RootScreen
+import com.sebaslogen.artai.android.ui.NavRootScreen
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
 
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             parent = androidApplicationDIComponent,
             componentContext = defaultComponentContext()
         )
-        val rootComponent = mainActivityDIComponent.rootComponent
+        val navRootComponent = mainActivityDIComponent.rootComponent
 
         setContent {
             CompositionLocalProvider(
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        RootScreen(rootComponent)
+                        NavRootScreen(navRootComponent)
                     }
                 }
             }
