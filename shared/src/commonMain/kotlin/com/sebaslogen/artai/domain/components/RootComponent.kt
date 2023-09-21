@@ -9,7 +9,7 @@ interface RootComponent: Navigator {
     val childrenStack: Value<ChildStack<*, Child>>
 
     sealed class Child {
-        class HomeScreen(val component: HomeScreenComponent) : Child()
+        class HomeScreen(val component: SDUIScreenComponent) : Child()
         class RemoteScreen(val component: SDUIScreenComponent) : Child()
     }
 }

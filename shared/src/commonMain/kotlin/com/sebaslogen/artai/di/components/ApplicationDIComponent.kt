@@ -8,12 +8,12 @@ import kotlin.coroutines.CoroutineContext
 
 @Component
 @ApplicationSingleton
-abstract class ApplicationDIComponent : NetworkDIComponent, ApiServicesDIComponent, ViewModelsDIComponent {
+abstract class ApplicationDIComponent : NetworkDIComponent, ApiServicesDIComponent, AppComponentsDIComponent {
 
     @Provides
     fun mainCoroutineContext(): CoroutineContext = Dispatchers.Main
 
     @Provides
-    fun viewModelsDIComponent(): ViewModelsDIComponent = this
+    fun appComponentsDIComponent(): AppComponentsDIComponent = this
 
 }

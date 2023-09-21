@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
-import com.sebaslogen.artai.di.components.ViewModelsDIComponent
+import com.sebaslogen.artai.di.components.AppComponentsDIComponent
 import com.sebaslogen.artai.di.scopes.MainActivityScope
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
@@ -27,8 +27,13 @@ import kotlin.coroutines.CoroutineContext
 class NavRootComponent(
     componentContext: ComponentContext,
     private val mainCoroutineContext: CoroutineContext,
-    private val viewModelsDIComponent: ViewModelsDIComponent
+    private val appComponentsDIComponent: AppComponentsDIComponent
 ) : RootComponent, ComponentContext by componentContext, Navigator {
+//    This class has (thanks to the ComponentContext) access to
+//        lifecycle... // Access the Lifecycle
+//        stateKeeper... // Access the StateKeeper
+//        instanceKeeper... // Access the InstanceKeeper
+//        backHandler... // Access the BackHandler
 
     private val navigation = StackNavigation<Config>()
     private val stack: Value<ChildStack<Config, Child>> = childStack(
@@ -49,26 +54,19 @@ class NavRootComponent(
         data class RemoteScreen(val url: Url) : Config
     }
 
-    private fun createChild(config: Config, componentContext: ComponentContext): Child =
-        when (config) {
-            is Config.HomeScreen -> {
-                val url = Url("")
+    private fun createChild(config: Config, componentContext: ComponentContext): Child {
+        return when (config) {
+            // TODO: Assisted injection
+            is Config.HomeScreen ->
                 Child.HomeScreen(
-                    HomeScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, this, url)
+                    appComponentsDIComponent.theSDUIScreenComponentCreator(componentContext, mainCoroutineContext, this, Url(""))
                 )
-            }
-
             is Config.RemoteScreen ->
                 Child.RemoteScreen(
-                    SDUIScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, this, config.url)
+                    appComponentsDIComponent.theSDUIScreenComponentCreator(componentContext, mainCoroutineContext, this, config.url)
                 )
         }
-//    init {
-//        lifecycle... // Access the Lifecycle
-//        stateKeeper... // Access the StateKeeper
-//        instanceKeeper... // Access the InstanceKeeper
-//        backHandler... // Access the BackHandler
-//    }
+    }
 
     override fun onNavigation(action: Action.OpenScreen) {
         navigation.push(Config.RemoteScreen(url = action.url))
