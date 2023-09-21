@@ -49,7 +49,6 @@ kotlin {
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
-                implementation(libs.kmm.viewmodel)
                 implementation(libs.configuration.annotations)
                 api(libs.decompose)
             }

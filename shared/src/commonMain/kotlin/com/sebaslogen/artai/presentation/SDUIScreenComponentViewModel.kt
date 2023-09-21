@@ -19,13 +19,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import me.tatarka.inject.annotations.Assisted
+import me.tatarka.inject.annotations.Inject
 import kotlin.coroutines.CoroutineContext
 
+@Inject
 class SDUIScreenComponentViewModel(
+    @Assisted
     coroutineContext: CoroutineContext,
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
+    @Assisted
     private val actionHandler: ActionHandlerSync,
+    @Assisted
     private val url: Url
 ) : InstanceKeeper.Instance, ActionHandler {
     private val viewModelScope = CoroutineScope(coroutineContext + SupervisorJob())

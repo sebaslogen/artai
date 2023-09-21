@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
-import com.sebaslogen.artai.di.components.AppComponentsDIComponent
+import com.sebaslogen.artai.di.components.ViewModelsDIComponent
 import com.sebaslogen.artai.di.scopes.MainActivityScope
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
@@ -27,7 +27,7 @@ import kotlin.coroutines.CoroutineContext
 class DefaultRootComponent(
     componentContext: ComponentContext,
     private val mainCoroutineContext: CoroutineContext,
-    private val appComponentsDIComponent: AppComponentsDIComponent
+    private val viewModelsDIComponent: ViewModelsDIComponent
 ) : RootComponent, ComponentContext by componentContext, Navigator {
 
     private val navigation = StackNavigation<Config>()
@@ -50,16 +50,18 @@ class DefaultRootComponent(
     }
 
     private fun createChild(config: Config, componentContext: ComponentContext): Child {
-        val actionHandler = appComponentsDIComponent.actionHandlerSyncCreator(this)
+        val actionHandler = viewModelsDIComponent.actionHandlerSyncCreator(this)
         return when (config) {
-            // TODO: Assisted injection
-            is Config.HomeScreen ->
+            is Config.HomeScreen -> {
+                val url = Url("")
                 Child.HomeScreen(
-                    appComponentsDIComponent.homeScreenComponentCreator(componentContext, mainCoroutineContext, actionHandler, Url(""))
+                    HomeScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, actionHandler, url)
                 )
+            }
+
             is Config.RemoteScreen ->
                 Child.RemoteScreen(
-                    appComponentsDIComponent.theSDUIScreenComponentCreator(componentContext, mainCoroutineContext, actionHandler, config.url)
+                    SDUIScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, actionHandler, config.url)
                 )
         }
     }

@@ -72,6 +72,4 @@ dependencies {
     implementation(libs.compose.image.loader)
 
     implementation(libs.decompose.extensions.compose.jetpack)
-
-    implementation(libs.kmm.viewmodel)
 }

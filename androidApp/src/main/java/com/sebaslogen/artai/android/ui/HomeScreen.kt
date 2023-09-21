@@ -10,11 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sebaslogen.artai.android.ui.components.ScreenContent
 import com.sebaslogen.artai.domain.components.HomeScreenComponent
 import com.sebaslogen.artai.domain.components.SDUIScreenComponent
-import com.sebaslogen.artai.presentation.DynamicUIViewModel
 import com.sebaslogen.artai.presentation.DynamicUIViewState
 import com.sebaslogen.artai.presentation.SDUIScreenComponentViewModel
 
