@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         val mainActivityDIComponent = MainActivityDIComponent::class.create(parent = androidApplicationDIComponent)
 
-        val navRootComponent = retainedComponent { componentContext ->
+        val navRootComponent = retainedComponent("MainActivityComponent") { componentContext ->
             NavRootComponent(
                 componentContext,
                 mainCoroutineContext = mainActivityDIComponent.mainCoroutineContext,
