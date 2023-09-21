@@ -15,6 +15,10 @@ import androidx.compose.ui.unit.dp
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.models.Favorite
 
+// TODO: Create a FavoriteComponentViewModel and a container FavoriteComponent
+//  Pass with an updated LocalProvider the componentContext to the FavoriteComponent constructor (so it's a brother of the current one
+//  Create the VM with DI and assist the injection of the coroutineContext and the Favorite
+
 @Composable
 fun FavoriteContainer(
     favorite: Favorite,
