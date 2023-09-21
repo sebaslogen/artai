@@ -49,22 +49,20 @@ class DefaultRootComponent(
         data class RemoteScreen(val url: Url) : Config
     }
 
-    private fun createChild(config: Config, componentContext: ComponentContext): Child {
-        val actionHandler = viewModelsDIComponent.actionHandlerSyncCreator(this)
-        return when (config) {
+    private fun createChild(config: Config, componentContext: ComponentContext): Child =
+        when (config) {
             is Config.HomeScreen -> {
                 val url = Url("")
                 Child.HomeScreen(
-                    HomeScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, actionHandler, url)
+                    HomeScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, this, url)
                 )
             }
 
             is Config.RemoteScreen ->
                 Child.RemoteScreen(
-                    SDUIScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, actionHandler, config.url)
+                    SDUIScreenComponent(componentContext, viewModelsDIComponent, mainCoroutineContext, this, config.url)
                 )
         }
-    }
 //    init {
 //        lifecycle... // Access the Lifecycle
 //        stateKeeper... // Access the StateKeeper

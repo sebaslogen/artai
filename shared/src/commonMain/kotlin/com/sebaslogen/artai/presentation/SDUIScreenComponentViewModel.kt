@@ -4,6 +4,7 @@ import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
+import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
@@ -29,11 +30,13 @@ class SDUIScreenComponentViewModel(
     coroutineContext: CoroutineContext,
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
-    @Assisted
     private val actionHandler: ActionHandlerSync,
+    @Assisted
+    var navigator: Navigator,
     @Assisted
     private val url: Url
 ) : InstanceKeeper.Instance, ActionHandler {
+
     private val viewModelScope = CoroutineScope(coroutineContext + SupervisorJob())
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(DynamicUIViewState.Loading)
@@ -90,7 +93,7 @@ class SDUIScreenComponentViewModel(
 
     override fun onAction(action: Action) {
         viewModelScope.launch {
-            actionHandler.onAction(action = action)
+            actionHandler.onAction(action = action, navigator = navigator)
         }
     }
 
