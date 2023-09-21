@@ -27,8 +27,6 @@ fun HomeScreenContent(
     component: HomeScreenComponent,
 ) {
     val viewModel: SDUIScreenComponentViewModel = component.viewModel
-    // TODO: Get VM from SDUIScreenComponent
-//    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {
@@ -50,8 +48,6 @@ fun SDUIScreenContent(
     component: SDUIScreenComponent
 ) {
     val viewModel: SDUIScreenComponentViewModel = component.viewModel
-    // TODO: Get VM from SDUIScreenComponent
-//    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
     val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
 
     Column {

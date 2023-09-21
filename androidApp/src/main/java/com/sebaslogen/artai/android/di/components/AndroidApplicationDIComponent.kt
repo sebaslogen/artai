@@ -9,7 +9,7 @@ import me.tatarka.inject.annotations.Provides
 @Component
 @AndroidSingleton
 abstract class AndroidApplicationDIComponent(
-    @Component val parent: ApplicationDIComponent,
+    @Component val parent: ApplicationDIComponent, // Include all dependencies from the parent in this component
     @get:Provides val context: Context,
 ) : ImageLoaderDIComponent
 
@@ -17,4 +17,4 @@ interface ApplicationDIComponentProvider {
     val dependencyInjectionComponent: AndroidApplicationDIComponent
 }
 
-val Context.applicationDIComponent get() = (applicationContext as ApplicationDIComponentProvider).dependencyInjectionComponent
+val Context.androidApplicationDIComponent get() = (applicationContext as ApplicationDIComponentProvider).dependencyInjectionComponent

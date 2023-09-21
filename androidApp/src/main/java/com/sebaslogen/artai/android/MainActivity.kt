@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
-import com.sebaslogen.artai.android.di.components.applicationDIComponent
+import com.sebaslogen.artai.android.di.components.androidApplicationDIComponent
 import com.sebaslogen.artai.android.ui.RootScreen
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
@@ -18,13 +18,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
+
         val mainActivityDIComponent = MainActivityDIComponent::class.create(
-            parent = applicationDIComponent,
+            parent = androidApplicationDIComponent,
             componentContext = defaultComponentContext()
         )
+        val rootComponent = mainActivityDIComponent.rootComponent
 
-        val rootComponent = mainActivityDIComponent.rootComponent()
         setContent {
             CompositionLocalProvider(
                 LocalImageLoader provides mainActivityDIComponent.imageLoaderCreator()
