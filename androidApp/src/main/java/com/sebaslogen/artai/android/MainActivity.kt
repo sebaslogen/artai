@@ -8,9 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.defaultComponentContext
+import com.arkivanov.decompose.retainedComponent
 import com.sebaslogen.artai.android.di.components.androidApplicationDIComponent
 import com.sebaslogen.artai.android.ui.NavRootScreen
+import com.sebaslogen.artai.domain.components.NavRootComponent
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
 
@@ -21,11 +22,15 @@ class MainActivity : ComponentActivity() {
 
         Napier.d { "Starting MainActivity. Debug build: ${BuildConfig.DEBUG}" }
 
-        val mainActivityDIComponent = MainActivityDIComponent::class.create(
-            parent = androidApplicationDIComponent,
-            componentContext = defaultComponentContext()
-        )
-        val navRootComponent = mainActivityDIComponent.rootComponent
+        val mainActivityDIComponent = MainActivityDIComponent::class.create(parent = androidApplicationDIComponent)
+
+        val navRootComponent = retainedComponent { componentContext ->
+            NavRootComponent(
+                componentContext,
+                mainCoroutineContext = mainActivityDIComponent.mainCoroutineContext,
+                appComponentsDIComponent = mainActivityDIComponent.appComponentsDIComponent
+            )
+        }
 
         setContent {
             CompositionLocalProvider(

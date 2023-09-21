@@ -42,14 +42,12 @@ class SDUIScreenComponent(
     val viewState = viewModel.viewState
 
     init {
-        if (viewModel.shouldInitialize()) {
-            // TODO: Improve? Init block should NOT happen in Component but in VM (because of the InstanceKeeper)
-            if (url.value.isBlank()) {
-                fetchHomeData()
-            } else {
-                fetchData { responseHandler ->
-                    dynamicUIUseCase.fetchScreenData(url = url.value, responseHandler = responseHandler)
-                }
+        // TODO: Improve?
+        if (url.value.isBlank()) {
+            fetchHomeData()
+        } else {
+            fetchData { responseHandler ->
+                dynamicUIUseCase.fetchScreenData(url = url.value, responseHandler = responseHandler)
             }
         }
     }

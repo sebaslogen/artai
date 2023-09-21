@@ -29,8 +29,6 @@ class SDUIScreenComponentViewModel(
 
     val mutableViewState = MutableStateFlow<DynamicUIViewState>(DynamicUIViewState.Loading)
 
-    private var initialized: Boolean = false
-
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = mutableViewState
         .combine(favoritesUseCase.favorites) { state, favorites ->
@@ -44,11 +42,5 @@ class SDUIScreenComponentViewModel(
 
     override fun onDestroy() {
         viewModelScope.cancel()
-    }
-
-    fun shouldInitialize(): Boolean {
-        val shouldInitialize = !initialized
-        initialized = true
-        return shouldInitialize
     }
 }

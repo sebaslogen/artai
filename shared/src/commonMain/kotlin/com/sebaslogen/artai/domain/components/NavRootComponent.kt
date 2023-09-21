@@ -35,6 +35,10 @@ class NavRootComponent(
 //        instanceKeeper... // Access the InstanceKeeper
 //        backHandler... // Access the BackHandler
 
+    init {
+        val test = "hola"
+    }
+
     private val navigation = StackNavigation<Config>()
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
