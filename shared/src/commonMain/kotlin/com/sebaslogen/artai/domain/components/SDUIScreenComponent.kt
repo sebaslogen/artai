@@ -10,14 +10,11 @@ import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.Url
 import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
-import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import com.sebaslogen.artai.presentation.DynamicUIViewState
-import com.sebaslogen.artai.presentation.DynamicUIViewStateReducer
 import com.sebaslogen.artai.utils.attachNewCoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Assisted
@@ -26,24 +23,21 @@ import kotlin.coroutines.CoroutineContext
 
 @Inject
 class SDUIScreenComponent(
-    @Assisted componentContext: ComponentContext,
-    @Assisted coroutineContext: CoroutineContext,
+    @Assisted private val componentContext: ComponentContext,
+    @Assisted private val coroutineContext: CoroutineContext,
     private val dynamicUIUseCase: DynamicUIUseCase,
-    private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync,
     @Assisted private val navigator: Navigator,
     @Assisted val url: Url
 ) : ComponentContext by componentContext, ActionHandler {
 
+    private val siblingComponents = mutableSetOf<ComponentContext>()
     private val viewModelScope = attachNewCoroutineScope(coroutineContext)
 
     private val mutableViewState = MutableStateFlow<DynamicUIViewState>(DynamicUIViewState.Loading)
 
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = mutableViewState
-        .combine(favoritesUseCase.favorites) { state, favorites ->
-            DynamicUIViewStateReducer.reduce(state, favorites)
-        } // TODO: Move reducer to separate FavsVM
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -87,6 +81,19 @@ class SDUIScreenComponent(
 
     fun onRefreshClicked() {
         fetchFakeReloadData()
+    }
+
+    /**
+     * Create a new component using the [ComponentContext] of this object,
+     * then add this new component to the list of siblings so it stays in memory as long as this object,
+     * and finally return the new component to the caller to be used.
+     */
+    fun <T : ComponentContext> attachSiblingComponent(
+        builder: (componentContext: ComponentContext, coroutineContext: CoroutineContext) -> T
+    ): T {
+        val newComponent = builder(componentContext, coroutineContext)
+        siblingComponents.add(newComponent)
+        return newComponent
     }
 
     override fun onAction(action: Action) {

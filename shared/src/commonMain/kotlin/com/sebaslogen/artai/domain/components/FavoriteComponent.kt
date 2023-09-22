@@ -29,10 +29,9 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import kotlin.coroutines.CoroutineContext
 
-@Inject
 class FavoriteComponent(
-    @Assisted componentContext: ComponentContext,
-    @Assisted coroutineContext: CoroutineContext,
+    componentContext: ComponentContext,
+    coroutineContext: CoroutineContext,
     private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync,
 ) : ComponentContext by componentContext, ActionHandler {

@@ -2,6 +2,7 @@ package com.sebaslogen.artai.android
 
 import com.arkivanov.decompose.ComponentContext
 import com.sebaslogen.artai.android.di.components.AndroidApplicationDIComponent
+import com.sebaslogen.artai.android.ui.components.FavoriteContainer
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.di.components.AppComponentsDIComponent
 import com.sebaslogen.artai.di.scopes.MainActivityScope
@@ -21,4 +22,5 @@ abstract class MainActivityDIComponent(
     abstract val imageLoaderCreator: () -> ImageLoader
     abstract val mainCoroutineContext: CoroutineContext
     abstract val appComponentsDIComponent: AppComponentsDIComponent
+    abstract val favoriteContainer: FavoriteContainer
 }

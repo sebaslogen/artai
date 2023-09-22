@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.retainedComponent
 import com.sebaslogen.artai.android.di.components.androidApplicationDIComponent
 import com.sebaslogen.artai.android.ui.NavRootScreen
+import com.sebaslogen.artai.android.ui.components.LocalFavoriteContainer
 import com.sebaslogen.artai.domain.components.NavRootComponent
 import com.seiko.imageloader.LocalImageLoader
 import io.github.aakira.napier.Napier
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CompositionLocalProvider(
-                LocalImageLoader provides mainActivityDIComponent.imageLoaderCreator()
+                LocalImageLoader provides mainActivityDIComponent.imageLoaderCreator(),
+                LocalFavoriteContainer provides mainActivityDIComponent.favoriteContainer
             ) {
                 MyApplicationTheme {
                     Surface(
