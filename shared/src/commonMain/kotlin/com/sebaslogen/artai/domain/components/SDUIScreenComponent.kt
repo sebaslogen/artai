@@ -1,8 +1,7 @@
 package com.sebaslogen.artai.domain.components
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.instancekeeper.getOrCreate
-import com.arkivanov.essenty.lifecycle.doOnDestroy
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.Navigator
@@ -13,7 +12,13 @@ import com.sebaslogen.artai.domain.models.Url
 import com.sebaslogen.artai.domain.usecases.DynamicUIUseCase
 import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import com.sebaslogen.artai.presentation.DynamicUIViewState
-import com.sebaslogen.artai.presentation.viewmodels.SDUIScreenComponentViewModel
+import com.sebaslogen.artai.presentation.DynamicUIViewStateReducer
+import com.sebaslogen.artai.utils.attachNewCoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -22,7 +27,7 @@ import kotlin.coroutines.CoroutineContext
 @Inject
 class SDUIScreenComponent(
     @Assisted componentContext: ComponentContext,
-    @Assisted private val coroutineContext: CoroutineContext,
+    @Assisted coroutineContext: CoroutineContext,
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync,
@@ -30,17 +35,20 @@ class SDUIScreenComponent(
     @Assisted val url: Url
 ) : ComponentContext by componentContext, ActionHandler {
 
-    private val viewModel = instanceKeeper.getOrCreate {
-        SDUIScreenComponentViewModel(
-            coroutineContext = coroutineContext,
-            favoritesUseCase = favoritesUseCase
+    private val viewModelScope = attachNewCoroutineScope(coroutineContext)
+
+    private val mutableViewState = MutableStateFlow<DynamicUIViewState>(DynamicUIViewState.Loading)
+
+    @NativeCoroutinesState
+    val viewState: StateFlow<DynamicUIViewState> = mutableViewState
+        .combine(favoritesUseCase.favorites) { state, favorites ->
+            DynamicUIViewStateReducer.reduce(state, favorites)
+        } // TODO: Move reducer to separate FavsVM
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = DynamicUIViewState.Loading
         )
-    }
-
-    private val viewModelScope = viewModel.viewModelScope
-
-    private val mutableViewState = viewModel.mutableViewState
-    val viewState = viewModel.viewState
 
     init {
         // TODO: Improve?
@@ -50,9 +58,6 @@ class SDUIScreenComponent(
             fetchData { responseHandler ->
                 dynamicUIUseCase.fetchScreenData(url = url.value, responseHandler = responseHandler)
             }
-        }
-        lifecycle.doOnDestroy {
-            // TODO: Move ViewModel to this class and cancel coroutine here
         }
     }
 
