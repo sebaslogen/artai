@@ -20,7 +20,7 @@ import com.sebaslogen.artai.presentation.DynamicUIViewState
 
 val LocalSDUIScreenComponent = createSDUIScreenComponentProvidableCompositionLocal()
 
-class SDUIScreenComponentProvidableCompositionLocal constructor(
+class SDUIScreenComponentProvidableCompositionLocal(
     val delegate: ProvidableCompositionLocal<SDUIScreenComponent?>,
 ) {
     inline val current: SDUIScreenComponent

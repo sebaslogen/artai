@@ -37,7 +37,7 @@ import kotlin.coroutines.CoroutineContext
  */
 val LocalFavoriteContainer = createFavoriteContainerProvidableCompositionLocal()
 
-class FavoriteContainerProvidableCompositionLocal constructor(
+class FavoriteContainerProvidableCompositionLocal(
     val delegate: ProvidableCompositionLocal<FavoriteContainer?>,
 ) {
     inline val current: FavoriteContainer
