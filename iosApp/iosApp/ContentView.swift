@@ -1,28 +1,33 @@
 import SwiftUI
 import shared
-import KMMViewModelSwiftUI
-import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
-    @StateViewModel var viewModel = InjectApplicationComponent().dynamicUIViewModel
-
-    var body: some View {
-        let state: DynamicUIViewState = viewModel.viewState
-        switch onEnum(of: state) {
-        case .error(_):
-            Text("Error loading data :(")
-        case .loading(_):
-            Text("Loading...")
-        case .success(let sucessState):
-            ScreenContent(state: sucessState, onRefresh: {
-                viewModel.onRefreshClicked()
-            })
-        }
+    private let root: RootComponent
+    
+    init(_ root: RootComponent) {
+        self.root = root
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    var body: some View {
+        StackView(
+            stackValue: StateValue(root.childrenStack),
+            getTitle: {
+                switch $0 {
+                case is RootComponentChild.HomeScreen: return "HomeScreen"
+                case is RootComponentChild.RemoteScreen: return "RemoteScreen"
+                default: return ""
+                }
+            },
+            onBack: {toIndex in },//root.onBackClicked, // TODO
+            childContent: {
+                switch $0 {
+                case let child as RootComponentChild.HomeScreen:
+                    SDUIScreen(component: child.component, viewStateProvider: SDUIComponentViewStateProvider(component: child.component))
+                case let child as RootComponentChild.RemoteScreen:
+                    SDUIScreen(component: child.component, viewStateProvider: SDUIComponentViewStateProvider(component: child.component))
+                default: EmptyView()
+                }
+            }
+        )
     }
 }

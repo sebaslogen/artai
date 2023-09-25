@@ -29,6 +29,8 @@ kotlin {
             baseName = "shared"
             isStatic = true
             export(libs.napier.logger)
+            export(libs.decompose)
+            export(libs.essenty.lifecycle.decompose)
         }
     }
 

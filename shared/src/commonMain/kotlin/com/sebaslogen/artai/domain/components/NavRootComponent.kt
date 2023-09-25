@@ -9,7 +9,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.sebaslogen.artai.di.components.AppComponentsDIComponent
-import com.sebaslogen.artai.di.scopes.MainActivityScope
+import com.sebaslogen.artai.di.scopes.RootScreenScope
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
 import com.sebaslogen.artai.domain.models.Action
@@ -22,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
  * Root component of the application that initializes
  * lifecycles, state restoration, instance keepers, back handlers and business logic.
  */
-@MainActivityScope
+@RootScreenScope
 @Inject
 class NavRootComponent(
     componentContext: ComponentContext,

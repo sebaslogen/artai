@@ -15,6 +15,7 @@ import com.sebaslogen.artai.utils.attachNewCoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Assisted
@@ -37,12 +38,7 @@ class SDUIScreenComponent(
     private val mutableViewState = MutableStateFlow<DynamicUIViewState>(DynamicUIViewState.Loading)
 
     @NativeCoroutinesState
-    val viewState: StateFlow<DynamicUIViewState> = mutableViewState
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = DynamicUIViewState.Loading
-        )
+    val viewState: StateFlow<DynamicUIViewState> = mutableViewState.asStateFlow()
 
     init {
         // TODO: Improve?

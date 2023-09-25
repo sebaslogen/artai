@@ -15,9 +15,13 @@
 		B77D4B932AB2FB1000B7BF30 /* CarouselSmallArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */; };
 		B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6429DC401E00E7B64A /* CarouselView.swift */; };
 		B7829F6729DC431600E7B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6629DC431600E7B64A /* SectionHeaderView.swift */; };
+		B794969D2AC1F6100017194E /* SDUIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794969C2AC1F6100017194E /* SDUIScreen.swift */; };
+		B79496A02AC1FDE30017194E /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794969F2AC1FDE30017194E /* StackView.swift */; };
+		B79496A22AC1FE0C0017194E /* StateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79496A12AC1FE0C0017194E /* StateValue.swift */; };
+		B79496A42AC1FE320017194E /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79496A32AC1FE320017194E /* ObservableValue.swift */; };
+		B79496A72AC20A2E0017194E /* SDUIComponentViewStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79496A62AC20A2E0017194E /* SDUIComponentViewStateProvider.swift */; };
 		B79574402AB312980093E7CD /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795743F2AB312980093E7CD /* FavoriteView.swift */; };
 		B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4729D1004700C7DE85 /* Napier.swift */; };
-		B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */; };
 		B7EA2B4E29DC34DB00C7DE85 /* ScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA2B4D29DC34DB00C7DE85 /* ScreenContent.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,9 +37,13 @@
 		B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSmallArtView.swift; sourceTree = "<group>"; };
 		B7829F6429DC401E00E7B64A /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		B7829F6629DC431600E7B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		B794969C2AC1F6100017194E /* SDUIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDUIScreen.swift; sourceTree = "<group>"; };
+		B794969F2AC1FDE30017194E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		B79496A12AC1FE0C0017194E /* StateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
+		B79496A32AC1FE320017194E /* ObservableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
+		B79496A62AC20A2E0017194E /* SDUIComponentViewStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDUIComponentViewStateProvider.swift; sourceTree = "<group>"; };
 		B795743F2AB312980093E7CD /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		B7EA2B4729D1004700C7DE85 /* Napier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Napier.swift; sourceTree = "<group>"; };
-		B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 		B7EA2B4D29DC34DB00C7DE85 /* ScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenContent.swift; sourceTree = "<group>"; };
 		F30A0EC773F852AC667FAAE4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +107,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				B794969E2AC1FDD40017194E /* decompose */,
 				B7829F6329DC3FB400E7B64A /* views */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -106,7 +115,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				B7EA2B4729D1004700C7DE85 /* Napier.swift */,
-				B7EA2B4B29DB938B00C7DE85 /* KMMViewModel.swift */,
+				B79496A62AC20A2E0017194E /* SDUIComponentViewStateProvider.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -119,8 +128,19 @@
 				B7829F6429DC401E00E7B64A /* CarouselView.swift */,
 				B77D4B922AB2FB1000B7BF30 /* CarouselSmallArtView.swift */,
 				B795743F2AB312980093E7CD /* FavoriteView.swift */,
+				B794969C2AC1F6100017194E /* SDUIScreen.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		B794969E2AC1FDD40017194E /* decompose */ = {
+			isa = PBXGroup;
+			children = (
+				B794969F2AC1FDE30017194E /* StackView.swift */,
+				B79496A12AC1FE0C0017194E /* StateValue.swift */,
+				B79496A32AC1FE320017194E /* ObservableValue.swift */,
+			);
+			path = decompose;
 			sourceTree = "<group>";
 		};
 		C80C7CECF8F2C4C20CDE1A56 /* Frameworks */ = {
@@ -247,13 +267,17 @@
 			files = (
 				B7829F6729DC431600E7B64A /* SectionHeaderView.swift in Sources */,
 				B7EA2B4E29DC34DB00C7DE85 /* ScreenContent.swift in Sources */,
+				B79496A42AC1FE320017194E /* ObservableValue.swift in Sources */,
+				B79496A72AC20A2E0017194E /* SDUIComponentViewStateProvider.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */,
+				B794969D2AC1F6100017194E /* SDUIScreen.swift in Sources */,
 				B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */,
-				B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */,
 				B77D4B932AB2FB1000B7BF30 /* CarouselSmallArtView.swift in Sources */,
 				B79574402AB312980093E7CD /* FavoriteView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				B79496A22AC1FE0C0017194E /* StateValue.swift in Sources */,
+				B79496A02AC1FDE30017194E /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
