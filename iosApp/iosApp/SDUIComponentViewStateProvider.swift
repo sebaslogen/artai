@@ -1,6 +1,5 @@
 import shared
 import KMPNativeCoroutinesAsync
-import Foundation
 
 @MainActor
 class SDUIComponentViewStateProvider: ObservableObject {
