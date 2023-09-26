@@ -24,6 +24,8 @@ struct SDUIScreen: View {
         case .success(let sucessState):
             ScreenContent(state: sucessState, onRefresh: {
                 component.onRefreshClicked()
+            }, onAction: { action in
+                component.onAction(action: action)
             })
         }
     }
