@@ -15,10 +15,10 @@ ktorfit-compiler = '1.8.1'
 kmm-viewmodel = "1.0.0-ALPHA-14"
 nativecoroutines = '1.0.0-ALPHA-18'
 skie = "0.5.0"
-androidx-activity = '1.7.2'
+androidx-activity = '1.8.0'
 androidx-lifecycle = '2.6.2'
-androidx-navigation = "2.7.3"
-compose-bom = "2023.09.02" # https://developer.android.com/jetpack/compose/bom/bom-mapping
+androidx-navigation = "2.7.4"
+compose-bom = "2023.10.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.3'
 compose-image-loader = "1.6.8"
 
