@@ -88,15 +88,15 @@ fun ImageLoaderImage(
 
         val state by remember {
             derivedStateOf {
-                when (action) {
-                    is ImageEvent.Start -> {
+                when (val currentAction = action) {
+                    is ImageEvent.Start, ImageEvent.StartWithFetch -> {
                         progress.value = 0.0F
                         ImageLoadingState.Loading
                     }
 
-                    is ImageResult.Source, is ImageResult.Error -> {
+                    is ImageResult.OfError -> {
                         progress.value = 0.0F
-                        (action as? ImageResult.Error)?.let { error.value = it.error }
+                        error.value = currentAction.error
                         ImageLoadingState.Failure
                     }
 
