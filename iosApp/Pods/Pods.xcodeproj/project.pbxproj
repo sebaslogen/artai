@@ -383,14 +383,6 @@
 			path = "../Target Support Files/KMMViewModelCore";
 			sourceTree = "<group>";
 		};
-		683F40D9DD3E3BA77AC02A2D /* xcschemes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = xcschemes;
-			path = Pods.xcodeproj/xcuserdata/sebas.xcuserdatad/xcschemes;
-			sourceTree = "<group>";
-		};
 		6ED6EBAC41935C035EAEF0B6E4C18112 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,7 +475,6 @@
 				DFD8BA1FB7665A132F5EC7671FC102FA /* Pods */,
 				5B928543BC95C360575B3BCCE28B0CD1 /* Products */,
 				11C970DEAE48C6D0282DFE54684F53F1 /* Targets Support Files */,
-				683F40D9DD3E3BA77AC02A2D /* xcschemes */,
 			);
 			sourceTree = "<group>";
 		};
