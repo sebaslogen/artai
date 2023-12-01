@@ -13,6 +13,8 @@ import com.sebaslogen.artai.domain.ResponseHandler
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import com.sebaslogen.artai.domain.models.Screen
+import com.sebaslogen.artai.globalRepo
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -71,7 +73,18 @@ open class DynamicUIViewModel(
     }
 
     fun onRefreshClicked() {
-        fetchFakeReloadData()
+//        fetchFakeReloadData()
+        globalRepo?.let {repo ->
+            viewModelScope.coroutineScope.launch {
+                val message: String =
+                    try {
+                        repo.sduiRequest(screenId = "home")
+                    } catch (exc: Exception) {
+                        "Error: " + (exc.message ?: "Unknown error")
+                    }
+                Napier.w { "Sebas Message: $message" }
+            }
+        }
     }
 
     override fun onAction(action: Action) {

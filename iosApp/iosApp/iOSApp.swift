@@ -8,9 +8,16 @@ struct iOSApp: App {
         Napier.setupLogger()
         let gRPCClient = SDUIRpcClient()
         let repo = ExperimentKt.getRepo(client: gRPCClient)
+        ExperimentKt.globalRepo = repo
+    // TODO: pass repo to KT VM and make a call to KT VM network function
+//        repo.sduiRequest(screenId: "home", completionHandler: )
 //
-//        let request = Screen_V1_GetScreenRequest(screenID: "home")//, unknownFields: OkioByteString.companion.EMPTY)
-//        gRPCClient.sendRequest(kmpRequest: request) { reply, error in
+//        var request = Screen_V1_GetScreenRequest()
+//        request.screenID = "home"
+//        gRPCClient.sendRequest(kmpRequest: GetScreenRequest(screen_id: "home") { reply, error in
+//            print("Reply: \(reply?.screenTitle) - Error: \(error?.message)")
+//        }
+//        repo.sduiRequest(kmpRequest: request) { reply, error in
 //            print("Reply: \(reply?.screenTitle) - Error: \(error?.message)")
 //        }
     }

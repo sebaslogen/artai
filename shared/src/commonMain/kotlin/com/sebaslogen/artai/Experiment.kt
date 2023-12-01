@@ -5,6 +5,7 @@ import SDUIRpcCallbackClient
 import SDUIRpcSuspendClientImpl
 import screen.v1.GetScreenRequest
 
+var globalRepo: GrpcTestRepository? = null
 fun getRepo(client: SDUIRpcCallbackClient): GrpcTestRepository {
     return object : GrpcTestRepository {
 
