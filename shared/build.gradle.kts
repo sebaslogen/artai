@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.wire)
     alias(libs.plugins.kotlin.native.cocoapods)
     alias(libs.plugins.buildkonfig)
     alias(libs.plugins.ksp)
@@ -47,6 +48,8 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
                 implementation(libs.kmm.viewmodel)
+                implementation(libs.wireGrpcClient)
+                implementation(libs.wireRuntime)
             }
         }
         val commonTest by getting {
@@ -99,6 +102,16 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+wire {
+    sourcePath {
+        srcDir("./src/proto")
+    }
+    kotlin {
+        rpcRole = "client"
+        rpcCallStyle = "suspending"
     }
 }
 

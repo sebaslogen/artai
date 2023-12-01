@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package screen.v1;
+
+import "google/protobuf/empty.proto";
+
+service ScreenService {
+    rpc ErrorTester(ErrorTesterRequest) returns (google.protobuf.Empty);
+    // Returns a SDUI screen.
+    rpc GetScreen(GetScreenRequest) returns (GetScreenResponse);
+}
+
+message ErrorTesterRequest {
+  // Error code must always be present
+  int32 error_code = 1;
+}
+
+message GetScreenRequest {
+  // Screen ID must always be present
+  string screen_id = 1;
+}
+
+message GetScreenResponse {
+  // Screen title must always be present
+  string screen_title = 1;
+  // Screen description is optional
+  optional string screen_description = 2;
+  // Screen components must always be present
+  repeated ComponentV1 components = 3;
+}
+
+
+message ComponentV1 {
+  oneof component {
+    ButtonV1 button = 1;
+    CardV1 card = 2;
+  }
+}
+
+
+// Style enum for the button
+enum style {
+  PRIMARY = 0;
+  SECONDARY = 1;
+}
+
+message ButtonV1 {
+  // Button ID must always be present
+  string button_id = 1;
+  // Button title must always be present
+  string button_title = 2;
+  // Wether the button is enabled
+  style button_style = 3;
+  // Button description is optional
+  optional string button_description = 4;
+  // Button metadata is optional
+  map<string, style> button_metadata = 5;
+  // Optional action description
+  optional ButtonAction button_action = 6;
+}
+
+message ButtonAction {
+  string action_id = 1;
+  string action_title = 2;
+  string action_description = 3;
+  optional bool action_enabled = 4;
+}
+
+message CardV1 {
+  // Card ID must always be present
+  string card_id = 1;
+  // Card title must always be present
+  string card_title = 2;
+  // Style of the card
+  optional style card_style = 3;
+  // Card description is optional
+  optional string card_description = 4;
+  // Card image is optional
+  string card_image = 5;
+}
