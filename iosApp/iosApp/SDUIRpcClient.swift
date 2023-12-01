@@ -14,7 +14,7 @@
  import NIO
  import SwiftProtobuf
 
- class SDUIRpcClient: SDUIRpcCallbackClient { // TODO
+ class SDUIRpcClient: SDUIRpcCallbackClient {
      private var commonChannel: GRPCChannel?
 
      private var screenClient: Screen_V1_ScreenServiceClient?
@@ -32,7 +32,9 @@
          let newChannel = ClientConnection
              //You can use .usingTLS instead of .insecure, but you won’t be able to connect to our test server this way, it doesn’t have a certificate
  //            .usingTLS(group: eventGroup)
-             .insecure(group: eventGroup)
+//             .insecure(group: eventGroup)
+             .secure(group: eventGroup)
+             .withTLS(certificateVerification: .noHostnameVerification)
              .withBackgroundActivityLogger(logger)   //Logging the events of the channel itself
              .connect(host: "connect-poc-server-qpkwvfricq-ez.a.run.app", port: 443)
 
