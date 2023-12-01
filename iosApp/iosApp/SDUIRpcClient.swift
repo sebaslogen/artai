@@ -63,7 +63,7 @@
 
          //Create SwiftProtobuf.Message from WireMessage
          var request = Screen_V1_GetScreenRequest()
-          request.screenID = kmpRequest.screen_id
+         request.screenID = kmpRequest.screen_id
 
          //Get a call instance
          let responseCall = client.getScreen(request)
