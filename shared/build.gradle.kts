@@ -11,7 +11,7 @@ plugins {
 }
 
 kotlin {
-    android {
+    androidTarget {
     }
 
     iosX64()
@@ -105,7 +105,7 @@ android {
     }
 }
 
-wire {
+wire { // TODO: Fix kotlin models generation from proto with Wire
     sourcePath {
         srcDir("./src/proto")
     }

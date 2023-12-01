@@ -6,8 +6,8 @@ struct iOSApp: App {
 
     init() {
         Napier.setupLogger()
-//        let gRPCClient = SDUIRpcClient()
-//        let repo = ExperimentKt.getRepo(gRPCClient)
+        let gRPCClient = SDUIRpcClient()
+        let repo = ExperimentKt.getRepo(client: gRPCClient)
 //
 //        let request = Screen_V1_GetScreenRequest(screenID: "home")//, unknownFields: OkioByteString.companion.EMPTY)
 //        gRPCClient.sendRequest(kmpRequest: request) { reply, error in
