@@ -4,6 +4,7 @@ import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.sebaslogen.artai.McDScreen
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.DynamicUINavigationState
@@ -74,15 +75,15 @@ open class DynamicUIViewModel(
 
     fun onRefreshClicked() {
 //        fetchFakeReloadData()
-        globalRepo?.let {repo ->
+        globalRepo?.let { repo ->
             viewModelScope.coroutineScope.launch {
-                val message: String =
-                    try {
-                        repo.sduiRequest(screenId = "home")
-                    } catch (exc: Exception) {
-                        "Error: " + (exc.message ?: "Unknown error")
-                    }
-                Napier.w { "Sebas Message: $message" }
+                try {
+                    val screen: McDScreen = repo.sduiRequest(screenId = "home")
+                    Napier.w { "Sebas Message: $screen" }
+                } catch (exc: Exception) {
+                    val message = "Error: " + (exc.message ?: "Unknown error")
+                    Napier.w { "Sebas Message: $message" }
+                }
             }
         }
     }
