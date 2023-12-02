@@ -67,7 +67,7 @@ jobs:
             ${{ runner.os }}-konan-
 
       - name: Gen pod
-        run: ./gradlew :shared:podGenIOS --parallel
+        run: ./gradlew :shared:podGenIOS :shared:generateDummyFramework --parallel
 
       - name: Install Pod
         run: pod install
