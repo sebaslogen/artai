@@ -35,6 +35,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
         val commonMain by getting {
             dependencies {

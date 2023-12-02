@@ -9,6 +9,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         google()
+        maven { setUrl("https://androidx.dev/storage/compose-compiler/repository/") }
         mavenCentral()
     }
 }
