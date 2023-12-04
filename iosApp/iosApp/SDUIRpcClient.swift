@@ -30,7 +30,7 @@
 
          //Create a channel, specify the security type, host and port
          let newChannel = ClientConnection
-             .usingPlatformAppropriateTLS(for: eventGroup)
+             .usingPlatformAppropriateTLS(for: eventGroup) // Config options docs here: https://github.com/grpc/grpc-swift/blob/main/docs/tls.md
              .withBackgroundActivityLogger(logger)   //Logging the events of the channel itself
              .connect(host: "connect-poc-server-qpkwvfricq-ez.a.run.app", port: 443)
 
