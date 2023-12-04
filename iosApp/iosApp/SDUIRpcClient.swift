@@ -30,11 +30,7 @@
 
          //Create a channel, specify the security type, host and port
          let newChannel = ClientConnection
-             //You can use .usingTLS instead of .insecure, but you won’t be able to connect to our test server this way, it doesn’t have a certificate
- //            .usingTLS(group: eventGroup)
-//             .insecure(group: eventGroup)
-             .secure(group: eventGroup)
-             .withTLS(certificateVerification: .noHostnameVerification)
+             .usingPlatformAppropriateTLS(for: eventGroup)
              .withBackgroundActivityLogger(logger)   //Logging the events of the channel itself
              .connect(host: "connect-poc-server-qpkwvfricq-ez.a.run.app", port: 443)
 
@@ -70,7 +66,7 @@
          DispatchQueue.global().async {
              do {
                  //In the background we wait for the result of the call
-                 let swiftMessage = try responseCall.response.wait()
+                 let swiftMessage: Screen_V1_GetScreenResponse = try responseCall.response.wait()
                  DispatchQueue.main.async {
                      //Convert SwiftProtobuf.Message to WireMessage (the ADAPTER object can parse a specific WireMessage class from a binary format)
                      let (wireMessage, mappingError) = swiftMessage.toWireMessage(adapter: GetScreenResponse.companion.ADAPTER)

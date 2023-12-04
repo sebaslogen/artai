@@ -79,10 +79,10 @@ open class DynamicUIViewModel(
             viewModelScope.coroutineScope.launch {
                 try {
                     val screen: McDScreen = repo.sduiRequest(screenId = "home")
-                    Napier.w { "Sebas Message: $screen" }
+                    Napier.d { "Sebas Message: $screen" }
                 } catch (exc: Exception) {
                     val message = "Error: " + (exc.message ?: "Unknown error")
-                    Napier.w { "Sebas Message: $message" }
+                    Napier.e { "Sebas Message: $message" }
                 }
             }
         }
