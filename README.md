@@ -22,6 +22,7 @@ Art gallery experimentation app for Server Driven UI in Kotlin Mobile Multiplatf
 - Ktorfit
 - KMM-ViewModel
 - KMP-NativeCoroutines
+- SKIE: Wrap KMP Objective-C in a nice Swift API
 
 ## Before running!
 
