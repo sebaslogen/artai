@@ -7,47 +7,30 @@
 //
 
  import Foundation
- import GRPC
- import NIOHPACK
- import Logging
+// import NIOHPACK
+// import Logging
  import shared
- import NIO
+ import Connect
+ import ConnectNIO
+// import NIO
  import SwiftProtobuf
 
  class SDUIRpcClient: SDUIRpcCallbackClient {
-     private var commonChannel: GRPCChannel?
-
-     private var screenClient: Screen_V1_ScreenServiceNIOClient?
+     private var screenClient: Screen_V1_ScreenServiceClient?
 
      init() {
-
-         //I'm setting up the logger
-         var logger = Logger(label: "gRPC", factory: StreamLogHandler.standardOutput(label:))
-         logger.logLevel = .debug
-
-         //loopCount - how many independent loops within the group work within the channel (can simultaneously send/receive messages)
-         let eventGroup = PlatformSupport.makeEventLoopGroup(loopCount: 4)
-
-         //Create a channel, specify the security type, host and port
-         let newChannel = ClientConnection
-             .usingPlatformAppropriateTLS(for: eventGroup) // Config options docs here: https://github.com/grpc/grpc-swift/blob/main/docs/tls.md
-             .withBackgroundActivityLogger(logger)   //Logging the events of the channel itself
-             .connect(host: "connect-poc-server-qpkwvfricq-ez.a.run.app", port: 443)
-
-         //We work without additional headers, logging requests
-         let callOptions = CallOptions(
-             customMetadata: HPACKHeaders([]),
-             logger: logger
+         
+         let host = "https://connect-poc-server-qpkwvfricq-ez.a.run.app"
+         // ProtocolClient is usually stored and passed to generated clients.
+         let protocolClient = ProtocolClient(
+             httpClient: NIOHTTPClient(host: host),
+             config: ProtocolClientConfig(
+                 host: host, // Base URL for APIs
+                 networkProtocol: .connect, // Or .grpcWeb
+                 codec: ProtoCodec() // Or JSONCodec()
+             )
          )
-
-         //Create and save a client instance
-         screenClient = Screen_V1_ScreenServiceNIOClient(
-             channel: newChannel,
-             defaultCallOptions: callOptions,
-             interceptors: nil
-         )
-         //Save the channel
-         commonChannel = newChannel
+         screenClient = Screen_V1_ScreenServiceClient(client: protocolClient)
      }
 
      func sendRequest(kmpRequest: GetScreenRequest, callback: @escaping (GetScreenResponse?, KotlinException?) -> Void) {
@@ -56,26 +39,25 @@
              callback(nil, nil)
              return
          }
-
-         //Create SwiftProtobuf.Message from WireMessage
-         var request = Screen_V1_GetScreenRequest()
-         request.screenID = kmpRequest.screenId
+         
+         // Performed within an async context.
+         let request = Screen_V1_GetScreenRequest.with { $0.screenID = kmpRequest.screenId }
 
          //Get a call instance
-         let responseCall = client.getScreen(request)
-         DispatchQueue.global().async {
-             do {
-                 //In the background we wait for the result of the call
-                 let swiftMessage: Screen_V1_GetScreenResponse = try responseCall.response.wait()
+         Task.detached {
+             //In the background we wait for the result of the call
+             let response = await client.getScreen(request: request, headers: [:])
+             switch response.result {
+             case .success(let success):
                  DispatchQueue.main.async {
                      //Convert SwiftProtobuf.Message to WireMessage (the ADAPTER object can parse a specific WireMessage class from a binary format)
-                     let (wireMessage, mappingError) = swiftMessage.toWireMessage()
+                     let (wireMessage, mappingError) = success.toWireMessage()
                      //Be sure to call the callback on the same thread on which the wireMessage was actually created, otherwise we will get an error in KotlinNative runtime
                      callback(wireMessage, mappingError)
                  }
-             } catch let err {
+             case .failure(let failure):
                  DispatchQueue.main.async {
-                     callback(nil, KotlinException(message: err.localizedDescription))
+                     callback(nil, KotlinException(message: failure.localizedDescription))
                  }
              }
          }
