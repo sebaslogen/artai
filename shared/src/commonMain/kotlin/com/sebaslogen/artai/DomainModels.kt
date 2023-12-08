@@ -1,6 +1,6 @@
 package com.sebaslogen.artai
 
-import screen.v1.style
+import screen.v1.Style
 
 data class McDScreen(val screenTitle: String, val screenDescription: String?, val components: List<McDScreenComponent>)
 
@@ -19,7 +19,7 @@ sealed class McDScreenComponent {
         val buttonStyle: McDStyle?,
         val buttonDescription: String?,
         val buttonAction: McDButtonAction?,
-        val buttonMetadata: Map<String, style>,
+        val buttonMetadata: Map<String, Style>,
     ) : McDScreenComponent()
 }
 

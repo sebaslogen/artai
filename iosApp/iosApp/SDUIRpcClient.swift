@@ -17,7 +17,7 @@
  class SDUIRpcClient: SDUIRpcCallbackClient {
      private var commonChannel: GRPCChannel?
 
-     private var screenClient: Screen_V1_ScreenServiceClient?
+     private var screenClient: Screen_V1_ScreenServiceNIOClient?
 
      init() {
 
@@ -41,7 +41,7 @@
          )
 
          //Create and save a client instance
-         screenClient = Screen_V1_ScreenServiceClient(
+         screenClient = Screen_V1_ScreenServiceNIOClient(
              channel: newChannel,
              defaultCallOptions: callOptions,
              interceptors: nil
@@ -59,7 +59,7 @@
 
          //Create SwiftProtobuf.Message from WireMessage
          var request = Screen_V1_GetScreenRequest()
-         request.screenID = kmpRequest.screen_id
+         request.screenID = kmpRequest.screenId
 
          //Get a call instance
          let responseCall = client.getScreen(request)
@@ -69,7 +69,7 @@
                  let swiftMessage: Screen_V1_GetScreenResponse = try responseCall.response.wait()
                  DispatchQueue.main.async {
                      //Convert SwiftProtobuf.Message to WireMessage (the ADAPTER object can parse a specific WireMessage class from a binary format)
-                     let (wireMessage, mappingError) = swiftMessage.toWireMessage(adapter: GetScreenResponse.companion.ADAPTER)
+                     let (wireMessage, mappingError) = swiftMessage.toWireMessage()
                      //Be sure to call the callback on the same thread on which the wireMessage was actually created, otherwise we will get an error in KotlinNative runtime
                      callback(wireMessage, mappingError)
                  }
@@ -82,23 +82,23 @@
      }
  }
 
- fileprivate extension SwiftProtobuf.Message {
-     // Take the view SwiftMessage in the form of NSData, translates into KotlinByteArray and gives it as input to the adapter
-     func toWireMessage<WireMessage, Adapter: Wire_runtimeProtoAdapter<WireMessage>>(adapter: Adapter) -> (WireMessage?, KotlinException?) {
-         do {
-             let data = try self.serializedData()
-             let result = adapter.decode(bytes: data.toKotlinByteArray())
+fileprivate extension SwiftProtobuf.Message {
+    // Take the view SwiftMessage in the form of NSData, translates into KotlinByteArray and gives it as input to the adapter
+    func toWireMessage() -> (GetScreenResponse?, KotlinException?) {
+        do {
+            let data = try self.serializedData()
+            let result = ExperimentKt.decodeGRPCResponse(rawResponse: data.toKotlinByteArray())
 
-             if let nResult = result {
-                 return (nResult, nil)
-             } else {
-                 return (nil, KotlinException(message: "Cannot parse message data"))
-             }
-         } catch let err {
-             return (nil, KotlinException(message: err.localizedDescription))
-         }
-     }
- }
+            if let nResult = result {
+                return (nResult, nil)
+            } else {
+                return (nil, KotlinException(message: "Cannot parse message data"))
+            }
+        } catch let err {
+            return (nil, KotlinException(message: err.localizedDescription))
+        }
+    }
+}
 
  fileprivate extension Data {
      //The most primitive way to convert NSData to KotlinByteArray:

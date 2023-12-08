@@ -3,6 +3,7 @@ package com.sebaslogen.artai
 import GrpcTestRepository
 import SDUIRpcCallbackClient
 import SDUIRpcSuspendClientImpl
+import pbandk.decodeFromByteArray
 import screen.v1.GetScreenRequest
 import screen.v1.GetScreenResponse
 
@@ -18,4 +19,9 @@ fun getRepo(client: SDUIRpcCallbackClient): GrpcTestRepository {
         }
 
     }
+}
+
+fun decodeGRPCResponse(rawResponse: ByteArray): GetScreenResponse? {
+    val decodeFromByteArray = GetScreenResponse.decodeFromByteArray(rawResponse)
+    return if (decodeFromByteArray != GetScreenResponse.defaultInstance) decodeFromByteArray else null
 }

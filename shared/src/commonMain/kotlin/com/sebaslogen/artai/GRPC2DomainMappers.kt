@@ -5,51 +5,52 @@ import screen.v1.ButtonV1
 import screen.v1.CardV1
 import screen.v1.ComponentV1
 import screen.v1.GetScreenResponse
-import screen.v1.style
+import screen.v1.Style
 
 
 fun GetScreenResponse.toScreen(): McDScreen = McDScreen(
-    screenTitle = this.screen_title,
-    screenDescription = this.screen_description,
+    screenTitle = this.screenTitle,
+    screenDescription = this.screenDescription,
     components = this.components.map { it.toMcDScreenComponent() }
 )
 
-private fun ComponentV1.toMcDScreenComponent(): McDScreenComponent = when { // TODO: How to make it exhaustive?
-    this.button != null -> this.button.toMcDButtonComponent()
-    this.card != null -> this.card.toMcDCardComponent()
-    else -> throw IllegalArgumentException("Unknown component type: $this")
+private fun ComponentV1.toMcDScreenComponent(): McDScreenComponent = when(this.component) {
+    is ComponentV1.Component.Button -> component.value.toMcDButtonComponent()
+    is ComponentV1.Component.Card -> component.value.toMcDCardComponent()
+    null -> throw IllegalArgumentException("Unknown component type: $this") // TODO: How to do this right????
 }
 
 private fun CardV1.toMcDCardComponent(): McDScreenComponent.McDCardComponent = McDScreenComponent.McDCardComponent(
-    cardId = this.card_id,
-    cardTitle = this.card_title,
-    cardStyle = this.card_style.toMcDStyle(),
-    cardDescription = this.card_description,
-    cardImage = this.card_image,
+    cardId = this.cardId,
+    cardTitle = this.cardTitle,
+    cardStyle = this.cardStyle.toMcDStyle(),
+    cardDescription = this.cardDescription,
+    cardImage = this.cardImage,
 )
 
-private fun style?.toMcDStyle(): McDStyle? = this?.let {
+private fun Style?.toMcDStyle(): McDStyle? = this?.let {
     when(this) {
-        style.PRIMARY -> McDStyle.PRIMARY
-        style.SECONDARY -> McDStyle.SECONDARY
+        Style.PRIMARY -> McDStyle.PRIMARY
+        Style.SECONDARY -> McDStyle.SECONDARY
+        is Style.UNRECOGNIZED -> TODO("log unrecognized enum type")
     }
 }
 
 private fun ButtonV1.toMcDButtonComponent(): McDScreenComponent.McDButtonComponent = McDScreenComponent.McDButtonComponent(
-    buttonId = this.button_id,
-    buttonTitle = this.button_title,
-    buttonStyle = this.button_style.toMcDStyle(),
-    buttonDescription = this.button_description,
-    buttonAction = this.button_action.toMcDButtonAction(),
-    buttonMetadata = this.button_metadata,
+    buttonId = this.buttonId,
+    buttonTitle = this.buttonTitle,
+    buttonStyle = this.buttonStyle.toMcDStyle(),
+    buttonDescription = this.buttonDescription,
+    buttonAction = this.buttonAction.toMcDButtonAction(),
+    buttonMetadata = this.buttonMetadata,
 )
 
 private fun ButtonAction?.toMcDButtonAction(): McDButtonAction? = this?.let {
     McDButtonAction(
-        actionId = this.action_id,
-        actionTitle = this.action_title,
-        actionDescription = this.action_description,
-        actionEnabled = this.action_enabled,
+        actionId = this.actionId,
+        actionTitle = this.actionTitle,
+        actionDescription = this.actionDescription,
+        actionEnabled = this.actionEnabled,
     )
 }
 
