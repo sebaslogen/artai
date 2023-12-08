@@ -12,8 +12,8 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		AB0DD1B2AF3633700148FD3D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0462DAA9A38DC8FC0382FB0E /* Pods_iosApp.framework */; };
-		B750B7DC2B23306B000E93D6 /* screen.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750B7DB2B23306B000E93D6 /* screen.pb.swift */; };
-		B750B7DE2B233073000E93D6 /* screen.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750B7DD2B233073000E93D6 /* screen.grpc.swift */; };
+		B750B7E52B233636000E93D6 /* screen.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750B7E32B233636000E93D6 /* screen.pb.swift */; };
+		B750B7E62B233636000E93D6 /* screen.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750B7E42B233636000E93D6 /* screen.grpc.swift */; };
 		B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6429DC401E00E7B64A /* CarouselView.swift */; };
 		B7829F6729DC431600E7B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7829F6629DC431600E7B64A /* SectionHeaderView.swift */; };
 		B7C339A22B19F4F800645F89 /* CGRPCZlib in Frameworks */ = {isa = PBXBuildFile; productRef = B7C339A12B19F4F800645F89 /* CGRPCZlib */; };
@@ -35,8 +35,8 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C56CFFFFCCA62F23F5FCD49 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
-		B750B7DB2B23306B000E93D6 /* screen.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = screen.pb.swift; path = "../../../../../McDonalds-archos-connect-poc/clients/iosApp/iosApp/generated/proto/screen/v1/screen.pb.swift"; sourceTree = "<group>"; };
-		B750B7DD2B233073000E93D6 /* screen.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = screen.grpc.swift; path = "../../../../../McDonalds-archos-connect-poc/clients/iosApp/iosApp/generated/proto/screen/v1/screen.grpc.swift"; sourceTree = "<group>"; };
+		B750B7E32B233636000E93D6 /* screen.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = screen.pb.swift; sourceTree = "<group>"; };
+		B750B7E42B233636000E93D6 /* screen.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = screen.grpc.swift; sourceTree = "<group>"; };
 		B7829F6429DC401E00E7B64A /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		B7829F6629DC431600E7B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		B7C339AF2B19F5DA00645F89 /* SDUIRpcClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDUIRpcClient.swift; sourceTree = "<group>"; };
@@ -135,8 +135,8 @@
 		B7C339AA2B19F51F00645F89 /* proto */ = {
 			isa = PBXGroup;
 			children = (
-				B750B7DD2B233073000E93D6 /* screen.grpc.swift */,
-				B750B7DB2B23306B000E93D6 /* screen.pb.swift */,
+				B750B7E42B233636000E93D6 /* screen.grpc.swift */,
+				B750B7E32B233636000E93D6 /* screen.pb.swift */,
 			);
 			path = proto;
 			sourceTree = "<group>";
@@ -274,11 +274,11 @@
 			files = (
 				B7829F6729DC431600E7B64A /* SectionHeaderView.swift in Sources */,
 				B7EA2B4E29DC34DB00C7DE85 /* ScreenContent.swift in Sources */,
-				B750B7DC2B23306B000E93D6 /* screen.pb.swift in Sources */,
+				B750B7E52B233636000E93D6 /* screen.pb.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				B7C339B02B19F5DA00645F89 /* SDUIRpcClient.swift in Sources */,
 				B7EA2B4829D1004700C7DE85 /* Napier.swift in Sources */,
-				B750B7DE2B233073000E93D6 /* screen.grpc.swift in Sources */,
+				B750B7E62B233636000E93D6 /* screen.grpc.swift in Sources */,
 				B7829F6529DC401E00E7B64A /* CarouselView.swift in Sources */,
 				B7EA2B4C29DB938B00C7DE85 /* KMMViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
