@@ -20,7 +20,6 @@ androidx-navigation = '2.6.0'
 compose-bom = "2023.06.01" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.0'
 compose-image-loader = "1.6.0"
-wire = "4.9.3"
 pbandkRuntime = "0.14.2"
 
 [libraries]
@@ -59,10 +58,6 @@ compose-ui = { module = 'androidx.compose.ui:ui' }
 compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
 compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
 compose-image-loader = { module = 'io.github.qdsfdhvh:image-loader', version.ref = 'compose-image-loader' }
-# Wire
-#wireGradle = { module = "com.squareup.wire:wire-gradle-plugin", version.ref = "wire"}
-wireRuntime = { module = "com.squareup.wire:wire-runtime", version.ref = "wire"} # This provides the Wire Adapters for the Swift to ByteArray Adapter
-wireGrpcClient = { module = "com.squareup.wire:wire-grpc-client", version.ref = "wire"}
 pbandk-runtime = { module = "pro.streem.pbandk:pbandk-runtime", version.ref = "pbandkRuntime" }
 
 [plugins]
@@ -76,4 +71,3 @@ kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', versi
 ktorfit = { id = 'de.jensklingenberg.ktorfit', version.ref = 'ktorfit-compiler' }
 buildkonfig = { id = 'com.codingfeline.buildkonfig', version.ref = 'buildkonfig' }
 nativecoroutines = { id = 'com.rickclephas.kmp.nativecoroutines', version.ref = 'nativecoroutines' }
-wire = { id = 'com.squareup.wire', version.ref = 'wire' }

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-//    alias(libs.plugins.wire)
     alias(libs.plugins.kotlin.native.cocoapods)
     alias(libs.plugins.buildkonfig)
     alias(libs.plugins.ksp)
@@ -48,8 +47,6 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
                 implementation(libs.kmm.viewmodel)
-                implementation(libs.wireGrpcClient)
-                implementation(libs.wireRuntime)
 
                 implementation(libs.pbandk.runtime)
             }
@@ -106,16 +103,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
-//wire { // TODO: Fix kotlin models generation from proto with Wire
-//    sourcePath {
-//        srcDir("./src/proto")
-//    }
-//    kotlin {
-//        rpcRole = "client"
-//        rpcCallStyle = "suspending"
-//    }
-//}
 
 dependencies {
     // KSP will eventually have better multiplatform support and we'll be able to simply have

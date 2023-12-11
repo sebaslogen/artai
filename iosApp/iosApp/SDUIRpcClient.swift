@@ -50,10 +50,10 @@
              switch response.result {
              case .success(let success):
                  DispatchQueue.main.async {
-                     //Convert SwiftProtobuf.Message to WireMessage (the ADAPTER object can parse a specific WireMessage class from a binary format)
-                     let (wireMessage, mappingError) = success.toWireMessage()
-                     //Be sure to call the callback on the same thread on which the wireMessage was actually created, otherwise we will get an error in KotlinNative runtime
-                     callback(wireMessage, mappingError)
+                     //Convert SwiftProtobuf.Message to KmpMessage (the Kotlin function can parse a specific KMP Message class from a binary format)
+                     let (kmpMessage, mappingError) = success.toKmpMessage()
+                     //Be sure to call the callback on the same thread on which the KmpMessage was actually created, otherwise we will get an error in KotlinNative runtime
+                     callback(kmpMessage, mappingError)
                  }
              case .failure(let failure):
                  DispatchQueue.main.async {
@@ -66,7 +66,7 @@
 
 fileprivate extension SwiftProtobuf.Message {
     // Take the view SwiftMessage in the form of NSData, translates into KotlinByteArray and gives it as input to the adapter
-    func toWireMessage() -> (GetScreenResponse?, KotlinException?) {
+    func toKmpMessage() -> (GetScreenResponse?, KotlinException?) {
         do {
             let data = try self.serializedData()
             let result = ExperimentKt.decodeGRPCResponse(rawResponse: data.toKotlinByteArray())
