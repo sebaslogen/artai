@@ -35,6 +35,9 @@ android {
             )
         }
     }
+    packaging { // Require to compile google protobuf lib in pbandk & connect-kotlin-google-java-ext (error duplicated any.proto)
+        resources.pickFirsts.add("google/protobuf/*.proto")
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -71,4 +74,12 @@ dependencies {
     implementation(libs.compose.image.loader)
 
     implementation(libs.kmm.viewmodel)
+
+    // TODO: Move all of these into a library built on the backend
+    // Required to build the parsing of the protobuf response in PbandkStrategy
+    implementation(libs.connect.kotlin.okhttp)
+    // Java specific dependencies for protocol buffers
+    implementation(libs.connect.kotlin.google.java.ext)
+    implementation(libs.pbandk.runtime)
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
 }

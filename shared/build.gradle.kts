@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -60,6 +62,11 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.android)
                 api(libs.androidx.lifecycle.viewmodel.ktx)
+
+                api(libs.okhttp)
+                api(libs.connect.kotlin.okhttp)
+                // Java specific dependencies for protocol buffers
+                implementation(libs.connect.kotlin.google.java.ext)
             }
         }
         val androidUnitTest by getting
@@ -122,4 +129,8 @@ dependencies {
 
 task("testClasses").doLast {
     println("This is a dummy testClasses task to avoid error: Cannot locate tasks that match ':shared:testClasses' as task 'testClasses'")
+}
+
+tasks.withType<KotlinCompile>().configureEach { // Required for the pbandk library's generated code
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }
