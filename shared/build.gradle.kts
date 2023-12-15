@@ -49,6 +49,7 @@ kotlin {
                 implementation(libs.ktor.content.negotiation)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.serialization.json)
+                implementation(libs.kotlinx.serialization.json)
                 api(libs.ktorfit.lib)
                 implementation(libs.configuration.annotations)
                 api(libs.decompose)
