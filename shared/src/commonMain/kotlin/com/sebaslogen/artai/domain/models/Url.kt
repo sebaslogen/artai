@@ -1,9 +1,8 @@
 package com.sebaslogen.artai.domain.models
 
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
 @JvmInline
-@Parcelize
-value class Url(val value: String) : Parcelable
+@Serializable
+value class Url(val value: String)

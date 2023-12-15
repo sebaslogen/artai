@@ -6,14 +6,13 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
 import com.sebaslogen.artai.di.components.AppComponentsDIComponent
 import com.sebaslogen.artai.di.scopes.RootScreenScope
 import com.sebaslogen.artai.domain.Navigator
 import com.sebaslogen.artai.domain.components.RootComponent.Child
 import com.sebaslogen.artai.domain.models.Action
 import com.sebaslogen.artai.domain.models.Url
+import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -38,6 +37,7 @@ class NavRootComponent(
     private val navigation = StackNavigation<Config>()
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.HomeScreen,
         handleBackButton = true, // Automatically pop from the stack on back button presses
         childFactory = ::createChild
@@ -47,10 +47,12 @@ class NavRootComponent(
     /**
      * Navigation configuration at app level.
      */
-    @Parcelize
-    private sealed interface Config : Parcelable {
-        object HomeScreen : Config // TODO: Use data object if possible
+    @Serializable
+    private sealed interface Config {
+        @Serializable
+        data object HomeScreen : Config
 
+        @Serializable
         data class RemoteScreen(val url: Url) : Config
     }
 

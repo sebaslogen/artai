@@ -20,8 +20,8 @@ androidx-navigation = "2.7.6"
 compose-bom = "2023.10.01" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.7'
 compose-image-loader = "1.7.1"
-decompose = "2.1.4"
-essenty-for-decompose = "1.2.0"
+decompose = "3.0.0-alpha02"
+essenty-for-decompose = "2.0.0-alpha02"
 
 [libraries]
 kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
@@ -59,7 +59,7 @@ compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' 
 compose-image-loader = { module = 'io.github.qdsfdhvh:image-loader', version.ref = 'compose-image-loader' }
 # Decompose libs
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-extensions-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 essenty-lifecycle-decompose = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty-for-decompose" }
 
 [plugins]
@@ -70,7 +70,6 @@ kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref 
 kotlin-native-cocoapods = { id = 'org.jetbrains.kotlin.native.cocoapods', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
 kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', version.ref = 'kotlin' }
-kotlin-parcelize = { id = 'org.jetbrains.kotlin.plugin.parcelize', version.ref = 'kotlin' }
 ktorfit = { id = 'de.jensklingenberg.ktorfit', version.ref = 'ktorfit' }
 buildkonfig = { id = 'com.codingfeline.buildkonfig', version.ref = 'buildkonfig' }
 nativecoroutines = { id = 'com.rickclephas.kmp.nativecoroutines', version.ref = 'nativecoroutines' }
