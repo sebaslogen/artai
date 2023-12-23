@@ -383,7 +383,7 @@
 			path = "../Target Support Files/KMMViewModelCore";
 			sourceTree = "<group>";
 		};
-		683F4B90E728423CD4853D45 /* xcschemes */ = {
+		683F432C918B15E0838E4A5C /* xcschemes */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -483,7 +483,7 @@
 				DFD8BA1FB7665A132F5EC7671FC102FA /* Pods */,
 				5B928543BC95C360575B3BCCE28B0CD1 /* Products */,
 				11C970DEAE48C6D0282DFE54684F53F1 /* Targets Support Files */,
-				683F4B90E728423CD4853D45 /* xcschemes */,
+				683F432C918B15E0838E4A5C /* xcschemes */,
 			);
 			sourceTree = "<group>";
 		};
@@ -704,8 +704,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
