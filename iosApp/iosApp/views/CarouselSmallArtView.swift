@@ -35,7 +35,7 @@ struct CarouselSmallArtView: View {
                     }
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
-                } else if sectionStyle == KMPSection.CarouselCarouselStyle.roundedsquares {
+                } else if sectionStyle == KMPSection.CarouselCarouselStyle.roundedSquares {
                     AsyncImage(url: url) { image in
                         image.resizable()
                     } placeholder: {
