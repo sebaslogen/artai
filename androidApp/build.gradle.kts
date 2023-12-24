@@ -16,6 +16,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
@@ -33,11 +34,6 @@ android {
                 "META-INF/*.properties",
                 "/META-INF/{AL2.0,LGPL2.1}",
             )
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
         }
     }
     compileOptions {
