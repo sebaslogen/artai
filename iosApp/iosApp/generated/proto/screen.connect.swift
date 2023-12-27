@@ -14,7 +14,7 @@ internal protocol Screen_V1_ScreenServiceClientInterface: Sendable {
 
     /// Returns a SDUI screen.
     @available(iOS 13, *)
-    func `getScreen`(request: Screen_V1_GetScreenRequest, headers: Connect.Headers) async -> ResponseMessage<Screen_V1_GetScreenResponse>
+    func `getScreen`(request: Screen_V1_GetScreenRequest, headers: Connect.Headers) async -> ResponseMessage<Google_Protobuf_Any>
 }
 
 /// Concrete implementation of `Screen_V1_ScreenServiceClientInterface`.
@@ -31,7 +31,7 @@ internal final class Screen_V1_ScreenServiceClient: Screen_V1_ScreenServiceClien
     }
 
     @available(iOS 13, *)
-    internal func `getScreen`(request: Screen_V1_GetScreenRequest, headers: Connect.Headers = [:]) async -> ResponseMessage<Screen_V1_GetScreenResponse> {
+    internal func `getScreen`(request: Screen_V1_GetScreenRequest, headers: Connect.Headers = [:]) async -> ResponseMessage<Google_Protobuf_Any> {
         return await self.client.unary(path: "/screen.v1.ScreenService/GetScreen", idempotencyLevel: .unknown, request: request, headers: headers)
     }
 

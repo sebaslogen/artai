@@ -18,7 +18,6 @@ import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import okhttp3.OkHttpClient
 import screen.v1.GetScreenRequest
-import screen.v1.GetScreenResponse
 
 class ArtaiApplication : Application(), ApplicationComponentProvider {
     override val component by lazy(LazyThreadSafetyMode.NONE) {
@@ -40,10 +39,9 @@ class ArtaiApplication : Application(), ApplicationComponentProvider {
                 )
             )
             val client = ConnectGRPCClient(protocolClient)
-            override suspend fun sduiRequest(screenId: String): McDScreen {
-                val response: GetScreenResponse = client.sendRequest(GetScreenRequest(screenId))
-                return response.toScreen()
-            }
+
+            override suspend fun sduiRequest(screenId: String): McDScreen =
+                client.sendRequest(GetScreenRequest(screenId)).toScreen()
         }
     }
 
