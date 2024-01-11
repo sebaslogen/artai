@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.2.1"
 kotlin = '1.9.21'
 compileSdk = '34'
 minSdk = '28'
@@ -20,6 +20,7 @@ androidx-navigation = "2.7.6"
 compose-bom = "2023.10.01" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.7'
 compose-image-loader = "1.7.1"
+molecule = '1.3.1'
 
 [libraries]
 kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
@@ -72,3 +73,4 @@ ktorfit = { id = 'de.jensklingenberg.ktorfit', version.ref = 'ktorfit' }
 buildkonfig = { id = 'com.codingfeline.buildkonfig', version.ref = 'buildkonfig' }
 nativecoroutines = { id = 'com.rickclephas.kmp.nativecoroutines', version.ref = 'nativecoroutines' }
 skie = { id = 'co.touchlab.skie', version.ref = 'skie' }
+molecule = { id = 'app.cash.molecule', version.ref = 'molecule' }

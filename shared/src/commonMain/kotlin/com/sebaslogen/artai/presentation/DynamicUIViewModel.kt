@@ -1,5 +1,10 @@
 package com.sebaslogen.artai.presentation
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
@@ -18,8 +23,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
+import app.cash.molecule.launchMolecule
+import app.cash.molecule.moleculeFlow
+import com.sebaslogen.artai.domain.models.CarouselItem
+import com.sebaslogen.artai.domain.models.Screen
+import com.sebaslogen.artai.domain.models.Section
+import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.onEach
 
 
 @Inject
@@ -34,14 +47,61 @@ open class DynamicUIViewModel(
 
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState
-        .combine(favoritesUseCase.favorites) { state, favorites ->
-            DynamicUIViewStateReducer.reduce(state, favorites)
+//        .combine(favoritesUseCase.favorites) { state, favorites ->
+//            DynamicUIViewStateReducer.reduce(state, favorites)
+//        }
+        .transformLatest<DynamicUIViewState, DynamicUIViewState> {
+            viewModelScope.coroutineScope.launchMolecule(RecompositionMode.Immediate) {
+//                moleculeFlow(mode = RecompositionMode.Immediate) {
+                    ScreenReducer(it)
+//                }
+            }
+        }
+        .onEach {
+            Napier.d { "We get $it" }
         }
         .stateIn(
             viewModelScope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = DynamicUIViewState.Loading
         )
+
+    @Composable
+    private fun ScreenReducer(it: DynamicUIViewState): DynamicUIViewState = when (it) {
+        is DynamicUIViewState.Error -> DynamicUIViewState.Error(it.error)
+        DynamicUIViewState.Loading -> DynamicUIViewState.Loading
+        is DynamicUIViewState.Success -> DynamicUIViewState.Success(ReduceScreen(it.data))
+    }
+
+    @Composable
+    private fun ReduceScreen(screen: Screen): Screen {
+        return screen.copy (sections= screen.sections.map {
+            when (it) {
+                is Section.Carousel -> ReduceCarousel(it)
+                is Section.Footer -> it
+                is Section.ListSection -> it
+                is Section.Unknown -> it
+            }
+        })
+    }
+
+    @Composable
+    private fun ReduceCarousel(it: Section.Carousel): Section.Carousel {
+        return it.copy(items = it.items.map {
+            when (it) {
+                is CarouselItem.SmallArt -> ReduceSmallArts(it)
+                is CarouselItem.Unknown -> it
+            }
+        })
+    }
+
+    @Composable
+    private fun ReduceSmallArts(it: CarouselItem.SmallArt): CarouselItem.SmallArt {
+        val isFavorite by favoritesUseCase.favoriteState(it.id).collectAsState(false)
+        return it.copy(
+            favorite = it.favorite.copy(favorited = isFavorite)
+        )
+    }
 
     init {
         when (val initialNavigationState = navigationState.value) {

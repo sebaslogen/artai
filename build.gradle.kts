@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.buildkonfig) apply false
     alias(libs.plugins.ktorfit) apply false
+    alias(libs.plugins.molecule) apply false
 }
 
 tasks.register("clean", Delete::class) {

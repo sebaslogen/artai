@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.skie)
     alias(libs.plugins.nativecoroutines)
+    alias(libs.plugins.molecule)
 }
 
 kotlin {
