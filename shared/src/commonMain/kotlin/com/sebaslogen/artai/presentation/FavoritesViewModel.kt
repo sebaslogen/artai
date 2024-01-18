@@ -1,5 +1,6 @@
 package com.sebaslogen.artai.presentation
 
+import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import kotlinx.coroutines.flow.Flow
 import me.tatarka.inject.annotations.Inject
@@ -7,7 +8,7 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class FavoritesViewModel(
     private val favoritesUseCase: FavoritesUseCase
-) {
+): KMMViewModel() {
     /**
      * Return a flow of favorited states (in the from of a boolean) for the given favorite id
      */

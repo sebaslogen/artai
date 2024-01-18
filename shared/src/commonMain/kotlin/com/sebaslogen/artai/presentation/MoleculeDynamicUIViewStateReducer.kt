@@ -1,0 +1,78 @@
+package com.sebaslogen.artai.presentation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.InternalComposeApi
+import androidx.compose.runtime.ProvidedValue
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentComposer
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.staticCompositionLocalOf
+import com.sebaslogen.artai.domain.DynamicUINavigationState
+import com.sebaslogen.artai.domain.models.CarouselItem
+import com.sebaslogen.artai.domain.models.Screen
+import com.sebaslogen.artai.domain.models.Section
+import kotlinx.coroutines.flow.StateFlow
+import me.tatarka.inject.annotations.Assisted
+import me.tatarka.inject.annotations.Inject
+
+class ViewModelsProvider(){
+    fun getFavoritesViewModel(): FavoritesViewModel = TODO()
+}
+
+val LocalViewModelsProvider = staticCompositionLocalOf { ViewModelsProvider() }
+
+@Composable
+@OptIn(InternalComposeApi::class)
+fun <T> MyCompositionLocalProvider(vararg values: ProvidedValue<*>, content: @Composable () -> T): T {
+    currentComposer.startProviders(values)
+    val c = content()
+    currentComposer.endProviders()
+    return c
+}
+
+@Composable
+fun reduceScreenState(it: DynamicUIViewState, viewModelsProvider: ViewModelsProvider): DynamicUIViewState {
+    return MyCompositionLocalProvider(LocalViewModelsProvider provides viewModelsProvider){
+        when (it) {
+            is DynamicUIViewState.Error -> DynamicUIViewState.Error(it.error)
+            DynamicUIViewState.Loading -> DynamicUIViewState.Loading
+            is DynamicUIViewState.Success -> DynamicUIViewState.Success(reduceScreen(it.data))
+        }
+    }
+
+}
+
+@Composable
+private fun reduceScreen(screen: Screen): Screen {
+    return screen.copy (sections= screen.sections.map {
+        when (it) {
+            is Section.Carousel -> reduceCarousel(it)
+            is Section.Footer -> it
+            is Section.ListSection -> it
+            is Section.Unknown -> it
+        }
+    })
+}
+
+@Composable
+private fun reduceCarousel(it: Section.Carousel): Section.Carousel {
+    return it.copy(items = it.items.map {
+        when (it) {
+            is CarouselItem.SmallArt -> reduceSmallArts(it)
+            is CarouselItem.Unknown -> it
+        }
+    })
+}
+
+//typealias reduceSmallArts = @Composable (CarouselItem.SmallArt) -> CarouselItem.SmallArt
+@Composable
+//@Inject
+private fun reduceSmallArts(smallArt: CarouselItem.SmallArt): CarouselItem.SmallArt {
+    val favoritesViewModel = LocalViewModelsProvider.current.getFavoritesViewModel()
+    val isFavorite by favoritesViewModel.favoriteState(smallArt.id).collectAsState(initial = false)
+
+    return smallArt.copy(
+        favorite = smallArt.favorite.copy(favorited = isFavorite)
+    )
+}

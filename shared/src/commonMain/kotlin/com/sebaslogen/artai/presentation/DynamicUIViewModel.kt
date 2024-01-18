@@ -41,11 +41,13 @@ import kotlinx.coroutines.flow.transform
 open class DynamicUIViewModel(
     private val navigationState: MutableStateFlow<DynamicUINavigationState>,
     private val dynamicUIUseCase: DynamicUIUseCase,
-    private val favoritesUseCase: FavoritesUseCase,
+//    private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync
 ) : KMMViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
+
+    val viewModelsProvider = ViewModelsProvider() // TODO()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @NativeCoroutinesState
@@ -59,7 +61,7 @@ open class DynamicUIViewModel(
 //        .transformLatest<DynamicUIViewState, DynamicUIViewState> {
         .flatMapLatest { viewState ->
             moleculeFlow(mode = RecompositionMode.Immediate) {
-                reduceScreenState(viewState)
+                reduceScreenState(viewState, viewModelsProvider)
             }
         }
         .onEach {
@@ -70,44 +72,6 @@ open class DynamicUIViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = DynamicUIViewState.Loading
         )
-
-    @Composable
-    private fun reduceScreenState(it: DynamicUIViewState): DynamicUIViewState = when (it) {
-        is DynamicUIViewState.Error -> DynamicUIViewState.Error(it.error)
-        DynamicUIViewState.Loading -> DynamicUIViewState.Loading
-        is DynamicUIViewState.Success -> DynamicUIViewState.Success(reduceScreen(it.data))
-    }
-
-    @Composable
-    private fun reduceScreen(screen: Screen): Screen {
-        return screen.copy (sections= screen.sections.map {
-            when (it) {
-                is Section.Carousel -> reduceCarousel(it)
-                is Section.Footer -> it
-                is Section.ListSection -> it
-                is Section.Unknown -> it
-            }
-        })
-    }
-
-    @Composable
-    private fun reduceCarousel(it: Section.Carousel): Section.Carousel {
-        return it.copy(items = it.items.map {
-            when (it) {
-                is CarouselItem.SmallArt -> reduceSmallArts(it)
-                is CarouselItem.Unknown -> it
-            }
-        })
-    }
-
-    @Composable
-    private fun reduceSmallArts(it: CarouselItem.SmallArt): CarouselItem.SmallArt {
-        val isFavorite by favoritesUseCase.favoriteState(it.id).collectAsState(false)
-
-        return it.copy(
-            favorite = it.favorite.copy(favorited = isFavorite)
-        )
-    }
 
     init {
         when (val initialNavigationState = navigationState.value) {
