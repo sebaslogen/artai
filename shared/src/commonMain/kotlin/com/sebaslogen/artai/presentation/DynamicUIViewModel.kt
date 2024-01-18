@@ -1,10 +1,12 @@
 package com.sebaslogen.artai.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.cash.molecule.RecompositionMode
 import app.cash.molecule.launchMolecule
+import app.cash.molecule.moleculeFlow
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
@@ -28,6 +30,9 @@ import com.sebaslogen.artai.domain.models.CarouselItem
 import com.sebaslogen.artai.domain.models.Screen
 import com.sebaslogen.artai.domain.models.Section
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.transform
 
@@ -42,6 +47,7 @@ open class DynamicUIViewModel(
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @NativeCoroutinesState
     val viewState: StateFlow<DynamicUIViewState> = _viewState
         .onEach {
@@ -51,11 +57,9 @@ open class DynamicUIViewModel(
 //            DynamicUIViewStateReducer.reduce(state, favorites)
 //        }
 //        .transformLatest<DynamicUIViewState, DynamicUIViewState> {
-        .transform<DynamicUIViewState, DynamicUIViewState> {
-            viewModelScope.coroutineScope.launchMolecule(RecompositionMode.Immediate) {
-//                moleculeFlow(mode = RecompositionMode.Immediate) {
-                    reduceScreenState(it)
-//                }
+        .flatMapLatest { viewState ->
+            moleculeFlow(mode = RecompositionMode.Immediate) {
+                reduceScreenState(viewState)
             }
         }
         .onEach {
@@ -99,6 +103,7 @@ open class DynamicUIViewModel(
     @Composable
     private fun reduceSmallArts(it: CarouselItem.SmallArt): CarouselItem.SmallArt {
         val isFavorite by favoritesUseCase.favoriteState(it.id).collectAsState(false)
+
         return it.copy(
             favorite = it.favorite.copy(favorited = isFavorite)
         )
