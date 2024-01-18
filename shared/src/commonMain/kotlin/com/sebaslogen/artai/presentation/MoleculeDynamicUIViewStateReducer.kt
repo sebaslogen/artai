@@ -3,15 +3,20 @@ package com.sebaslogen.artai.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.InternalComposeApi
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.domain.models.CarouselItem
 import com.sebaslogen.artai.domain.models.Screen
 import com.sebaslogen.artai.domain.models.Section
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -22,7 +27,7 @@ class ViewModelsProvider(){
 
 val LocalViewModelsProvider = staticCompositionLocalOf { ViewModelsProvider() }
 
-@Composable
+@MoleculeComposable
 @OptIn(InternalComposeApi::class)
 fun <T> MyCompositionLocalProvider(vararg values: ProvidedValue<*>, content: @Composable () -> T): T {
     currentComposer.startProviders(values)
@@ -31,7 +36,7 @@ fun <T> MyCompositionLocalProvider(vararg values: ProvidedValue<*>, content: @Co
     return c
 }
 
-@Composable
+@MoleculeComposable
 fun reduceScreenState(it: DynamicUIViewState, viewModelsProvider: ViewModelsProvider): DynamicUIViewState {
     return MyCompositionLocalProvider(LocalViewModelsProvider provides viewModelsProvider){
         when (it) {
@@ -43,7 +48,7 @@ fun reduceScreenState(it: DynamicUIViewState, viewModelsProvider: ViewModelsProv
 
 }
 
-@Composable
+@MoleculeComposable
 private fun reduceScreen(screen: Screen): Screen {
     return screen.copy (sections= screen.sections.map {
         when (it) {
@@ -55,7 +60,7 @@ private fun reduceScreen(screen: Screen): Screen {
     })
 }
 
-@Composable
+@MoleculeComposable
 private fun reduceCarousel(it: Section.Carousel): Section.Carousel {
     return it.copy(items = it.items.map {
         when (it) {
@@ -65,14 +70,21 @@ private fun reduceCarousel(it: Section.Carousel): Section.Carousel {
     })
 }
 
-//typealias reduceSmallArts = @Composable (CarouselItem.SmallArt) -> CarouselItem.SmallArt
-@Composable
-//@Inject
+@MoleculeComposable
 private fun reduceSmallArts(smallArt: CarouselItem.SmallArt): CarouselItem.SmallArt {
-    val favoritesViewModel = LocalViewModelsProvider.current.getFavoritesViewModel()
-    val isFavorite by favoritesViewModel.favoriteState(smallArt.id).collectAsState(initial = false)
+//    val favoritesViewModel = LocalViewModelsProvider.current.getFavoritesViewModel()
+//    val isFavorite by favoritesViewModel.favoriteState(smallArt.id).collectAsState(initial = false)
+
+    // TODO: Remove this and enable lines above when VM dependency injection is solved
+    var isFavorite by remember { mutableStateOf(true) }
+    LaunchedEffect(Unit) {
+        delay(5000)
+        isFavorite = !isFavorite
+    }
 
     return smallArt.copy(
         favorite = smallArt.favorite.copy(favorited = isFavorite)
     )
 }
+
+typealias MoleculeComposable = Composable
