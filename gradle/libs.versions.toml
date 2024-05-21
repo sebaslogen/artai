@@ -1,21 +1,21 @@
 [versions]
 agp = "8.4.1"
-kotlin = '1.9.23'
+kotlin = '1.9.24'
 compileSdk = '34'
 minSdk = '28'
 targetSdk = '34'
 kotlin-inject = '0.6.3'
-ksp = '1.9.23-1.0.20'
+ksp = '1.9.24-1.0.20'
 coroutines = "1.8.1"
 napier = '2.7.1'
 ktor = '2.3.11'
 buildkonfig = '0.15.1'
 ktorfit = '1.13.0'
-kmm-viewmodel = "1.0.0-ALPHA-20"
-nativecoroutines = "1.0.0-ALPHA-28"
+kmm-viewmodel = "1.0.0-ALPHA-21"
+nativecoroutines = "1.0.0-ALPHA-29"
 skie = "0.6.4"
 androidx-activity = '1.9.0'
-androidx-lifecycle = '2.8.0'
+androidx-lifecycle = '2.7.0'
 androidx-navigation = "2.7.7"
 compose-bom = "2024.05.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.14'
