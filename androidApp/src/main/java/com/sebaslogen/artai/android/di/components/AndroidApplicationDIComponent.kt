@@ -13,8 +13,8 @@ abstract class AndroidApplicationDIComponent(
     @get:Provides val context: Context,
 ) : ImageLoaderDIComponent
 
-interface ApplicationDIComponentProvider {
+interface AndroidApplicationDIComponentProvider {
     val dependencyInjectionComponent: AndroidApplicationDIComponent
 }
 
-val Context.androidApplicationDIComponent get() = (applicationContext as ApplicationDIComponentProvider).dependencyInjectionComponent
+val Context.androidApplicationDIComponent get() = (applicationContext as AndroidApplicationDIComponentProvider).dependencyInjectionComponent

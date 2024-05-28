@@ -2,14 +2,14 @@ package com.sebaslogen.artai.android
 
 import android.app.Application
 import com.sebaslogen.artai.android.di.components.AndroidApplicationDIComponent
-import com.sebaslogen.artai.android.di.components.ApplicationDIComponentProvider
+import com.sebaslogen.artai.android.di.components.AndroidApplicationDIComponentProvider
 import com.sebaslogen.artai.android.di.components.create
 import com.sebaslogen.artai.di.components.ApplicationDIComponent
 import com.sebaslogen.artai.di.components.create
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 
-class ArtaiApplication : Application(), ApplicationDIComponentProvider {
+class ArtaiApplication : Application(), AndroidApplicationDIComponentProvider {
     override val dependencyInjectionComponent by lazy(LazyThreadSafetyMode.NONE) {
         AndroidApplicationDIComponent::class.create(ApplicationDIComponent::class.create(), applicationContext)
     }
