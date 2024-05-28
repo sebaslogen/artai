@@ -12,6 +12,7 @@ import shared
 struct ScreenContent: View {
     var state: DynamicUIViewState.Success
     var onRefresh: () -> Void
+    var onAction: (_ action: Action) -> Void
 
     var body: some View {
         VStack {
@@ -23,7 +24,7 @@ struct ScreenContent: View {
             List(screen.sections, id: \.id) { section in
                 switch onEnum(of: section) {
                 case .carousel(let carousel):
-                    CarouselView(section: carousel)
+                    CarouselView(section: carousel, onAction: onAction)
                 case .footer(let footer):
                     Text("TODO(Footer)")
                 case .listSection(let listSection):

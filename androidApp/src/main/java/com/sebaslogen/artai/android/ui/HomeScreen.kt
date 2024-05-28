@@ -6,59 +6,40 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sebaslogen.artai.android.ui.components.ScreenContent
-import com.sebaslogen.artai.domain.DynamicUINavigationState
-import com.sebaslogen.artai.presentation.DynamicUIViewModel
+import com.sebaslogen.artai.domain.components.SDUIScreenComponent
 import com.sebaslogen.artai.presentation.DynamicUIViewState
-import kotlinx.coroutines.flow.StateFlow
 
 
 /**
  * Home screen with manual refresh button hardcoded on screen and SDUI content below
  */
 @Composable
-fun HomeScreenContent(dynamicUiViewModelProvider: () -> DynamicUIViewModel) {
-    val viewModel = viewModel { dynamicUiViewModelProvider() }
-    val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
-
-    Column {
-        Text("Home Screen content")
-        Button(onClick = viewModel::onRefreshClicked) {
-            Text("Refresh")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        when (val state = viewState) {
-            is DynamicUIViewState.Error -> Text("Error loading data :(")
-            DynamicUIViewState.Loading -> Text("Loading...")
-            is DynamicUIViewState.Success -> ScreenContent(state.data, viewModel)
-        }
-    }
-}
-
-@Composable
-fun SDUIScreenContent(
-    dynamicUiViewModelProvider: () -> DynamicUIViewModel,
-    navigationState: StateFlow<DynamicUINavigationState>
+fun HomeScreenContent(
+    component: SDUIScreenComponent,
 ) {
-    val viewModel: DynamicUIViewModel = viewModel { dynamicUiViewModelProvider() }
-    val viewState: DynamicUIViewState by viewModel.viewState.collectAsStateWithLifecycle()
-    val navState: DynamicUINavigationState by navigationState.collectAsStateWithLifecycle()
+    CompositionLocalProvider(
+        LocalSDUIScreenComponent provides component
+    ) {
+        val viewState: DynamicUIViewState by component.viewState.collectAsStateWithLifecycle()
 
-    Column {
-        when (val e = navState) {
-            DynamicUINavigationState.HomeScreen -> Text("Home")
-            is DynamicUINavigationState.RemoteScreen -> Text("Remote url is ...${e.url.takeLast(20)}")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        when (val state = viewState) {
-            is DynamicUIViewState.Error -> Text("Error loading data :(")
-            DynamicUIViewState.Loading -> Text("Loading...")
-            is DynamicUIViewState.Success -> ScreenContent(state.data, viewModel)
+        Column {
+            Text("Home Screen content")
+            Button(onClick = component::onRefreshClicked) {
+                Text("Refresh")
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            when (val state = viewState) {
+                is DynamicUIViewState.Error -> Text("Error loading data :(")
+                DynamicUIViewState.Loading -> Text("Loading...")
+                is DynamicUIViewState.Success -> ScreenContent(state.data, component)
+            }
         }
     }
 }
+
