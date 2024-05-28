@@ -29,7 +29,7 @@ fun LazyListScope.carousel(section: Section.Carousel, onAction: ActionHandler) {
     when (section.header) {
         is SectionHeader.Large -> sectionHeaderLarge(section.header as SectionHeader.Large)
         is SectionHeader.Normal -> sectionHeaderNormal(section.header as SectionHeader.Normal)
-        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt, onAction)
+        is SectionHeader.SmallArt -> sectionHeaderSmallArt(section.header as SectionHeader.SmallArt)
         is SectionHeader.Unknown -> sectionHeaderUnknown(section.header as SectionHeader.Unknown)
     }
     item(key = section.id) {
@@ -58,7 +58,8 @@ private fun LazyItemScope.CarouselSmallArt(
     shape: RoundedCornerShape,
     onAction: ActionHandler
 ) {
-    FavoriteContainer(item.favorite, onAction) {
+    @Suppress("LocalVariableName") val FavoriteContainer = LocalFavoriteContainer.current
+    FavoriteContainer(item.favorite, Modifier) {
         ImageLoaderImage(
             data = item.image,
             contentDescription = "Img ${item.image}",
