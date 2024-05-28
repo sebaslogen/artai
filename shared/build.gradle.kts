@@ -49,6 +49,7 @@ kotlin {
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
+                api(libs.ktorfit.response)
                 implementation(libs.kmm.viewmodel)
                 implementation(libs.configuration.annotations)
             }
@@ -126,7 +127,6 @@ dependencies {
         "kspIosSimulatorArm64"
     ).forEach {
         add(it, libs.kotlinInject.compiler)
-        add(it, libs.ktorfit.ksp)
     }
 }
 
