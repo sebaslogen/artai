@@ -9,7 +9,7 @@ ksp = '2.0.0-1.0.23'
 coroutines = "1.8.1"
 napier = '2.7.1'
 ktor = '3.0.0-beta-2'
-serialization = "1.6.2"
+serialization = "1.6.3"
 buildkonfig = '0.15.1'
 ktorfit = '2.0.0'
 observableviewmodel = "1.0.0-BETA-3"
@@ -20,8 +20,8 @@ androidx-lifecycle = '2.8.3'
 androidx-navigation = "2.7.7"
 compose-bom = "2024.06.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-image-loader = "1.8.2"
-decompose = "3.0.0-alpha04"
-essenty-for-decompose = "2.0.0-alpha02"
+decompose = "3.0.0"
+essenty-for-decompose = "2.0.0"
 
 [libraries]
 kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
