@@ -4,7 +4,7 @@ import com.sebaslogen.artai.data.mappers.mapToCacheData
 import com.sebaslogen.artai.data.mappers.mapToSuccess
 import com.sebaslogen.artai.data.remote.api.DynamicUIApi
 import com.sebaslogen.artai.data.remote.models.ApiScreenResponse
-import com.sebaslogen.artai.di.scopes.Singleton
+import com.sebaslogen.artai.di.scopes.ApplicationSingleton
 import com.sebaslogen.artai.domain.models.CacheData
 import com.sebaslogen.artai.domain.models.DynamicUIDomainModel
 import de.jensklingenberg.ktorfit.Response
@@ -13,7 +13,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 import me.tatarka.inject.annotations.Inject
 
-@Singleton
+@ApplicationSingleton
 @Inject
 class DynamicUIRepository(
     private val dynamicUIApi: DynamicUIApi,

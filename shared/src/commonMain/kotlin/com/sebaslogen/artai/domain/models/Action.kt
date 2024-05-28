@@ -9,12 +9,12 @@ sealed class Action {
 
     data class OpenScreen(
         override val id: String,
-        val url: String,
+        val url: Url,
     ) : Action()
 
     data class ToggleFavoriteState(
         override val id: String,
-        val url: String
+        val url: Url
     ) : Action()
 
     data class Unknown(val type: String, override val id: String? = null) : Action()

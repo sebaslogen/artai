@@ -52,7 +52,6 @@ dependencies {
 
     // Compose dependencies and integration libs
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(platform(libs.compose.bom))
@@ -64,5 +63,5 @@ dependencies {
     debugRuntimeOnly(libs.compose.ui.tooling)
     implementation(libs.compose.image.loader)
 
-    implementation(libs.observable.viewmodel)
+    implementation(libs.decompose.extensions.compose)
 }
