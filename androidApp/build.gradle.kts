@@ -65,4 +65,6 @@ dependencies {
     implementation(libs.compose.image.loader)
 
     implementation(libs.observable.viewmodel)
+
+    implementation(libs.resaca)
 }
