@@ -15,11 +15,10 @@ kmm-viewmodel = "1.0.0-ALPHA-21"
 nativecoroutines = "1.0.0-ALPHA-31"
 skie = "0.8.0"
 androidx-activity = '1.9.0'
-androidx-lifecycle = '2.7.0'
+androidx-lifecycle = '2.8.1'
 androidx-navigation = "2.7.7"
-compose-ui = "1.7.0-beta01"
+compose-ui = "1.7.0-beta02"
 compose-bom = "2024.05.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
-compose-compiler = '1.5.14'
 compose-image-loader = "1.8.0"
 
 [libraries]
@@ -51,7 +50,6 @@ ktor-serialization-json = { module = 'io.ktor:ktor-serialization-kotlinx-json', 
 kmm-viewmodel = { module = 'com.rickclephas.kmm:kmm-viewmodel-core', version.ref = 'kmm-viewmodel' }
 # Compose libs
 compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
-compose-compiler = { module = 'androidx.compose.compiler:compiler', version.ref = 'compose-compiler' }
 compose-foundation = { module = 'androidx.compose.foundation:foundation' }
 compose-material3 = { module = 'androidx.compose.material3:material3' }
 compose-runtime = { module = 'androidx.compose.runtime:runtime' }
