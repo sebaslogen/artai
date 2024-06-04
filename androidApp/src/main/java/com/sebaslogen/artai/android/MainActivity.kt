@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import com.sebaslogen.artai.android.di.components.ApplicationComponent
 import com.sebaslogen.artai.android.di.components.applicationComponent
 import com.sebaslogen.artai.android.ui.MainScreen
+import com.sebaslogen.artai.android.ui.components.FavoriteContainer
+import com.sebaslogen.artai.android.ui.components.LocalFavoriteContainer
 import com.sebaslogen.artai.data.remote.repositories.DynamicUIRepository
 import com.sebaslogen.artai.domain.DynamicUINavigationState
 import com.sebaslogen.artai.presentation.DynamicUIViewModel
@@ -27,10 +29,10 @@ abstract class MainActivityComponent(@Component val parent: ApplicationComponent
     abstract val imageLoaderCreator: () -> ImageLoader
     abstract val dynamicUIViewModel: DynamicUIViewModel
     abstract val mainScreen: MainScreen
+    abstract val favoriteContainer: FavoriteContainer
 }
 
 class MainActivity : ComponentActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CompositionLocalProvider(
                 LocalImageLoader provides mainActivityComponent.imageLoaderCreator(),
+                LocalFavoriteContainer provides mainActivityComponent.favoriteContainer,
             ) {
                 MyApplicationTheme {
                     Surface(
