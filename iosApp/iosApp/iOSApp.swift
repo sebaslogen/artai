@@ -44,8 +44,8 @@ class RootHolder : ObservableObject {
         
         root = NavRootComponent(
             componentContext: DefaultComponentContext(lifecycle: lifecycle),
-            mainCoroutineContext: iosAppDIComponent.parent.mainCoroutineContext(),
-            appComponentsDIComponent: iosAppDIComponent.parent.appComponentsDIComponent()
+            mainCoroutineContext: iosAppDIComponent.mainCoroutineContext(),
+            appComponentsDIComponent: iosAppDIComponent.appComponentsDIComponent()
         )
         
         LifecycleRegistryExtKt.create(lifecycle)
