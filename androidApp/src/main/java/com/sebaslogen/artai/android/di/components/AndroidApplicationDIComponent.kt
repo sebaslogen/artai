@@ -1,17 +1,16 @@
 package com.sebaslogen.artai.android.di.components
 
 import android.content.Context
-import com.sebaslogen.artai.android.di.scopes.AndroidSingleton
 import com.sebaslogen.artai.di.components.ApplicationDIComponent
+import com.sebaslogen.artai.di.scopes.ApplicationSingleton
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
 
 @Component
-@AndroidSingleton
+@ApplicationSingleton
 abstract class AndroidApplicationDIComponent(
-    @Component val parent: ApplicationDIComponent, // Include all dependencies from the parent in this component
     @get:Provides val context: Context,
-) : ImageLoaderDIComponent
+) : ApplicationDIComponent, ImageLoaderDIComponent
 
 interface AndroidApplicationDIComponentProvider {
     val dependencyInjectionComponent: AndroidApplicationDIComponent
