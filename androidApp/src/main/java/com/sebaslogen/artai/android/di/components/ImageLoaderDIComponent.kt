@@ -1,7 +1,6 @@
 package com.sebaslogen.artai.android.di.components
 
 import android.content.Context
-import com.sebaslogen.artai.android.di.scopes.AndroidSingleton
 import com.sebaslogen.artai.di.scopes.ApplicationSingleton
 import com.sebaslogen.artai.networking.Http
 import com.seiko.imageloader.ImageLoader
@@ -12,7 +11,7 @@ import me.tatarka.inject.annotations.Provides
 import okio.Path.Companion.toOkioPath
 
 interface ImageLoaderDIComponent {
-    @AndroidSingleton
+    @ApplicationSingleton
     @Provides
     fun imageLoader(applicationContext: Context, httpClientProvider: () -> Http): ImageLoader = ImageLoader {
         components {
