@@ -40,7 +40,7 @@ class RootHolder : ObservableObject {
     
     init() {
         lifecycle = LifecycleRegistryKt.LifecycleRegistry()
-        let iosAppDIComponent = InjectIOSApplicationDIComponent(parent: InjectApplicationDIComponent())
+        let iosAppDIComponent = InjectIOSApplicationDIComponent()
         
         root = NavRootComponent(
             componentContext: DefaultComponentContext(lifecycle: lifecycle),
