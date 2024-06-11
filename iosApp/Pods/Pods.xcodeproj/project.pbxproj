@@ -16,6 +16,7 @@
 			dependencies = (
 			);
 			name = shared;
+			productName = shared;
 		};
 /* End PBXAggregateTarget section */
 
@@ -94,7 +95,7 @@
 		8B524AABE529FB8A2D151B05321336E0 /* Pods-iosApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iosApp.modulemap"; sourceTree = "<group>"; };
 		95B09EA82E7AF9ACCCCAF3E55C859116 /* shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.debug.xcconfig; sourceTree = "<group>"; };
 		9BB0B8B698D4C35D4F9A07EF70910170 /* Pods-iosApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iosApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F1FFC8B10F4D7D4F37606E8959B3F29 /* Pods-iosApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iosApp-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9FECCB5AFF87D121F15BA01E683C7932 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		A2A65322A59F97691122A8D22F839245 /* KMPNativeCoroutinesCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KMPNativeCoroutinesCore.modulemap; sourceTree = "<group>"; };
@@ -103,11 +104,11 @@
 		B11B4CE01F59B1D9A0D0C047B3433BB9 /* KMPNativeCoroutinesCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesCore.release.xcconfig; sourceTree = "<group>"; };
 		CBB360F2822905300C310CBA06D6A093 /* KMPNativeCoroutinesAsync */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KMPNativeCoroutinesAsync; path = KMPNativeCoroutinesAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D92AD5A72C4FD6C930E2C2CE2047A68D /* KMPNativeCoroutinesAsync-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-umbrella.h"; sourceTree = "<group>"; };
-		E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KMPNativeCoroutinesCore; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5D1DB7C381E75CF7471EE7A5B13DFF /* KMPNativeCoroutinesCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesCore-dummy.m"; sourceTree = "<group>"; };
 		F605F0E6E523C51620ABC78C8574A6BC /* KMPNativeCoroutinesAsync-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KMPNativeCoroutinesAsync-Info.plist"; sourceTree = "<group>"; };
 		F87A626222A8D9B26448A9FEB04FD0DF /* Pods-iosApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iosApp-umbrella.h"; sourceTree = "<group>"; };
-		FB1BF8BE937671FB0F330C2D28634477 /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FB1BF8BE937671FB0F330C2D28634477 /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FB29346504194E4F75F84126035B63BF /* NativeCancellable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeCancellable.swift; path = KMPNativeCoroutinesCore/NativeCancellable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB360F2822905300C310CBA06D6A093 /* KMPNativeCoroutinesAsync */,
-				E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore */,
+				E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore.framework */,
 				B097DD7534E741D5C41838011D755842 /* Pods-iosApp */,
 			);
 			name = Products;
@@ -254,7 +255,6 @@
 				58447F6A92949A4134C77544F7CDA718 /* AsyncSequence.swift */,
 				A20BE39C55795C7F0F6EB56BFD77F348 /* Support Files */,
 			);
-			name = KMPNativeCoroutinesAsync;
 			path = KMPNativeCoroutinesAsync;
 			sourceTree = "<group>";
 		};
@@ -287,7 +287,6 @@
 				2A54F16B245767CB44582250E2E6FE8B /* NativeSuspend.swift */,
 				054E7294BBF4256299D85928B7D8C8B7 /* Support Files */,
 			);
-			name = KMPNativeCoroutinesCore;
 			path = KMPNativeCoroutinesCore;
 			sourceTree = "<group>";
 		};
@@ -396,7 +395,7 @@
 			);
 			name = KMPNativeCoroutinesCore;
 			productName = KMPNativeCoroutinesCore;
-			productReference = E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore */;
+			productReference = E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -462,7 +461,7 @@
 			name = "[CP-User] Build shared";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "                if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n                  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../../../../../private/var/folders/s1/cs056w011h1_hc9sm93wcv9r0000gn/T/wrap1loc/gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
+			shellScript = "                if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n                  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -543,7 +542,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -815,7 +814,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
