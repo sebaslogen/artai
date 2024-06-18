@@ -6,6 +6,7 @@ import com.sebaslogen.artai.networking.Http
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
+import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
 import me.tatarka.inject.annotations.Provides
 import okio.Path.Companion.toOkioPath
 
@@ -17,7 +18,7 @@ interface ImageLoaderComponent {
             setupDefaultComponents(context = applicationContext, httpClient = httpClientProvider)
         }
         interceptor {
-            memoryCacheConfig {
+            bitmapMemoryCacheConfig {
                 // Set the max size to 25% of the app's available memory.
                 maxSizePercent(applicationContext, 0.25)
             }
