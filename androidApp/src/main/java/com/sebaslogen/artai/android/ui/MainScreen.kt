@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.drop
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
-typealias MainScreen = @Composable (StateFlow<DynamicUINavigationState>) -> Unit
+typealias MainScreen = @Composable (navigationState: StateFlow<DynamicUINavigationState>) -> Unit
 
 @Inject
 @Composable
