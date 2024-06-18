@@ -17,7 +17,6 @@ skie = "0.8.2"
 androidx-activity = '1.9.0'
 androidx-lifecycle = '2.8.2'
 androidx-navigation = "2.7.7"
-compose-ui = "1.7.0-beta02"
 compose-bom = "2024.06.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-image-loader = "1.8.1"
 
@@ -53,7 +52,7 @@ compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-
 compose-foundation = { module = 'androidx.compose.foundation:foundation' }
 compose-material3 = { module = 'androidx.compose.material3:material3' }
 compose-runtime = { module = 'androidx.compose.runtime:runtime' }
-compose-ui = { module = 'androidx.compose.ui:ui', version.ref = 'compose-ui' }
+compose-ui = { module = 'androidx.compose.ui:ui' }
 compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
 compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
 compose-image-loader = { module = 'io.github.qdsfdhvh:image-loader', version.ref = 'compose-image-loader' }
