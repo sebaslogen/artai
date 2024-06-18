@@ -17,7 +17,7 @@ skie = "0.8.2"
 androidx-activity = '1.9.0'
 androidx-lifecycle = '2.8.2'
 androidx-navigation = "2.7.7"
-compose-ui = "1.7.0-beta02"
+compose-ui = "1.7.0-beta03"
 compose-bom = "2024.06.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-image-loader = "1.8.1"
 
