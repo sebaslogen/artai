@@ -12,6 +12,7 @@ import shared
 
 struct CarouselView: View {
     var section: KMPSection.Carousel
+    var onAction: (_ action: Action) -> Void
     
     var body: some View {
         
@@ -35,7 +36,7 @@ struct CarouselView: View {
                 ForEach(section.items, id: \.id) { item in
                     switch onEnum(of: item) {
                     case .smallArt(let smallArt):
-                        CarouselSmallArtView(smallArt: smallArt, sectionStyle: section.style)
+                        CarouselSmallArtView(smallArt: smallArt, sectionStyle: section.style, onAction: onAction)
                     case .unknown(_):
                         Text("TODO(Unknown)")
                     }
