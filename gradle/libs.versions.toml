@@ -18,7 +18,7 @@ androidx-activity = '1.9.0'
 androidx-lifecycle = '2.8.3'
 androidx-navigation = "2.7.7"
 compose-bom = "2024.06.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
-compose-image-loader = "1.8.1"
+compose-image-loader = "1.8.2"
 
 [libraries]
 kotlin-stdlib-common = { module = 'org.jetbrains.kotlin:kotlin-stdlib-common', version.ref = 'kotlin' }
