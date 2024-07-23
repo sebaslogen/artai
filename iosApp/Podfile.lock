@@ -1,39 +1,39 @@
 PODS:
-  - KMMViewModelCore (1.0.0-ALPHA-4):
-    - KMMViewModelCoreObjC (= 1.0.0-ALPHA-4)
-  - KMMViewModelCoreObjC (1.0.0-ALPHA-4)
-  - KMMViewModelSwiftUI (1.0.0-ALPHA-4):
-    - KMMViewModelCore (= 1.0.0-ALPHA-4)
-  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-6):
-    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-6)
-  - KMPNativeCoroutinesCore (1.0.0-ALPHA-6)
+  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-31):
+    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-31)
+  - KMPNativeCoroutinesCore (1.0.0-ALPHA-31)
+  - KMPObservableViewModelCore (1.0.0-BETA-3):
+    - KMPObservableViewModelCoreObjC (= 1.0.0-BETA-3)
+  - KMPObservableViewModelCoreObjC (1.0.0-BETA-3)
+  - KMPObservableViewModelSwiftUI (1.0.0-BETA-3):
+    - KMPObservableViewModelCore (= 1.0.0-BETA-3)
   - shared (1.0)
 
 DEPENDENCIES:
-  - KMMViewModelSwiftUI (= 1.0.0-ALPHA-4)
-  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-6)
+  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-31)
+  - KMPObservableViewModelSwiftUI (= 1.0.0-BETA-3)
   - shared (from `../shared`)
 
 SPEC REPOS:
   trunk:
-    - KMMViewModelCore
-    - KMMViewModelCoreObjC
-    - KMMViewModelSwiftUI
     - KMPNativeCoroutinesAsync
     - KMPNativeCoroutinesCore
+    - KMPObservableViewModelCore
+    - KMPObservableViewModelCoreObjC
+    - KMPObservableViewModelSwiftUI
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  KMMViewModelCore: 3feb43988fb1b234f7062653dc1070a11951bd34
-  KMMViewModelCoreObjC: 66508fb41c04a2ac3425c18e4fa8db5a79cce528
-  KMMViewModelSwiftUI: af36e8ca89cb88c42581e953be9bd8a6c1b1a4b8
-  KMPNativeCoroutinesAsync: 05e23198a8607af5abbb016beeed5586ab69d40e
-  KMPNativeCoroutinesCore: ee5236cd93d3f96c594d3d7ea4245739cb06a367
+  KMPNativeCoroutinesAsync: d32ec9bb9d3ce393f524e5e4afb1ce53b83dae6c
+  KMPNativeCoroutinesCore: 9dec13ac28fe0709fb8b473f314de1ec0d55720e
+  KMPObservableViewModelCore: 03ca22ae973a0cdfd9948876c716cd58ed3ca546
+  KMPObservableViewModelCoreObjC: 047a8024ee08631dbe89e4f5038de1e3094775f3
+  KMPObservableViewModelSwiftUI: 24d69864340bd6f45d4611f40944b281d6831458
   shared: 51274222e99a287ad4ac2f5434c8b3bd78d63f6a
 
-PODFILE CHECKSUM: 5a75c755f309b469d42329f8bfb461161cbc2c36
+PODFILE CHECKSUM: 9adb09f68abd793b978b17e75a908f13e02359b0
 
 COCOAPODS: 1.15.2

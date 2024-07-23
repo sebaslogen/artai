@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double KMMViewModelSwiftUIVersionNumber;
-FOUNDATION_EXPORT const unsigned char KMMViewModelSwiftUIVersionString[];
+FOUNDATION_EXPORT double KMPObservableViewModelCoreVersionNumber;
+FOUNDATION_EXPORT const unsigned char KMPObservableViewModelCoreVersionString[];
 
