@@ -50,7 +50,7 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
                 api(libs.ktorfit.lib)
                 api(libs.ktorfit.response)
-                implementation(libs.kmm.viewmodel)
+                implementation(libs.observable.viewmodel)
                 implementation(libs.configuration.annotations)
             }
         }

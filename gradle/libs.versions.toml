@@ -11,7 +11,7 @@ napier = '2.7.1'
 ktor = '2.3.12'
 buildkonfig = '0.15.1'
 ktorfit = '2.0.0'
-kmm-viewmodel = "1.0.0-ALPHA-21"
+observableviewmodel = "1.0.0-BETA-3"
 nativecoroutines = "1.0.0-ALPHA-31"
 skie = "0.8.3"
 androidx-activity = '1.9.0'
@@ -46,7 +46,7 @@ ktor-content-negotiation = { module = 'io.ktor:ktor-client-content-negotiation',
 ktor-client-serialization = { module = 'io.ktor:ktor-client-serialization', version.ref = 'ktor' }
 ktor-serialization-json = { module = 'io.ktor:ktor-serialization-kotlinx-json', version.ref = 'ktor' }
 # KMM ViewModels
-kmm-viewmodel = { module = 'com.rickclephas.kmm:kmm-viewmodel-core', version.ref = 'kmm-viewmodel' }
+observable-viewmodel = { module = 'com.rickclephas.kmp:kmp-observableviewmodel-core', version.ref = 'observableviewmodel' }
 # Compose libs
 compose-bom = { module = 'androidx.compose:compose-bom', version.ref = 'compose-bom' }
 compose-foundation = { module = 'androidx.compose.foundation:foundation' }

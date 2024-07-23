@@ -64,5 +64,5 @@ dependencies {
     debugRuntimeOnly(libs.compose.ui.tooling)
     implementation(libs.compose.image.loader)
 
-    implementation(libs.kmm.viewmodel)
+    implementation(libs.observable.viewmodel)
 }

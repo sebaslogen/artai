@@ -1,9 +1,9 @@
 package com.sebaslogen.artai.presentation
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
-import com.rickclephas.kmm.viewmodel.coroutineScope
-import com.rickclephas.kmm.viewmodel.stateIn
+import com.rickclephas.kmp.observableviewmodel.ViewModel
+import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
+import com.rickclephas.kmp.observableviewmodel.coroutineScope
+import com.rickclephas.kmp.observableviewmodel.stateIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
@@ -28,7 +28,7 @@ open class DynamicUIViewModel(
     private val dynamicUIUseCase: DynamicUIUseCase,
     private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync
-) : KMMViewModel(), ActionHandler, NavigationStateHandler {
+) : ViewModel(), ActionHandler, NavigationStateHandler {
 
     private val _viewState = MutableStateFlow<DynamicUIViewState>(viewModelScope, DynamicUIViewState.Loading)
 
