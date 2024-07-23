@@ -1,8 +1,8 @@
 package com.sebaslogen.artai.presentation
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.observableviewmodel.ViewModel
+import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import com.sebaslogen.artai.domain.ActionHandler
 import com.sebaslogen.artai.domain.ActionHandlerSync
 import com.sebaslogen.artai.domain.NotANavigationStateHandler
@@ -18,7 +18,7 @@ import me.tatarka.inject.annotations.Inject
 open class FavoritesViewModel(
     private val favoritesUseCase: FavoritesUseCase,
     private val actionHandler: ActionHandlerSync
-) : KMMViewModel(), ActionHandler {
+) : ViewModel(), ActionHandler {
     /**
      * Return a flow of favorited states (in the from of a boolean) for the given favorite id
      */
