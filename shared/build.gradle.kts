@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.native.cocoapods)
     alias(libs.plugins.buildkonfig)
     alias(libs.plugins.ksp)
@@ -29,6 +28,8 @@ kotlin {
             baseName = "shared"
             isStatic = true
             export(libs.napier.logger)
+            export(libs.decompose)
+            export(libs.essenty.lifecycle.decompose)
         }
     }
 
@@ -48,10 +49,11 @@ kotlin {
                 implementation(libs.ktor.content.negotiation)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.serialization.json)
+                implementation(libs.kotlinx.serialization.json)
                 api(libs.ktorfit.lib)
                 api(libs.ktorfit.response)
-                implementation(libs.observable.viewmodel)
                 implementation(libs.configuration.annotations)
+                api(libs.decompose)
             }
         }
         val commonTest by getting {

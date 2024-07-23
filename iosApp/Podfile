@@ -2,6 +2,5 @@ target 'iosApp' do
   use_frameworks!
   platform :ios, '14.1'
   pod 'shared', :path => '../shared'
-  pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-31'
-  pod 'KMPObservableViewModelSwiftUI', '1.0.0-BETA-3'
+  pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-31'    # Swift Concurrency implementation
 end
