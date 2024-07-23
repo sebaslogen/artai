@@ -1,17 +1,41 @@
 package com.sebaslogen.artai.presentation
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.observableviewmodel.ViewModel
+import com.rickclephas.kmp.observableviewmodel.coroutineScope
+import com.sebaslogen.artai.domain.ActionHandler
+import com.sebaslogen.artai.domain.ActionHandlerSync
+import com.sebaslogen.artai.domain.NotANavigationStateHandler
+import com.sebaslogen.artai.domain.models.Action
+import com.sebaslogen.artai.domain.models.Favorite
 import com.sebaslogen.artai.domain.usecases.FavoritesUseCase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class FavoritesViewModel(
-    private val favoritesUseCase: FavoritesUseCase
-) {
+open class FavoritesViewModel(
+    private val favoritesUseCase: FavoritesUseCase,
+    private val actionHandler: ActionHandlerSync
+) : ViewModel(), ActionHandler {
     /**
      * Return a flow of favorited states (in the from of a boolean) for the given favorite id
      */
-    fun favoriteState(id: String): Flow<Boolean> = favoritesUseCase.favoriteState(id)
+    @NativeCoroutines
+    fun favoriteState(favorite: Favorite): Flow<Favorite> =
+        favoritesUseCase.favoriteState(favorite.id).map { favorited ->
+            favorite.copy(favorited = favorited)
+        }
+
+    //    val newFavState = favorites.contains(id)
+    //    return if (newFavState == favorited) this else this.copy(favorited = favorites.contains(id))
+
+    override fun onAction(action: Action) {
+        viewModelScope.coroutineScope.launch {
+            actionHandler.onAction(action = action, navigationStateHandler = object : NotANavigationStateHandler(name = "FavoritesViewModel") {})
+        }
+    }
 
     // TODO: Remove or use this nice idea
 //    /**
