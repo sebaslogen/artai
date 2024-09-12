@@ -83,8 +83,10 @@ private fun HttpClient.addGitHubRawTextContentTypeToJsonInterceptor(): HttpClien
     receivePipeline.intercept(HttpReceivePipeline.Before) { response ->
         this.proceedWith(object : HttpResponse() {
             override val call: HttpClientCall = response.call
-            override val content: ByteReadChannel = response.content
+            @InternalAPI
+            override val rawContent: ByteReadChannel = response.rawContent
             override val coroutineContext: CoroutineContext = response.coroutineContext
+
             override val headers: Headers = HeadersBuilder().apply {
                 appendAll(response.headers)
                 this.remove(HttpHeaders.ContentType)
