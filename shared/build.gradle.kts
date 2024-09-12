@@ -104,6 +104,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    packaging {
+        resources {
+            excludes += setOf(
+                // Exclude AndroidX version files
+                "META-INF/*.version",
+                // Exclude consumer proguard files
+                "META-INF/proguard/*",
+                // Exclude the Firebase/Fabric/other random properties files
+                "/*.properties",
+                "fabric/*.properties",
+                "META-INF/*.properties",
+                "/META-INF/{AL2.0,LGPL2.1}",
+            )
+        }
+    }
 }
 
 skie {
